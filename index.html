@@ -264,6 +264,24 @@ button.copy {
 footer a { color: var(--on-band); }
 .disclaimer { color: var(--on-band-muted); font-size: 0.9rem; max-width: 70ch; border-top: 1px solid rgba(255,255,255,0.18); padding-top: 16px; }
 </style>
+<style>
+.mat-intro { max-width: 68ch; }
+.deadlines { border-left: 4px solid var(--accent); background: var(--surface); border-radius: 0 6px 6px 0; padding: 18px 20px; display: grid; gap: 8px; max-width: 860px; }
+.deadlines ul, .wk-list { margin: 0; padding-left: 1.3em; display: grid; gap: 4px; font-size: 0.95rem; line-height: 1.5; }
+.weeklist.schedule { max-width: 860px; }
+.weeklist.schedule .wk-body { gap: 10px; }
+.wk-due { border-top: 1px solid var(--rule); padding-top: 10px; display: grid; gap: 6px; }
+.accs.weeks { max-width: 860px; }
+details.acc.week .acc-body { display: grid; gap: 10px; }
+details.acc.week .acc-body p { font-size: 0.95rem; line-height: 1.5; }
+details.acc.week > summary .chev::after { content: "Show"; }
+details.acc.week[open] > summary .chev::after { content: "Hide"; }
+.reuse { display: grid; gap: 12px; max-width: 860px; padding-top: 8px; }
+.reuse-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.reuse textarea { width: 100%; min-height: 260px; font: 0.85rem/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--text); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 10px; }
+details.code summary { cursor: pointer; font-family: var(--font-display); font-weight: 600; color: var(--heading); }
+details.code[open] summary { margin-bottom: 8px; }
+</style>
 </head>
 <body>
 <header class="band">
@@ -329,28 +347,101 @@ footer a { color: var(--on-band); }
     </div>
 
     <div class="group">
-      <h3>Assignments</h3>
+      <h3>Assignments and Syllabus</h3>
       <ul class="boxes two">
         <li><div class="box-top"><h4 class="box-title">Final Capstone Project</h4><span class="weight">45%</span></div><p>Students complete a research project through a step-by-step process that ties back to the in-class exercises.</p></li>
         <li><div class="box-top"><h4 class="box-title">Weekly AI Updates</h4><span class="weight">20%</span></div><p>Students complete four of five weekly updates on developments in legal AI. Pass/fail.</p><p class="wk-mats"><a href="materials/weekly-ai-update.html">Read the full assignment</a></p></li>
         <li><div class="box-top"><h4 class="box-title">AI Deep Dive</h4><span class="weight">20%</span></div><p>Each student completes one of four options: an online course, a book, four episodes of a podcast, or a short paper on AI in legal research. The student then writes 500 to 750 words. Pass/fail.</p><p class="wk-mats"><a href="materials/ai-deep-dive.html">Read the full assignment</a></p></li>
-        <li><div class="box-top"><h4 class="box-title">In-Class Work</h4><span class="weight">15%</span></div><p>In-class exercises and the Week 7 certification. Pass/fail.</p></li>
+        <li><div class="box-top"><h4 class="box-title">Syllabus</h4></div><p>The syllabus covers the course description, learning objectives, grading, the AI use policy, the schedule, deadlines, and logistics. Dates, times, rooms, and contact details appear as placeholders, so you can fill in your own course&rsquo;s details.</p><p class="wk-mats"><a href="materials/AI_and_Legal_Research_Generic_Syllabus.pptx" download>Download the syllabus (PowerPoint)</a></p></li>
       </ul>
     </div>
 
-    <div class="group">
-      <h3>Weekly Plan</h3>
-      <ul class="weeklist">
-        <li><div class="wk">Week 1</div><div class="wk-body"><h4 class="box-title">How Generative AI Works, and Prompting for Legal Research</h4><p>Lectures on generative AI, retrieval-augmented generation, and legal prompting. Students draft prompts for a family law fact pattern and test the prompts in CoCounsel, Harvey, Lexis Prot&eacute;g&eacute;, and a general chatbot.</p><p class="wk-mats"><span>Materials:</span> <a href="materials/week-1-introductions.html">Introductions discussion prompt</a></p></div></li>
-        <li><div class="wk">Week 2</div><div class="wk-body"><h4 class="box-title">Confidentiality, Data Scrubbing, and Professional Responsibility</h4><p>Students remove confidential client information from a document before they prompt an AI tool, and then work through a guided prompting exercise.</p></div></li>
-        <li><div class="wk">Week 3</div><div class="wk-body"><h4 class="box-title">Hallucinations and Verification</h4><p>Students check a brief by hand against a verification checklist, and then check the same brief with brief-analysis software.</p></div></li>
-        <li><div class="wk">Week 4</div><div class="wk-body"><h4 class="box-title">AI Compared with Secondary Sources</h4><p>Students compare an AI tool&rsquo;s answer with a secondary source on the same question. Students then apply Mike Caulfield&rsquo;s SIFT method to the empirical claims in a public-policy topic of their choice.</p></div></li>
-        <li><div class="wk">Week 5</div><div class="wk-body"><h4 class="box-title">Analytics and Current Awareness</h4><p>Students compare the litigation analytics in Westlaw, Lexis, and Bloomberg Law with AI-generated content.</p></div></li>
-        <li><div class="wk">Week 6</div><div class="wk-body"><h4 class="box-title">Statutory Research</h4><p>Students compare an AI tool&rsquo;s statutory research against an annotated code, and then complete a state law survey.</p></div></li>
-        <li><div class="wk">Week 7</div><div class="wk-body"><h4 class="box-title">AI Certification (asynchronous)</h4><p>Students complete either the Harvey Academy Legal Engineering Certification or the Clio Legal AI Fundamentals Certification.</p></div></li>
-      </ul>
+    <div class="group" id="schedule">
+      <h3>Weekly Overview and Associated Documents</h3>
+      <p class="prose">The course runs for seven weeks. Weeks 1 through 6 each meet in person for one class session, and Week 7 is an asynchronous module. Open a week to read its plan.</p>
+      <div class="deadlines">
+        <h4>Key Deadlines</h4>
+        <ul class="dl-list"><li>Weekly AI Updates: [time] on the Sunday before each class in Weeks 2 through 6 (4 of 5 required)</li><li>AI Deep Dive approval request, if your option needs approval: [time] on the day of the Week 2 class</li><li>AI Deep Dive: [time] on the day of the Week 5 class</li><li>Week 7 certification or reflection: [time] on the last day of classes</li><li>Final Capstone Project: [time] on the last day of classes</li></ul>
+      </div>
+      <div class="accs weeks">
+        <details class="acc week" id="week-1"><summary><span class="acc-title">Week 1: How Generative AI Works, and Prompting</span><span class="chev" aria-hidden="true"></span></summary><div class="acc-body wk-body"><p>This session begins with a syllabus review. We will briefly explain how generative AI and retrieval-augmented generation (RAG) produce answers, and you will test those explanations in a short hands-on exercise. The session also introduces the Learn, Build, Polish framework for AI uses and the Strategist, Analyst, Decision-Maker framework for AI-augmented legal research.</p><p>In the prompting exercise, each of you will build a prompt for one assigned tool by following that vendor&#x27;s own prompting advice, and you will run the prompt on a research problem. Your group will then compare the tools&#x27; answers. The session ends with a written reflection on your prompting habits.</p><p class="wk-mats"><span>Materials:</span> <a href="materials/week-1-introductions.html">Introductions discussion prompt</a></p><div class="wk-due"><p class="wk-mats"><span>Assignments released</span></p><ul class="wk-list"><li>AI Deep Dive assignment released (pass/fail)</li><li>Final Capstone Project released (traditional grading)</li><li>Weekly AI Updates discussion boards open (pass/fail)</li></ul></div></div></details>
+        <details class="acc week" id="week-2"><summary><span class="acc-title">Week 2: Confidentiality and Progressive Prompting</span><span class="chev" aria-hidden="true"></span></summary><div class="acc-body wk-body"><p>This week covers how the professional responsibility rules on confidentiality, including ABA Formal Opinion 512, apply to AI use. In the first exercise, you will rewrite a fact pattern as a prompt that keeps the facts that matter to the legal analysis and removes the details that identify the client.</p><p>In the second exercise, you will run five rounds of increasingly specific prompts in one tool and record how each round changes the tool&#x27;s answer. Your group will then write one answer to the research question and report it to the class. The session ends with a written reflection on AI policies in school and work.</p><div class="wk-due"><p class="wk-mats"><span>Assignments due</span></p><ul class="wk-list"><li>AI Deep Dive approval request due by [time] on the day of class, if your option needs approval</li><li>Weekly AI Update (post by [time] on the Sunday before class; 4 of 5 required for Weeks 2 to 6)</li></ul></div></div></details>
+        <details class="acc week" id="week-3"><summary><span class="acc-title">Week 3: Hallucinations and Verification</span><span class="chev" aria-hidden="true"></span></summary><div class="acc-body wk-body"><p>This week covers the errors that AI tools make in legal research: fabricated cases, wrong citations, inaccurate quotations, overstated holdings, persuasive authority presented as binding, and missing controlling authority.</p><p>In the exercise, your group will check a brief by hand. Your group will then run the same brief through a document analyzer and compare the errors that the software caught with the errors that you caught. The session ends with each of you writing your own verification checklist.</p><div class="wk-due"><p class="wk-mats"><span>Assignments due</span></p><ul class="wk-list"><li>Weekly AI Update (post by [time] on the Sunday before class; 4 of 5 required for Weeks 2 to 6)</li></ul></div></div></details>
+        <details class="acc week" id="week-4"><summary><span class="acc-title">Week 4: AI Versus Secondary Sources</span><span class="chev" aria-hidden="true"></span></summary><div class="acc-body wk-body"><p>This week treats an AI-generated research report as a bespoke but unreliable and unstable secondary source. In the first exercise, you will compare an AI tool’s answer to a research question with a treatise, practice guide, or other traditional secondary source that answers the same question.</p><p>In the second exercise, you will apply Mike Caulfield&#x27;s SIFT method (Stop, Investigate the source, Find better coverage, Trace claims to the original context) to a claim about law or legal technology that you choose. The session ends with a written reflection on how you use secondary sources and AI.</p><div class="wk-due"><p class="wk-mats"><span>Assignments due</span></p><ul class="wk-list"><li>Weekly AI Update (post by [time] on the Sunday before class; 4 of 5 required for Weeks 2 to 6)</li></ul></div></div></details>
+        <details class="acc week" id="week-5"><summary><span class="acc-title">Week 5: Memo and Brief Critique Session</span><span class="chev" aria-hidden="true"></span></summary><div class="acc-body wk-body"><p>This week treats AI as a revision tool that does not replace your judgment. You will start with a short legal memo or brief, either something you wrote or a sample that I provide, and you will prompt an AI tool to critique the memo or brief. The goal is to reinforce an ownership mindset in which you decide whether to use certain AI-generated feedback while rejecting other suggestions.</p><p>The in-class reflection will include a short reading on Rebecca Fordon’s concept of using AI output as a research “toe-hold,” along with reactions to the reading.</p><div class="wk-due"><p class="wk-mats"><span>Assignments due</span></p><ul class="wk-list"><li>AI Deep Dive due by [time] on the day of class (pass/fail)</li><li>Weekly AI Update (post by [time] on the Sunday before class; 4 of 5 required for Weeks 2 to 6)</li></ul></div></div></details>
+        <details class="acc week" id="week-6"><summary><span class="acc-title">Week 6: Statutory Research and Course Takeaways</span><span class="chev" aria-hidden="true"></span></summary><div class="acc-body wk-body"><p>This week focuses on using AI tools for statutory research, with an emphasis on effective dates, amendments, and the cases that interpret a statute. In the exercise, you will compare an AI tool’s answer to a statutory question with an annotated code.</p><p>We will also complete course evaluations in class.</p><p>Finally, you will combine your takeaways from the course into a list of tips for 1Ls about AI and legal research.</p><div class="wk-due"><p class="wk-mats"><span>Assignments due</span></p><ul class="wk-list"><li>Weekly AI Update (post by [time] on the Sunday before class; 4 of 5 required for Weeks 2 to 6); last opportunity</li></ul></div></div></details>
+        <details class="acc week" id="week-7"><summary><span class="acc-title">Week 7: AI Certification or Reflection (asynchronous module, no class session)</span><span class="chev" aria-hidden="true"></span></summary><div class="acc-body wk-body"><p>Class will not meet in person. You will complete one of two options: the Harvey Academy Legal Engineering Certification or a reflection exercise. The option you complete counts toward your In-Class Work grade, and completing it counts as your attendance for this week. I will post detailed instructions.</p><p>If we miss a class earlier in the term, that week will be the asynchronous week, and this will be the “make up” week.</p><div class="wk-due"><p class="wk-mats"><span>Assignments due</span></p><ul class="wk-list"><li>Certification or reflection due by [time] on the last day of classes (pass/fail; part of In-Class Work)</li><li>Final Capstone Project due by [time] on the last day of classes (traditional grading)</li></ul></div></div></details>
+      </div>
+      <div class="reuse">
+        <h4>Use This Schedule in Your Canvas Course</h4>
+        <p class="mat-intro">Click the button to copy the full schedule&rsquo;s Canvas code. In Canvas, open a page, switch the editor to HTML view, and paste the code. Then replace each [time] placeholder, and adjust the weeks and deadlines to fit your course.</p>
+        <div class="reuse-row"><button class="copy copy-canvas" type="button" data-target="canvas-code">Copy Canvas code</button></div>
+        <details class="code"><summary>Show the Canvas code</summary>
+          <textarea id="canvas-code" readonly aria-label="Canvas HTML code for the full course schedule">&lt;div style=&quot;font-family: Arial, Helvetica, sans-serif; line-height: 1.5; color: #222222; max-width: 820px;&quot;&gt;
+&lt;div style=&quot;background-color: #001e44; padding: 16px 20px; border-radius: 4px 4px 0 0;&quot;&gt;
+&lt;p style=&quot;margin: 0 0 4px 0; letter-spacing: 1px; text-transform: uppercase; color: #9ec9f0;&quot;&gt;AI and Legal Research&lt;/p&gt;
+&lt;h2 style=&quot;margin: 0; color: #ffffff;&quot;&gt;Course Schedule&lt;/h2&gt;
+&lt;/div&gt;
+&lt;div style=&quot;height: 4px; background-color: #2b7abc; margin-bottom: 20px;&quot;&gt;&lt;/div&gt;
+&lt;div style=&quot;background-color: #f0f4f9; border-left: 4px solid #1E407C; padding: 12px 16px; margin: 16px 0 24px 0;&quot;&gt;
+&lt;p style=&quot;margin: 0 0 4px 0;&quot;&gt;&lt;strong&gt;Key deadlines&lt;/strong&gt;&lt;/p&gt;
+&lt;ul style=&quot;margin: 4px 0 8px 0; padding-left: 22px;&quot;&gt;&lt;li style=&quot;margin-bottom: 4px;&quot;&gt;Weekly AI Updates: [time] on the Sunday before each class in Weeks 2 through 6 (4 of 5 required)&lt;/li&gt;&lt;li style=&quot;margin-bottom: 4px;&quot;&gt;AI Deep Dive approval request, if your option needs approval: [time] on the day of the Week 2 class&lt;/li&gt;&lt;li style=&quot;margin-bottom: 4px;&quot;&gt;AI Deep Dive: [time] on the day of the Week 5 class&lt;/li&gt;&lt;li style=&quot;margin-bottom: 4px;&quot;&gt;Week 7 certification or reflection: [time] on the last day of classes&lt;/li&gt;&lt;li style=&quot;margin-bottom: 4px;&quot;&gt;Final Capstone Project: [time] on the last day of classes&lt;/li&gt;&lt;/ul&gt;
+&lt;/div&gt;
+&lt;h3 style=&quot;color: #1e407c; margin: 24px 0 4px 0; border-bottom: 2px solid #2b7abc; padding-bottom: 4px;&quot;&gt;Week 1: How Generative AI Works, and Prompting&lt;/h3&gt;
+&lt;p style=&quot;margin: 8px 0;&quot;&gt;This session begins with a syllabus review. We will briefly explain how generative AI and retrieval-augmented generation (RAG) produce answers, and you will test those explanations in a short hands-on exercise. The session also introduces the Learn, Build, Polish framework for AI uses and the Strategist, Analyst, Decision-Maker framework for AI-augmented legal research.&lt;/p&gt;
+&lt;p style=&quot;margin: 8px 0;&quot;&gt;In the prompting exercise, each of you will build a prompt for one assigned tool by following that vendor&amp;#x27;s own prompting advice, and you will run the prompt on a research problem. Your group will then compare the tools&amp;#x27; answers. The session ends with a written reflection on your prompting habits.&lt;/p&gt;
+&lt;div style=&quot;background-color: #f0f4f9; border-left: 4px solid #1E407C; padding: 8px 16px; margin: 8px 0;&quot;&gt;
+&lt;p style=&quot;margin: 4px 0 0 0;&quot;&gt;&lt;strong&gt;Assignments released&lt;/strong&gt;&lt;/p&gt;
+&lt;ul style=&quot;margin: 4px 0 8px 0; padding-left: 22px;&quot;&gt;&lt;li style=&quot;margin-bottom: 4px;&quot;&gt;AI Deep Dive assignment released (pass/fail)&lt;/li&gt;&lt;li style=&quot;margin-bottom: 4px;&quot;&gt;Final Capstone Project released (traditional grading)&lt;/li&gt;&lt;li style=&quot;margin-bottom: 4px;&quot;&gt;Weekly AI Updates discussion boards open (pass/fail)&lt;/li&gt;&lt;/ul&gt;
+&lt;/div&gt;
+&lt;h3 style=&quot;color: #1e407c; margin: 24px 0 4px 0; border-bottom: 2px solid #2b7abc; padding-bottom: 4px;&quot;&gt;Week 2: Confidentiality and Progressive Prompting&lt;/h3&gt;
+&lt;p style=&quot;margin: 8px 0;&quot;&gt;This week covers how the professional responsibility rules on confidentiality, including ABA Formal Opinion 512, apply to AI use. In the first exercise, you will rewrite a fact pattern as a prompt that keeps the facts that matter to the legal analysis and removes the details that identify the client.&lt;/p&gt;
+&lt;p style=&quot;margin: 8px 0;&quot;&gt;In the second exercise, you will run five rounds of increasingly specific prompts in one tool and record how each round changes the tool&amp;#x27;s answer. Your group will then write one answer to the research question and report it to the class. The session ends with a written reflection on AI policies in school and work.&lt;/p&gt;
+&lt;div style=&quot;background-color: #f0f4f9; border-left: 4px solid #1E407C; padding: 8px 16px; margin: 8px 0;&quot;&gt;
+&lt;p style=&quot;margin: 4px 0 0 0;&quot;&gt;&lt;strong&gt;Assignments due&lt;/strong&gt;&lt;/p&gt;
+&lt;ul style=&quot;margin: 4px 0 8px 0; padding-left: 22px;&quot;&gt;&lt;li style=&quot;margin-bottom: 4px;&quot;&gt;AI Deep Dive approval request due by [time] on the day of class, if your option needs approval&lt;/li&gt;&lt;li style=&quot;margin-bottom: 4px;&quot;&gt;Weekly AI Update (post by [time] on the Sunday before class; 4 of 5 required for Weeks 2 to 6)&lt;/li&gt;&lt;/ul&gt;
+&lt;/div&gt;
+&lt;h3 style=&quot;color: #1e407c; margin: 24px 0 4px 0; border-bottom: 2px solid #2b7abc; padding-bottom: 4px;&quot;&gt;Week 3: Hallucinations and Verification&lt;/h3&gt;
+&lt;p style=&quot;margin: 8px 0;&quot;&gt;This week covers the errors that AI tools make in legal research: fabricated cases, wrong citations, inaccurate quotations, overstated holdings, persuasive authority presented as binding, and missing controlling authority.&lt;/p&gt;
+&lt;p style=&quot;margin: 8px 0;&quot;&gt;In the exercise, your group will check a brief by hand. Your group will then run the same brief through a document analyzer and compare the errors that the software caught with the errors that you caught. The session ends with each of you writing your own verification checklist.&lt;/p&gt;
+&lt;div style=&quot;background-color: #f0f4f9; border-left: 4px solid #1E407C; padding: 8px 16px; margin: 8px 0;&quot;&gt;
+&lt;p style=&quot;margin: 4px 0 0 0;&quot;&gt;&lt;strong&gt;Assignments due&lt;/strong&gt;&lt;/p&gt;
+&lt;ul style=&quot;margin: 4px 0 8px 0; padding-left: 22px;&quot;&gt;&lt;li style=&quot;margin-bottom: 4px;&quot;&gt;Weekly AI Update (post by [time] on the Sunday before class; 4 of 5 required for Weeks 2 to 6)&lt;/li&gt;&lt;/ul&gt;
+&lt;/div&gt;
+&lt;h3 style=&quot;color: #1e407c; margin: 24px 0 4px 0; border-bottom: 2px solid #2b7abc; padding-bottom: 4px;&quot;&gt;Week 4: AI Versus Secondary Sources&lt;/h3&gt;
+&lt;p style=&quot;margin: 8px 0;&quot;&gt;This week treats an AI-generated research report as a bespoke but unreliable and unstable secondary source. In the first exercise, you will compare an AI tool’s answer to a research question with a treatise, practice guide, or other traditional secondary source that answers the same question.&lt;/p&gt;
+&lt;p style=&quot;margin: 8px 0;&quot;&gt;In the second exercise, you will apply Mike Caulfield&amp;#x27;s SIFT method (Stop, Investigate the source, Find better coverage, Trace claims to the original context) to a claim about law or legal technology that you choose. The session ends with a written reflection on how you use secondary sources and AI.&lt;/p&gt;
+&lt;div style=&quot;background-color: #f0f4f9; border-left: 4px solid #1E407C; padding: 8px 16px; margin: 8px 0;&quot;&gt;
+&lt;p style=&quot;margin: 4px 0 0 0;&quot;&gt;&lt;strong&gt;Assignments due&lt;/strong&gt;&lt;/p&gt;
+&lt;ul style=&quot;margin: 4px 0 8px 0; padding-left: 22px;&quot;&gt;&lt;li style=&quot;margin-bottom: 4px;&quot;&gt;Weekly AI Update (post by [time] on the Sunday before class; 4 of 5 required for Weeks 2 to 6)&lt;/li&gt;&lt;/ul&gt;
+&lt;/div&gt;
+&lt;h3 style=&quot;color: #1e407c; margin: 24px 0 4px 0; border-bottom: 2px solid #2b7abc; padding-bottom: 4px;&quot;&gt;Week 5: Memo and Brief Critique Session&lt;/h3&gt;
+&lt;p style=&quot;margin: 8px 0;&quot;&gt;This week treats AI as a revision tool that does not replace your judgment. You will start with a short legal memo or brief, either something you wrote or a sample that I provide, and you will prompt an AI tool to critique the memo or brief. The goal is to reinforce an ownership mindset in which you decide whether to use certain AI-generated feedback while rejecting other suggestions.&lt;/p&gt;
+&lt;p style=&quot;margin: 8px 0;&quot;&gt;The in-class reflection will include a short reading on Rebecca Fordon’s concept of using AI output as a research “toe-hold,” along with reactions to the reading.&lt;/p&gt;
+&lt;div style=&quot;background-color: #f0f4f9; border-left: 4px solid #1E407C; padding: 8px 16px; margin: 8px 0;&quot;&gt;
+&lt;p style=&quot;margin: 4px 0 0 0;&quot;&gt;&lt;strong&gt;Assignments due&lt;/strong&gt;&lt;/p&gt;
+&lt;ul style=&quot;margin: 4px 0 8px 0; padding-left: 22px;&quot;&gt;&lt;li style=&quot;margin-bottom: 4px;&quot;&gt;AI Deep Dive due by [time] on the day of class (pass/fail)&lt;/li&gt;&lt;li style=&quot;margin-bottom: 4px;&quot;&gt;Weekly AI Update (post by [time] on the Sunday before class; 4 of 5 required for Weeks 2 to 6)&lt;/li&gt;&lt;/ul&gt;
+&lt;/div&gt;
+&lt;h3 style=&quot;color: #1e407c; margin: 24px 0 4px 0; border-bottom: 2px solid #2b7abc; padding-bottom: 4px;&quot;&gt;Week 6: Statutory Research and Course Takeaways&lt;/h3&gt;
+&lt;p style=&quot;margin: 8px 0;&quot;&gt;This week focuses on using AI tools for statutory research, with an emphasis on effective dates, amendments, and the cases that interpret a statute. In the exercise, you will compare an AI tool’s answer to a statutory question with an annotated code.&lt;/p&gt;
+&lt;p style=&quot;margin: 8px 0;&quot;&gt;We will also complete course evaluations in class.&lt;/p&gt;
+&lt;p style=&quot;margin: 8px 0;&quot;&gt;Finally, you will combine your takeaways from the course into a list of tips for 1Ls about AI and legal research.&lt;/p&gt;
+&lt;div style=&quot;background-color: #f0f4f9; border-left: 4px solid #1E407C; padding: 8px 16px; margin: 8px 0;&quot;&gt;
+&lt;p style=&quot;margin: 4px 0 0 0;&quot;&gt;&lt;strong&gt;Assignments due&lt;/strong&gt;&lt;/p&gt;
+&lt;ul style=&quot;margin: 4px 0 8px 0; padding-left: 22px;&quot;&gt;&lt;li style=&quot;margin-bottom: 4px;&quot;&gt;Weekly AI Update (post by [time] on the Sunday before class; 4 of 5 required for Weeks 2 to 6); last opportunity&lt;/li&gt;&lt;/ul&gt;
+&lt;/div&gt;
+&lt;h3 style=&quot;color: #1e407c; margin: 24px 0 4px 0; border-bottom: 2px solid #2b7abc; padding-bottom: 4px;&quot;&gt;Week 7: AI Certification or Reflection (asynchronous module, no class session)&lt;/h3&gt;
+&lt;p style=&quot;margin: 8px 0;&quot;&gt;Class will not meet in person. You will complete one of two options: the Harvey Academy Legal Engineering Certification or a reflection exercise. The option you complete counts toward your In-Class Work grade, and completing it counts as your attendance for this week. I will post detailed instructions on Canvas.&lt;/p&gt;
+&lt;p style=&quot;margin: 8px 0;&quot;&gt;If we miss a class earlier in the term, that week will be the asynchronous week, and this will be the “make up” week.&lt;/p&gt;
+&lt;div style=&quot;background-color: #f0f4f9; border-left: 4px solid #1E407C; padding: 8px 16px; margin: 8px 0;&quot;&gt;
+&lt;p style=&quot;margin: 4px 0 0 0;&quot;&gt;&lt;strong&gt;Assignments due&lt;/strong&gt;&lt;/p&gt;
+&lt;ul style=&quot;margin: 4px 0 8px 0; padding-left: 22px;&quot;&gt;&lt;li style=&quot;margin-bottom: 4px;&quot;&gt;Certification or reflection due by [time] on the last day of classes (pass/fail; part of In-Class Work)&lt;/li&gt;&lt;li style=&quot;margin-bottom: 4px;&quot;&gt;Final Capstone Project due by [time] on the last day of classes (traditional grading)&lt;/li&gt;&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</textarea>
+        </details>
+      </div>
     </div>
-
     <div class="license" id="license">
       <h3>License and Reuse</h3>
       <p>Unless a page says otherwise, Julie releases these course-related materials under the <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)</a>. You may adapt, remix, and republish the materials for noncommercial educational use, as long as you credit Julie. If you want to use the materials in a commercial training program, contact Julie first.</p>
@@ -405,6 +496,21 @@ footer a { color: var(--on-band); }
   }
   wireCopy('copy-email', 'email', 'Copy email address');
   wireCopy('copy-cite', 'cite', 'Copy citation');
+})();
+</script>
+<script>
+(function () {
+  document.querySelectorAll('button.copy-canvas').forEach(function (btn) {
+    var src = document.getElementById(btn.dataset.target), label = btn.textContent;
+    if (!src) return;
+    btn.addEventListener('click', function () {
+      function selectIt() { var d = src.closest('details'); if (d) d.open = true; src.focus(); src.select(); btn.textContent = 'Selected: press Ctrl+C'; }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(src.value).then(function () { btn.textContent = 'Copied'; }, selectIt);
+      } else { selectIt(); }
+      setTimeout(function () { btn.textContent = label; }, 2500);
+    });
+  });
 })();
 </script>
 </body>
