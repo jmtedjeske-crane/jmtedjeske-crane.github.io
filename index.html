@@ -249,6 +249,12 @@ p.prose { display: block; }
 .weeklist p { font-size: 0.95rem; line-height: 1.5; }
 @media (max-width: 560px) { .weeklist > li { grid-template-columns: minmax(0, 1fr); } }
 .acc-body .cites { padding-top: 4px; }
+.objectives { display: grid; gap: 12px; }
+.obj-list { list-style: none; counter-reset: obj; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 14px; }
+.obj-list li { counter-increment: obj; background: var(--surface); border-radius: 6px; padding: 14px 18px 14px 52px; position: relative; font-size: 0.95rem; line-height: 1.5; min-width: 0; }
+.obj-list li::before { content: counter(obj); position: absolute; left: 16px; top: 13px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: var(--on-accent); font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; line-height: 24px; text-align: center; }
+.objectives button.copy { justify-self: start; }
+@media (max-width: 640px) { .obj-list { grid-template-columns: minmax(0, 1fr); } }
 
 /* Footer */
 footer.band { padding-block: 44px; }
@@ -344,6 +350,19 @@ details.code[open] summary { margin-bottom: 8px; }
         </dl>
         <a class="more" href="about.html">More about Julie</a>
       </aside>
+    </div>
+
+    <div class="group objectives" id="objectives">
+      <h3>Course Learning Objectives</h3>
+      <p id="obj-intro">At the end of the course, you will be able to:</p>
+      <ol class="obj-list" id="obj-list">
+        <li>Write clear prompts by understanding your research goals, any confidentiality issues, and what each research system can do.</li>
+        <li>Critically evaluate AI-generated legal analysis to check if it is accurate, complete, well-reasoned, authoritative, and supported by reliable sources.</li>
+        <li>Decide how to incorporate generative AI into a legal research workflow.</li>
+        <li>Explain and reflect on the impact of generative AI in legal research, legal practice, and the larger society.</li>
+        <li>Build a sustainable habit of tracking developments in generative AI.</li>
+      </ol>
+      <button class="copy" id="copy-obj" type="button">Copy learning objectives</button>
     </div>
 
     <div class="group">
@@ -496,6 +515,30 @@ details.code[open] summary { margin-bottom: 8px; }
   }
   wireCopy('copy-email', 'email', 'Copy email address');
   wireCopy('copy-cite', 'cite', 'Copy citation');
+  (function () {
+    var btn = document.getElementById('copy-obj'), list = document.getElementById('obj-list'), intro = document.getElementById('obj-intro');
+    if (!btn || !list || !intro) return;
+    var label = btn.textContent;
+    btn.addEventListener('click', function () {
+      var items = Array.prototype.map.call(list.querySelectorAll('li'), function (li) { return li.textContent.trim(); });
+      var text = intro.textContent.trim() + '\n\n' + items.map(function (t, i) { return (i + 1) + '. ' + t; }).join('\n');
+      var html = '<p>' + intro.textContent.trim() + '</p><ol>' + items.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ol>';
+      function selectIt() {
+        var r = document.createRange(); r.setStartBefore(intro); r.setEndAfter(list);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        btn.textContent = 'Selected: press Ctrl+C';
+      }
+      function done() { btn.textContent = 'Copied'; }
+      if (navigator.clipboard && window.ClipboardItem && navigator.clipboard.write) {
+        navigator.clipboard.write([new ClipboardItem({ 'text/plain': new Blob([text], { type: 'text/plain' }), 'text/html': new Blob([html], { type: 'text/html' }) })]).then(done, function () {
+          navigator.clipboard.writeText(text).then(done, selectIt);
+        });
+      } else if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, selectIt);
+      } else { selectIt(); }
+      setTimeout(function () { btn.textContent = label; }, 2500);
+    });
+  })();
 })();
 </script>
 <script>
