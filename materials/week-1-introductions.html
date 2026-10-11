@@ -300,7 +300,7 @@ details.code[open] summary { margin-bottom: 8px; }
   <p class="crumb"><a href="../index.html#materials">AI and Legal Research</a> &rsaquo; Week 1</p>
   <section aria-labelledby="mat-h">
     <h2 id="mat-h">Week 1: Introductions Discussion</h2>
-    <p class="mat-intro">Students post this introduction to a Canvas discussion board before the first class. The page below shows [date] and [time] wherever a deadline belongs.</p>
+    <p class="mat-intro">Students post this introduction to a discussion board in the course&rsquo;s learning management system before the first class. The page below shows [date] and [time] wherever a deadline belongs.</p>
     <div class="canvas-frame">
 <div style="width: 100%; font-family: Arial, Helvetica, sans-serif; line-height: 1.55; color: #222222;">
     <div style="background-color: #001e44; padding: 18px 22px; border-radius: 4px 4px 0 0;">
@@ -329,11 +329,11 @@ details.code[open] summary { margin-bottom: 8px; }
 </div>
     </div>
     <div class="reuse">
-      <h3>Use This Page in Your Canvas Course</h3>
-      <p class="mat-intro">Click the button to copy the page&rsquo;s Canvas code. In Canvas, open a page or discussion, switch the editor to HTML view, and paste the code. Then replace each [date] and [time] placeholder, and adjust the grading details to fit your course.</p>
-      <div class="reuse-row"><button class="copy" id="copy-canvas" type="button">Copy Canvas code</button></div>
-      <details class="code"><summary>Show the Canvas code</summary>
-        <textarea id="canvas-code" readonly aria-label="Canvas HTML code for this page">&lt;div style=&quot;width: 100%; font-family: Arial, Helvetica, sans-serif; line-height: 1.55; color: #222222;&quot;&gt;
+      <h3>Use This Page in Your Learning Management System</h3>
+      <p class="mat-intro">Click the button to copy the page&rsquo;s HTML code. In Canvas, Blackboard, Moodle, D2L Brightspace, or another learning management system, open a page or discussion, switch the editor to HTML view, and paste the code. Then replace each [date] and [time] placeholder, and adjust the grading details to fit your course.</p>
+      <div class="reuse-row"><button class="copy" id="copy-canvas" type="button">Copy HTML code</button></div>
+      <details class="code"><summary>Show the HTML code</summary>
+        <textarea id="canvas-code" readonly aria-label="HTML code for this page">&lt;div style=&quot;width: 100%; font-family: Arial, Helvetica, sans-serif; line-height: 1.55; color: #222222;&quot;&gt;
     &lt;div style=&quot;background-color: #001e44; padding: 18px 22px; border-radius: 4px 4px 0 0;&quot;&gt;
         &lt;p style=&quot;margin: 0 0 4px 0; color: #9ec9f0;&quot;&gt;Week 1 &amp;middot; Before our first class on [date]&lt;/p&gt;
         &lt;h2 style=&quot;margin: 0; color: #ffffff;&quot;&gt;Introductions&lt;/h2&gt;
@@ -419,7 +419,7 @@ details.code[open] summary { margin-bottom: 8px; }
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(src.value).then(function () { btn.textContent = 'Copied'; }, selectIt);
     } else { selectIt(); }
-    setTimeout(function () { btn.textContent = 'Copy Canvas code'; }, 2500);
+    setTimeout(function () { btn.textContent = 'Copy HTML code'; }, 2500);
   });
 })();
 </script>

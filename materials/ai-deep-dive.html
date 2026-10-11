@@ -441,11 +441,11 @@ details.code[open] summary { margin-bottom: 8px; }
 </div>
     </div>
     <div class="reuse">
-      <h3>Use This Page in Your Canvas Course</h3>
-      <p class="mat-intro">Click the button to copy the page&rsquo;s Canvas code. In Canvas, open a page or discussion, switch the editor to HTML view, and paste the code. Then replace each [date], [time], and [your email address] placeholder, and adjust the grading details to fit your course.</p>
-      <div class="reuse-row"><button class="copy" id="copy-canvas" type="button">Copy Canvas code</button></div>
-      <details class="code"><summary>Show the Canvas code</summary>
-        <textarea id="canvas-code" readonly aria-label="Canvas HTML code for this page">&lt;div style=&quot;font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 1.5; color: #222222;&quot;&gt;
+      <h3>Use This Page in Your Learning Management System</h3>
+      <p class="mat-intro">Click the button to copy the page&rsquo;s HTML code. In Canvas, Blackboard, Moodle, D2L Brightspace, or another learning management system, open a page or discussion, switch the editor to HTML view, and paste the code. Then replace each [date], [time], and [your email address] placeholder, and adjust the grading details to fit your course.</p>
+      <div class="reuse-row"><button class="copy" id="copy-canvas" type="button">Copy HTML code</button></div>
+      <details class="code"><summary>Show the HTML code</summary>
+        <textarea id="canvas-code" readonly aria-label="HTML code for this page">&lt;div style=&quot;font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 1.5; color: #222222;&quot;&gt;
     &lt;div style=&quot;background-color: #001e44; color: #ffffff; padding: 16px 20px; margin-bottom: 20px;&quot;&gt;
         &lt;p style=&quot;margin: 0; font-size: 14px; color: #9cc7ec;&quot;&gt;Released Week 1 &amp;middot; Due [date] &amp;middot; 20% of the course grade (pass/fail)&lt;/p&gt;
         &lt;h2 style=&quot;margin: 4px 0 0 0; font-size: 24px; color: #ffffff;&quot;&gt;AI Deep Dive&lt;/h2&gt;
@@ -643,7 +643,7 @@ details.code[open] summary { margin-bottom: 8px; }
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(src.value).then(function () { btn.textContent = 'Copied'; }, selectIt);
     } else { selectIt(); }
-    setTimeout(function () { btn.textContent = 'Copy Canvas code'; }, 2500);
+    setTimeout(function () { btn.textContent = 'Copy HTML code'; }, 2500);
   });
 })();
 </script>
