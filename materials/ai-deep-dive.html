@@ -263,6 +263,11 @@ button.copy {
 .profiles { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 22px; }
 footer a { color: var(--on-band); }
 .disclaimer { color: var(--on-band-muted); font-size: 0.9rem; max-width: 70ch; border-top: 1px solid rgba(255,255,255,0.18); padding-top: 16px; }
+
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; }
+.sec-head > h2 { font-size: 1.75rem; padding-bottom: 10px; position: relative; }
+.sec-head > h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 56px; height: 3px; background: var(--accent); }
+.to-top { font-size: inherit; white-space: nowrap; }
 </style>
 <style>
 .crumb { margin: 0; padding-top: 24px; font-size: 0.9rem; color: var(--muted); }
@@ -281,7 +286,7 @@ details.code[open] summary { margin-bottom: 8px; }
 </style>
 </head>
 <body>
-<header class="band">
+<header class="band" id="top">
   <div class="wrap masthead compact">
     <p class="site-name"><a href="../index.html">Julie Tedjeske Crane</a></p>
   </div>
@@ -441,7 +446,7 @@ details.code[open] summary { margin-bottom: 8px; }
 </div>
     </div>
     <div class="reuse">
-      <h3>Use This Page in Your Learning Management System</h3>
+      <div class="sec-head"><h3>Use This Page in Your Learning Management System</h3><a class="to-top" href="#top">Back to top</a></div>
       <p class="mat-intro">Click the button to copy the page&rsquo;s HTML code. In Canvas, Blackboard, Moodle, D2L Brightspace, or another learning management system, open a page or discussion, switch the editor to HTML view, and paste the code. Then replace each [date], [time], and [your email address] placeholder, and adjust the grading details to fit your course.</p>
       <div class="reuse-row"><button class="copy" id="copy-canvas" type="button">Copy HTML code</button></div>
       <details class="code"><summary>Show the HTML code</summary>
@@ -585,7 +590,7 @@ details.code[open] summary { margin-bottom: 8px; }
       </details>
     </div>
     <div class="license">
-      <h3>License</h3>
+      <div class="sec-head"><h3>License</h3><a class="to-top" href="#top">Back to top</a></div>
       <p>Julie Tedjeske Crane releases this course-related material under the <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)</a>. You may adapt and republish the material for noncommercial educational use, as long as you credit Julie.</p>
       <p class="small">Suggested citation: Julie Tedjeske Crane, <i>AI Deep Dive Assignment</i>, <i>in</i> <i>AI and Legal Research: Teaching Materials</i> (2026), https://jmtedjeske-crane.github.io/materials/ai-deep-dive.html (licensed under CC BY-NC 4.0).</p>
     </div>
@@ -622,12 +627,12 @@ details.code[open] summary { margin-bottom: 8px; }
       function selectIt() {
         var r = document.createRange(); r.selectNodeContents(src);
         var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-        btn.textContent = 'Selected: press Ctrl+C';
+        btn.textContent = (/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent) ? 'Selected: press Cmd+C' : 'Selected: press Ctrl+C');
       }
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(function () { btn.textContent = 'Copied'; }, selectIt);
       } else { selectIt(); }
-      setTimeout(function () { btn.textContent = label; }, 2500);
+      setTimeout(function () { if (!/^Selected/.test(btn.textContent)) btn.textContent = label; }, 2500); setTimeout(function () { if (/^Selected/.test(btn.textContent)) btn.textContent = label; }, 6000);
     });
   }
   wireCopy('copy-email', 'email', 'Copy email address');
@@ -639,11 +644,11 @@ details.code[open] summary { margin-bottom: 8px; }
   var btn = document.getElementById('copy-canvas'), src = document.getElementById('canvas-code');
   if (!btn || !src) return;
   btn.addEventListener('click', function () {
-    function selectIt() { var d = src.closest('details'); if (d) d.open = true; src.focus(); src.select(); btn.textContent = 'Selected: press Ctrl+C'; }
+    function selectIt() { var d = src.closest('details'); if (d) d.open = true; src.focus(); src.select(); btn.textContent = (/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent) ? 'Selected: press Cmd+C' : 'Selected: press Ctrl+C'); }
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(src.value).then(function () { btn.textContent = 'Copied'; }, selectIt);
     } else { selectIt(); }
-    setTimeout(function () { btn.textContent = 'Copy HTML code'; }, 2500);
+    setTimeout(function () { if (!/^Selected/.test(btn.textContent)) btn.textContent = 'Copy HTML code'; }, 2500); setTimeout(function () { if (/^Selected/.test(btn.textContent)) btn.textContent = 'Copy HTML code'; }, 6000);
   });
 })();
 </script>
