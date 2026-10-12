@@ -263,10 +263,15 @@ button.copy {
 .profiles { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 22px; }
 footer a { color: var(--on-band); }
 .disclaimer { color: var(--on-band-muted); font-size: 0.9rem; max-width: 70ch; border-top: 1px solid rgba(255,255,255,0.18); padding-top: 16px; }
+
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; }
+.sec-head > h2 { font-size: 1.75rem; padding-bottom: 10px; position: relative; }
+.sec-head > h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 56px; height: 3px; background: var(--accent); }
+.to-top { font-size: inherit; white-space: nowrap; }
 </style>
 </head>
 <body>
-<header class="band">
+<header class="band" id="top">
   <div class="wrap masthead hero-grid">
     <div class="hero-text">
       <h1>Julie Tedjeske Crane</h1>
@@ -356,7 +361,7 @@ footer a { color: var(--on-band); }
   </section>
 
   <section id="presentations" aria-labelledby="presentations-h">
-    <h2 id="presentations-h">Presentations</h2>
+    <div class="sec-head"><h2 id="presentations-h">Presentations</h2><a class="to-top" href="#top">Back to top</a></div>
     <div class="accs">
     <details class="acc" id="acc-aall-am">
       <summary>
@@ -472,7 +477,7 @@ footer a { color: var(--on-band); }
   </section>
 
   <section id="writing" aria-labelledby="writing-h">
-    <h2 id="writing-h">Writing</h2>
+    <div class="sec-head"><h2 id="writing-h">Writing</h2><a class="to-top" href="#top">Back to top</a></div>
     <p class="prose">Julie has written 26 posts for the <a href="https://ripslawlibrarian.wordpress.com/author/julietedjeskecrane/">RIPS Law Librarian Blog</a> since 2021, and she has written 25 posts since 2022 for <a href="https://sites.psu.edu/keepingitbrief/author/jmt1/">Keeping It Brief</a>, the blog of the Dickinson Law library. In 2021 and 2022, she wrote 2 posts for the <a href="https://litsis.classcaster.net/author/juliecrane/">blog</a> of AALL&rsquo;s Legal Innovation and Technology Special Interest Section (LIT-SIS). From 2021 to 2025, she also wrote 15 columns, book reviews, and program reviews for the <a href="https://www.aallnet.org/allsis/news-events/allsis-newsletter/newsletter-archives/">ALL-SIS Newsletter</a> of AALL&rsquo;s Academic Law Libraries Special Interest Section.</p>
     <div class="accs">
     <details class="acc" id="acc-blog">
@@ -621,12 +626,12 @@ footer a { color: var(--on-band); }
       function selectIt() {
         var r = document.createRange(); r.selectNodeContents(src);
         var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-        btn.textContent = 'Selected: press Ctrl+C';
+        btn.textContent = (/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent) ? 'Selected: press Cmd+C' : 'Selected: press Ctrl+C');
       }
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(function () { btn.textContent = 'Copied'; }, selectIt);
       } else { selectIt(); }
-      setTimeout(function () { btn.textContent = label; }, 2500);
+      setTimeout(function () { if (!/^Selected/.test(btn.textContent)) btn.textContent = label; }, 2500); setTimeout(function () { if (/^Selected/.test(btn.textContent)) btn.textContent = label; }, 6000);
     });
   }
   wireCopy('copy-email', 'email', 'Copy email address');

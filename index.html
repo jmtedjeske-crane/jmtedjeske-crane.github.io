@@ -251,8 +251,8 @@ p.prose { display: block; }
 .acc-body .cites { padding-top: 4px; }
 .objectives { display: grid; gap: 12px; }
 .obj-list { list-style: none; counter-reset: obj; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 14px; }
-.obj-list li { counter-increment: obj; background: var(--surface); border-radius: 6px; padding: 14px 18px 14px 52px; position: relative; font-size: 0.95rem; line-height: 1.5; min-width: 0; }
-.obj-list li::before { content: counter(obj); position: absolute; left: 16px; top: 13px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: var(--on-accent); font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; line-height: 24px; text-align: center; }
+.obj-list li { counter-increment: obj; border-top: 1px solid var(--rule); padding: 14px 18px 14px 40px; position: relative; font-size: 0.95rem; line-height: 1.5; min-width: 0; }
+.obj-list li::before { content: counter(obj); position: absolute; left: 0; top: 13px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: var(--on-accent); font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; line-height: 24px; text-align: center; }
 .objectives button.copy { justify-self: start; }
 @media (max-width: 640px) { .obj-list { grid-template-columns: minmax(0, 1fr); } }
 
@@ -272,6 +272,20 @@ footer a { color: var(--on-band); }
 </style>
 <style>
 .mat-intro { max-width: 68ch; }
+.intro-left > h2 { font-size: 1.75rem; padding-bottom: 10px; position: relative; margin-bottom: -6px; }
+.intro-left > h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 56px; height: 3px; background: var(--accent); }
+.page-menu { padding: 24px 0 14px; border-bottom: 1px solid var(--rule); }
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; max-width: 860px; }
+.to-top { font-size: inherit; white-space: nowrap; }
+.obj-list { grid-template-rows: repeat(3, auto); grid-auto-flow: column; align-content: start; }
+.obj-list li:nth-child(1), .obj-list li:nth-child(4) { border-top: 0; padding-top: 4px; }
+.obj-list li:nth-child(1)::before, .obj-list li:nth-child(4)::before { top: 3px; }
+@media (max-width: 640px) { .obj-list { grid-template-rows: none; grid-auto-flow: row; } .obj-list li:nth-child(4) { border-top: 1px solid var(--rule); padding-top: 14px; } .obj-list li:nth-child(4)::before { top: 13px; } }
+/* One text size for all running text */
+.small, .facts dd, .dated .what .detail, details.acc > summary .acc-sub, .job .meta, .masthead .lead, .masthead .role,
+.mats p, .status-note, .roles .role-second, .cite-text, .boxes p, .mindset p, .wk-mats, .weeklist p, .obj-list li,
+.wk-list, details.acc.week .acc-body p, .email, .disclaimer, .mat-intro, .prose { font-size: inherit; }
+#roles, #objectives, #assignments, #schedule, #license { scroll-margin-top: 64px; }
 .deadlines { border-left: 4px solid var(--accent); background: var(--surface); border-radius: 0 6px 6px 0; padding: 18px 20px; display: grid; gap: 8px; max-width: 860px; }
 .deadlines ul, .wk-list { margin: 0; padding-left: 1.3em; display: grid; gap: 4px; font-size: 0.95rem; line-height: 1.5; }
 .weeklist.schedule { max-width: 860px; }
@@ -287,19 +301,16 @@ details.acc.week[open] > summary .chev::after { content: "Hide"; }
 .reuse textarea { width: 100%; min-height: 260px; font: 0.85rem/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--text); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 10px; }
 details.code summary { cursor: pointer; font-family: var(--font-display); font-weight: 600; color: var(--heading); }
 details.code[open] summary { margin-bottom: 8px; }
+details.acc.week .acc-body p, .wk-list, .wk-mats, .card .more { font-size: inherit; }
 </style>
 </head>
 <body>
-<header class="band">
+<header class="band" id="top">
   <div class="wrap masthead hero-grid">
     <div class="hero-text">
       <h1>Julie Tedjeske Crane</h1>
       <p class="tagline">Law librarian. Legal research professor.</p>
       <p class="lead">Julie shares the materials from her course AI and Legal Research on this site so that law librarians and legal educators can adapt the materials for their own teaching. The materials are free to use for noncommercial educational purposes under a Creative Commons license.</p>
-      <div class="btns">
-        <a class="btn primary" href="#materials">See the AI and Legal Research course</a>
-        <a class="btn ghost" href="#license">License and reuse</a>
-      </div>
     </div>
     <figure class="hero-art">
       <img src="librarian-instructor-life.jpg" width="1408" height="768" alt="Hand-drawn, colored illustration of an open notebook titled Librarian and Instructor Life. Arrows lead from the title to labeled sketches of Julie&rsquo;s work: Instructional Design, AI in Education, In the Classroom, My Scholarship, Blogging, Conference Presentations, University Library System, and Law School Librarian. The sketches show a syllabus, students in a classroom, books, a speaker at a podium, and two library buildings.">
@@ -317,17 +328,26 @@ details.code[open] summary { margin-bottom: 8px; }
 </header>
 
 <main class="wrap">
+  <nav aria-label="On this page">
+    <ul class="jump page-menu">
+      <li><a href="#roles">Three Roles</a></li>
+      <li><a href="#objectives">Learning Objectives</a></li>
+      <li><a href="#assignments">Syllabus and Assignments</a></li>
+      <li><a href="#schedule">Weekly Overview</a></li>
+      <li><a href="#license">License and Reuse</a></li>
+    </ul>
+  </nav>
   <section id="materials" aria-labelledby="materials-h">
-    <h2 id="materials-h">AI and Legal Research</h2>
     <div class="about intro-grid">
       <div class="intro-left">
+    <h2 id="materials-h">AI and Legal Research</h2>
     <div class="howto">
       <p>AI and Legal Research is a one-credit, seven-week experiential course that Julie is teaching at Penn State Dickinson Law for the first time in the fall 2026 term.</p>
       <p class="status-note"><span class="tag soon">In progress</span> Links to the course materials will appear on this page as Julie publishes them.</p>
     </div>
 
-    <div class="group">
-      <h3>Three Roles for the Human in the Legal Research Loop</h3>
+    <div class="group" id="roles">
+      <div class="sec-head"><h3>Three Roles for the Human in the Legal Research Loop</h3><a class="to-top" href="#top">Back to top</a></div>
       <p class="prose">The course organizes its exercises around three roles in which the researcher exercises professional judgment. These roles apply to both traditional and AI-augmented research processes. They come from Julie&rsquo;s article <a href="https://insight.dickinsonlaw.psu.edu/fac_works/532/"><i>Teaching Legal Research Students to Be the &ldquo;Human in the Loop&rdquo;</i></a>, which <i>Perspectives: Teaching Legal Research and Writing</i> published in 2026.</p>
       <ul class="roles">
         <li><span class="role-name">Strategist</span><span class="role-second">Secondary role: Translator</span></li>
@@ -353,7 +373,7 @@ details.code[open] summary { margin-bottom: 8px; }
     </div>
 
     <div class="group objectives" id="objectives">
-      <h3>Course Learning Objectives</h3>
+      <div class="sec-head"><h3>Course Learning Objectives</h3><a class="to-top" href="#top">Back to top</a></div>
       <p id="obj-intro">At the end of the course, you will be able to:</p>
       <ol class="obj-list" id="obj-list">
         <li>Write clear prompts by understanding your research goals, any confidentiality issues, and what each research system can do.</li>
@@ -365,8 +385,8 @@ details.code[open] summary { margin-bottom: 8px; }
       <button class="copy" id="copy-obj" type="button">Copy learning objectives</button>
     </div>
 
-    <div class="group">
-      <h3>Syllabus and Assignments</h3>
+    <div class="group" id="assignments">
+      <div class="sec-head"><h3>Syllabus and Assignments</h3><a class="to-top" href="#top">Back to top</a></div>
       <ul class="boxes two">
         <li><div class="box-top"><h4 class="box-title">Syllabus</h4></div><p>The syllabus covers the course description, learning objectives, grading, the AI use policy, the schedule, deadlines, and logistics. Dates, times, rooms, and contact details appear as placeholders, so you can fill in your own course&rsquo;s details.</p><p class="wk-mats"><a href="materials/AI_and_Legal_Research_Generic_Syllabus.pptx" download>Download the syllabus (PowerPoint)</a></p></li>
         <li><div class="box-top"><h4 class="box-title">Final Capstone Project</h4></div><p>Students complete a research project through a step-by-step process that ties back to the in-class exercises.</p></li>
@@ -376,12 +396,8 @@ details.code[open] summary { margin-bottom: 8px; }
     </div>
 
     <div class="group" id="schedule">
-      <h3>Weekly Overview and Associated Documents</h3>
+      <div class="sec-head"><h3>Weekly Overview and Associated Documents</h3><a class="to-top" href="#top">Back to top</a></div>
       <p class="prose">The course runs for seven weeks. Weeks 1 through 6 each meet in person for one class session, and Week 7 is an asynchronous module. Open a week to read its plan.</p>
-      <div class="deadlines">
-        <h4>Key Deadlines</h4>
-        <ul class="dl-list"><li>Weekly AI Updates: [time] on the Sunday before each class in Weeks 2 through 6 (4 of 5 required)</li><li>AI Deep Dive approval request, if your option needs approval: [time] on the day of the Week 2 class</li><li>AI Deep Dive: [time] on the day of the Week 5 class</li><li>Week 7 certification or reflection: [time] on the last day of classes</li><li>Final Capstone Project: [time] on the last day of classes</li></ul>
-      </div>
       <div class="accs weeks">
         <details class="acc week" id="week-1"><summary><span class="acc-title">Week 1: How Generative AI Works, and Prompting</span><span class="chev" aria-hidden="true"></span></summary><div class="acc-body wk-body"><p>This session begins with a syllabus review. We will briefly explain how generative AI and retrieval-augmented generation (RAG) produce answers, and you will test those explanations in a short hands-on exercise. The session also introduces the Learn, Build, Polish framework for AI uses and the Strategist, Analyst, Decision-Maker framework for AI-augmented legal research.</p><p>In the prompting exercise, each of you will build a prompt for one assigned tool by following that vendor&#x27;s own prompting advice, and you will run the prompt on a research problem. Your group will then compare the tools&#x27; answers. The session ends with a written reflection on your prompting habits.</p><p class="wk-mats"><span>Materials:</span> <a href="materials/week-1-introductions.html">Introductions discussion prompt</a></p><div class="wk-due"><p class="wk-mats"><span>Assignments released</span></p><ul class="wk-list"><li>AI Deep Dive assignment released (pass/fail)</li><li>Final Capstone Project released (traditional grading)</li><li>Weekly AI Updates discussion boards open (pass/fail)</li></ul></div></div></details>
         <details class="acc week" id="week-2"><summary><span class="acc-title">Week 2: Confidentiality and Progressive Prompting</span><span class="chev" aria-hidden="true"></span></summary><div class="acc-body wk-body"><p>This week covers how the professional responsibility rules on confidentiality, including ABA Formal Opinion 512, apply to AI use. In the first exercise, you will rewrite a fact pattern as a prompt that keeps the facts that matter to the legal analysis and removes the details that identify the client.</p><p>In the second exercise, you will run five rounds of increasingly specific prompts in one tool and record how each round changes the tool&#x27;s answer. Your group will then write one answer to the research question and report it to the class. The session ends with a written reflection on AI policies in school and work.</p><div class="wk-due"><p class="wk-mats"><span>Assignments due</span></p><ul class="wk-list"><li>AI Deep Dive approval request due by [time] on the day of class, if your option needs approval</li><li>Weekly AI Update (post by [time] on the Sunday before class; 4 of 5 required for Weeks 2 to 6)</li></ul></div></div></details>
@@ -462,7 +478,7 @@ details.code[open] summary { margin-bottom: 8px; }
       </div>
     </div>
     <div class="license" id="license">
-      <h3>License and Reuse</h3>
+      <div class="sec-head"><h3>License and Reuse</h3><a class="to-top" href="#top">Back to top</a></div>
       <p>Unless a page says otherwise, Julie releases these course-related materials under the <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)</a>. You may adapt, remix, and republish the materials for noncommercial educational use, as long as you credit Julie. If you want to use the materials in a commercial training program, contact Julie first.</p>
       <div class="cite-box">
         <span class="eyebrow muted small">Suggested citation</span>
@@ -505,12 +521,12 @@ details.code[open] summary { margin-bottom: 8px; }
       function selectIt() {
         var r = document.createRange(); r.selectNodeContents(src);
         var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-        btn.textContent = 'Selected: press Ctrl+C';
+        btn.textContent = (/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent) ? 'Selected: press Cmd+C' : 'Selected: press Ctrl+C');
       }
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(function () { btn.textContent = 'Copied'; }, selectIt);
       } else { selectIt(); }
-      setTimeout(function () { btn.textContent = label; }, 2500);
+      setTimeout(function () { if (!/^Selected/.test(btn.textContent)) btn.textContent = label; }, 2500); setTimeout(function () { if (/^Selected/.test(btn.textContent)) btn.textContent = label; }, 6000);
     });
   }
   wireCopy('copy-email', 'email', 'Copy email address');
@@ -526,7 +542,7 @@ details.code[open] summary { margin-bottom: 8px; }
       function selectIt() {
         var r = document.createRange(); r.setStartBefore(intro); r.setEndAfter(list);
         var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-        btn.textContent = 'Selected: press Ctrl+C';
+        btn.textContent = (/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent) ? 'Selected: press Cmd+C' : 'Selected: press Ctrl+C');
       }
       function done() { btn.textContent = 'Copied'; }
       if (navigator.clipboard && window.ClipboardItem && navigator.clipboard.write) {
@@ -536,7 +552,7 @@ details.code[open] summary { margin-bottom: 8px; }
       } else if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(done, selectIt);
       } else { selectIt(); }
-      setTimeout(function () { btn.textContent = label; }, 2500);
+      setTimeout(function () { if (!/^Selected/.test(btn.textContent)) btn.textContent = label; }, 2500); setTimeout(function () { if (/^Selected/.test(btn.textContent)) btn.textContent = label; }, 6000);
     });
   })();
 })();
@@ -547,11 +563,11 @@ details.code[open] summary { margin-bottom: 8px; }
     var src = document.getElementById(btn.dataset.target), label = btn.textContent;
     if (!src) return;
     btn.addEventListener('click', function () {
-      function selectIt() { var d = src.closest('details'); if (d) d.open = true; src.focus(); src.select(); btn.textContent = 'Selected: press Ctrl+C'; }
+      function selectIt() { var d = src.closest('details'); if (d) d.open = true; src.focus(); src.select(); btn.textContent = (/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent) ? 'Selected: press Cmd+C' : 'Selected: press Ctrl+C'); }
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(src.value).then(function () { btn.textContent = 'Copied'; }, selectIt);
       } else { selectIt(); }
-      setTimeout(function () { btn.textContent = label; }, 2500);
+      setTimeout(function () { if (!/^Selected/.test(btn.textContent)) btn.textContent = label; }, 2500); setTimeout(function () { if (/^Selected/.test(btn.textContent)) btn.textContent = label; }, 6000);
     });
   });
 })();
