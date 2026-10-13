@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Research Plan and Prompt Record | AI and Legal Research</title>
+<style>
+/* Layout: one 820px column; navy title bar, jump links, one panel per step, sticky action bar. Matches the Toe-Hold Review Form and the course's Canvas pages. */
+:root {
+  --bg: #ffffff; --fg: #2d3b45; --muted: #5b6770; --navy: #001e44; --head: #1e407c; --accent: #2b7abc;
+  --callout: #f0f4f9; --line: #c5d3e3; --field: #ffffff; --danger: #b3261e; --onnavy: #ffffff; --eyebrow: #e3e9f2;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f1722; --fg: #dde4ec; --muted: #a3afbb; --navy: #001e44; --head: #9ec9f0; --accent: #6fb0e6;
+  --callout: #172434; --line: #34475d; --field: #131d2a; --danger: #ff8a80; --onnavy: #ffffff; --eyebrow: #c9d6e6; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0f1722; --fg: #dde4ec; --muted: #a3afbb; --navy: #001e44; --head: #9ec9f0; --accent: #6fb0e6;
+  --callout: #172434; --line: #34475d; --field: #131d2a; --danger: #ff8a80; --onnavy: #ffffff; --eyebrow: #c9d6e6; color-scheme: dark }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font); font-size: 16px; line-height: 1.5; }
+header { background: var(--navy); color: var(--onnavy); padding-block: 20px 22px; padding-inline: 16px; }
+.wrap { max-width: 820px; margin: 0 auto; }
+.eyebrow { font-size: 14px; letter-spacing: .05em; text-transform: uppercase; color: var(--eyebrow); }
+h1 { margin: 4px 0 0; font-size: 28px; font-weight: 900; line-height: 1.2; text-wrap: balance; }
+main { padding-block: 24px 200px; padding-inline: 16px; }
+main > .wrap { display: flex; flex-direction: column; gap: 28px; }
+h2 { margin: 0; color: var(--head); font-size: 21px; border-bottom: 2px solid var(--accent); padding-bottom: 4px; text-wrap: balance; }
+p { margin: 0; }
+.stack { display: flex; flex-direction: column; gap: 12px; }
+.callout { background: var(--callout); border-left: 4px solid var(--head); padding: 14px 16px; }
+.callout strong { color: var(--head); }
+.caps { margin-top: 6px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; font-size: 13px; }
+ul.tight { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 4px; }
+nav.jump { display: flex; flex-wrap: wrap; gap: 8px; }
+nav.jump a { color: var(--head); border: 1px solid var(--line); padding: 4px 10px; border-radius: 3px; text-decoration: none; font-size: 14px; }
+nav.jump a:hover { border-color: var(--accent); }
+#form { display: flex; flex-direction: column; gap: 28px; }
+section.panel { display: flex; flex-direction: column; gap: 18px; border: 1px solid var(--line); padding: 18px; border-radius: 4px; }
+.panel-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px; }
+.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+fieldset.field { border: 0; margin: 0; padding: 0; }
+legend { padding: 0; margin-bottom: 6px; }
+label, .lbl { font-weight: 700; color: var(--fg); }
+.opt { font-weight: 400; color: var(--muted); font-size: 14px; }
+.hint { color: var(--muted); font-size: 14px; }
+.count { font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.count.over { color: var(--danger); font-weight: 700; }
+input[type=text], input[type=date], select, textarea { font: inherit; color: var(--fg); background: var(--field); border: 1px solid var(--line); border-radius: 3px; padding: 8px 10px; width: 100%; box-sizing: border-box; }
+input[type=date], select { max-width: 280px; }
+textarea { min-height: 84px; resize: vertical; }
+input:focus-visible, textarea:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.row { display: flex; gap: 8px; align-items: center; }
+.row input { flex: 1; min-width: 0; }
+.row .num { min-width: 1.6em; text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+.sub { border: 1px solid var(--line); border-radius: 3px; padding: 12px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.sub-title { font-weight: 700; color: var(--head); }
+.checks { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+.checks.col { flex-direction: column; }
+.checks label { font-weight: 400; display: flex; gap: 6px; align-items: flex-start; }
+.checks input { margin-top: 5px; }
+.btns { display: flex; flex-wrap: wrap; gap: 6px; }
+button { font: inherit; cursor: pointer; border-radius: 3px; }
+.btn-link { background: none; border: 1px dashed var(--accent); color: var(--head); padding: 6px 12px; align-self: flex-start; }
+.btn-link[disabled], .btn-x[disabled] { opacity: .45; cursor: not-allowed; }
+.btn-x { background: none; border: 1px solid var(--line); color: var(--muted); padding: 4px 10px; font-size: 14px; }
+.steprow { display: flex; flex-direction: column; gap: 8px; padding-block: 10px; border-bottom: 1px solid var(--line); }
+.steprow:last-child { border-bottom: 0; }
+.steprow .checks label { white-space: nowrap; }
+footer.credit { font-size: 14px; color: var(--muted); display: flex; flex-direction: column; gap: 6px; }
+footer.credit a { color: var(--head); }
+.bar { position: fixed; left: 0; right: 0; bottom: 0; background: var(--bg); border-top: 2px solid var(--accent); padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); }
+.bar .wrap { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.status { font-size: 14px; color: var(--muted); min-width: 0; flex: 1 1 260px; }
+.btn-main { background: var(--head); color: var(--bg); border: 1px solid var(--head); padding: 8px 16px; font-weight: 700; }
+.btn-alt { background: none; color: var(--head); border: 1px solid var(--head); padding: 8px 16px; font-weight: 700; }
+#outBox { min-height: 220px; font-size: 14px; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Final Capstone Project &middot; Steps 1, 2, and 3 &middot; Optional drafting form</div>
+    <h1>Research Plan and Prompt Record</h1>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="stack">
+      <p>Use this form to draft your Step 1 research plan and to record the prompts that you run in Steps 2 and 3. When you finish, copy your work and paste it into the text box of the Canvas assignment <strong>Text Box for Research Plan (Step 1) and Record of Prompts for Steps 2 and 3</strong>. <em>This form is optional, and you use it at your own risk.</em> You can also type your answers directly into the Canvas text box instead.</p>
+      <div class="stack" style="gap:4px">
+        <strong style="color:var(--head)">Reminders</strong>
+        <ul class="tight">
+          <li>Complete the Step 1 research plan before you open any research tool. You may not use AI in Step 1.</li>
+          <li>Write the Step 2 and Step 3 prompts yourself, without AI. You must use AI to run them.</li>
+          <li>In every step, including the steps that do not allow AI, you may use the basic level of Grammarly or a similar writing tool to fix word choice, grammar, and typos.</li>
+        </ul>
+      </div>
+      <div class="callout" role="note">
+        <strong>This form does not save your work.</strong> Your text stays in this browser tab only, and nothing goes to Canvas or to your instructor.
+        <div class="caps">Copy your work before you close this tab. You cannot recover text after the tab closes.</div>
+        <p style="margin-top:6px">Your browser may not allow the form to copy your text. After you click <strong>Copy all</strong>, paste the text into the text box of the Canvas assignment <strong>Text Box for Research Plan (Step 1) and Record of Prompts for Steps 2 and 3</strong> and check that all of it appears there before you close this tab. If the text did not copy, click <strong>Show as text</strong> and copy the text by hand.</p>
+      </div>
+
+    </div>
+
+    <nav class="jump" aria-label="Jump to a section"><a href="#panel-1">Step 1: Research Plan</a><a href="#panel-2">Step 2: General-Purpose Prompts</a><a href="#panel-3">Step 3: Lexis and Westlaw Prompt</a></nav>
+
+    <div id="form"></div>
+
+    <section class="panel" id="outPanel" hidden aria-labelledby="h-out">
+      <h2 id="h-out">Your Text</h2>
+      <p>Copy the text below. To copy it, click in the box, press Ctrl+A and then Ctrl+C (Windows), or press Command+A and then Command+C (Mac).</p>
+      <textarea id="outBox" readonly aria-label="Your work as text"></textarea>
+    </section>
+
+    <footer class="credit">
+      <p><a href="../research-plan-and-prompt-record.html">About this form, and how to make your own version</a></p>
+      <p>Form created by Professor Julie Tedjeske Crane. This form is licensed under a <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)</a>.</p>
+    </footer>
+  </div>
+</main>
+
+<div class="bar">
+  <div class="wrap">
+    <span class="status" id="status" aria-live="polite">Not saved. Copy your work before you close this tab.</span>
+    <div class="row">
+      <button class="btn-alt" id="showBtn" type="button">Show as text</button>
+      <button class="btn-main" id="copyBtn" type="button">Copy all</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+
+  const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const words = t => (String(t || "").trim().match(/\S+/g) || []).length;
+  const T = s => String(s == null ? "" : s).trim();
+  const fid = p => "f-" + p.replace(/\./g, "-");
+  const F = {};
+  let S = {};
+  function get(p) { return p.split(".").reduce((o, k) => (o == null ? o : o[k]), S); }
+  function set(p, v) { const ks = p.split("."); let o = S; for (let i = 0; i < ks.length - 1; i++) o = o[ks[i]]; o[ks[ks.length - 1]] = v; }
+  const optTag = o => (o ? ` <span class="opt">(${o})</span>` : "");
+  const hintTag = (id, h) => (h ? `<span class="hint" id="${id}-h">${h}</span>` : "");
+  const desc = (id, h) => (h ? ` aria-describedby="${id}-h"` : "");
+  const showAttr = s => (s ? ` data-show="${s}"` : "");
+  function fText(p, label, o = {}) {
+    const id = fid(p);
+    return `<div class="field"${showAttr(o.show)}><label for="${id}">${label}${optTag(o.opt)}</label>${hintTag(id, o.hint)}<input type="${o.type || "text"}" id="${id}" data-s="${p}" value="${esc(get(p))}"${desc(id, o.hint)}></div>`;
+  }
+  function fArea(p, label, o = {}) {
+    const id = fid(p);
+    return `<div class="field"${showAttr(o.show)}><label for="${id}">${label}${optTag(o.opt)}</label>${hintTag(id, o.hint)}<textarea id="${id}" data-s="${p}"${desc(id, o.hint)}>${esc(get(p))}</textarea></div>`;
+  }
+  function fSelect(p, label, opts, o = {}) {
+    const id = fid(p);
+    return `<div class="field"${showAttr(o.show)}><label for="${id}">${label}${optTag(o.opt)}</label><select id="${id}" data-s="${p}">${opts.map(([v, l]) => `<option value="${v}"${get(p) === v ? " selected" : ""}>${l}</option>`).join("")}</select></div>`;
+  }
+  function fRadio(p, label, opts, o = {}) {
+    const id = fid(p);
+    return `<fieldset class="field"${showAttr(o.show)}${desc(id, o.hint)}><legend class="lbl">${label}${optTag(o.opt)}</legend>${hintTag(id, o.hint)}<div class="checks${o.col ? " col" : ""}">${opts.map(([v, l]) => `<label><input type="radio" name="${id}" id="${id}-${v}" data-s="${p}" value="${v}"${get(p) === v ? " checked" : ""}> <span>${l}</span></label>`).join("")}</div></fieldset>`;
+  }
+  function fChecks(label, items, o = {}) {
+    return `<fieldset class="field"${showAttr(o.show)}><legend class="lbl">${label}${optTag(o.opt)}</legend>${o.hint ? `<span class="hint">${o.hint}</span>` : ""}<div class="checks${o.col ? " col" : ""}">${items.map(([p, l]) => `<label><input type="checkbox" id="${fid(p)}" data-s="${p}"${get(p) ? " checked" : ""}> <span>${l}</span></label>`).join("")}</div></fieldset>`;
+  }
+  // A list of one-line text entries, stored as an array of strings at path p.
+  function fList(p, noun, o = {}) {
+    const arr = get(p);
+    let h = arr.map((v, i) => `<div class="row">${o.ordered ? `<span class="num">${i + 1}.</span>` : ""}<input type="text" id="${fid(p + "." + i)}" aria-label="${noun} ${i + 1}" data-s="${p}.${i}" value="${esc(v)}">${o.ordered ? `<button type="button" class="btn-x" data-act="up" data-p="${p}" data-i="${i}" aria-label="Move ${noun.toLowerCase()} ${i + 1} up"${i === 0 ? " disabled" : ""}>Up</button><button type="button" class="btn-x" data-act="down" data-p="${p}" data-i="${i}" aria-label="Move ${noun.toLowerCase()} ${i + 1} down"${i === arr.length - 1 ? " disabled" : ""}>Down</button>` : ""}<button type="button" class="btn-x" data-act="rm" data-p="${p}" data-i="${i}" aria-label="Remove ${noun.toLowerCase()} ${i + 1}">Remove</button></div>`).join("");
+    h += `<button type="button" class="btn-link" data-act="add" data-p="${p}">+ Add ${noun.toLowerCase()}</button>`;
+    return h;
+  }
+  const MONTHS = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "June", "July", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."];
+  const fmtDate = d => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(d || ""); return m ? `${MONTHS[+m[2] - 1]} ${+m[3]}, ${m[1]}` : T(d); };
+  const B = v => T(v) || "[blank]";
+  const filled = a => a.map(T).filter(Boolean);
+  const anyText = o => typeof o === "string" ? !!o.trim() : Array.isArray(o) ? o.some(anyText) : (o && typeof o === "object") ? Object.values(o).some(anyText) : false;
+  const joinAnd = a => a.length < 3 ? a.join(" and ") : a.slice(0, -1).join(", ") + ", and " + a[a.length - 1];
+
+  F.target = "Text Box for Research Plan (Step 1) and Record of Prompts for Steps 2 and 3";
+
+  const blankGen = () => ({ prompt: "", tool: "", date: "", model: "" });
+  const blankPlat = () => ({ date: "", model: "", varied: "", variation: "" });
+  S = {
+    plan: { issue: "", juris: "", court: "", facts: [""], posture: "", objective: "", gov: "", period: "" },
+    gen: [blankGen()],
+    s3: { prompt: "", useBloom: "", lexis: blankPlat(), west: blankPlat(), bloom: blankPlat() }
+  };
+  const MAXG = 3;
+  F.file = "Research Plan and Prompts.txt";
+  F.max = { gen: MAXG };
+  F.blanks = { gen: blankGen };
+  F.focus = { gen: i => fid(`gen.${i}.prompt`) };
+  const TOOLS = [["aistudio", "AI Studio"], ["gemini", "Gemini"], ["harvey", "Harvey"], ["copilot", "Copilot"]];
+  const TOOL = Object.fromEntries(TOOLS);
+  const VARY = [["no", "No. I ran the prompt as written."], ["yes", "Yes. I made a variation for this platform."]];
+  const PLATS = ["lexis", "west", "bloom"];
+  const activePlats = () => PLATS.filter(k => k !== "bloom" || S.s3.useBloom === "yes");
+  const PLAT = { lexis: "Lexis Prot&eacute;g&eacute;", west: "Westlaw Deep Research or CoCounsel", bloom: "Bloomberg Law AI tool" };
+  const PLAT_TXT = { lexis: "Lexis Protégé", west: "Westlaw Deep Research or CoCounsel", bloom: "Bloomberg Law AI tool" };
+  const PLAT_FILE = { lexis: "Step3_Lexis_Output", west: "Step3_Westlaw_Output", bloom: "Step3_Bloomberg_Output" };
+
+  const platHTML = k => `
+    <div class="sub">
+      <span class="sub-title">${PLAT[k]}</span>
+      ${fText(`s3.${k}.date`, "Date that you ran the prompt", { opt: "required", type: "date" })}
+      ${fText(`s3.${k}.model`, k === "west" ? "Westlaw tool and mode setting" : "Model or mode setting", k === "west" ? { opt: "required", hint: "Write Deep Research or CoCounsel, and add any other setting that Westlaw shows." } : { opt: "if the platform shows one" })}
+      ${fRadio(`s3.${k}.varied`, "Did you make a variation in the prompt for this platform?", VARY, { opt: "required", col: true })}
+      ${fArea(`s3.${k}.variation`, "Describe the variation, or paste the changed wording", { show: `s3.${k}.varied=yes` })}
+      <p class="hint">Upload the full ${PLAT[k]} output to the Canvas assignment <strong>Upload AI Output from Steps 2 and 3</strong> as a separate file named <strong>${PLAT_FILE[k]}</strong>.</p>
+    </div>`;
+
+  F.render = () => `
+    <section class="panel" id="panel-1" aria-labelledby="h-1">
+      <h2 id="h-1">Step 1: Research Plan</h2>
+      ${fArea("plan.issue", "1. The issue to be researched, stated as one or more neutral questions", { opt: "required", hint: "Write the issue as one or more questions that do not assume the answer and do not favor the client." })}
+      <div class="field"><span class="lbl">2. The jurisdiction and court <span class="opt">(required)</span></span>
+        <div class="sub">
+          ${fText("plan.juris", "Jurisdiction")}
+          ${fText("plan.court", "Court that would decide the issue")}
+        </div>
+      </div>
+      <div class="field"><span class="lbl">3. The key facts <span class="opt">(required)</span></span>
+        <span class="hint">List only the facts that change the legal analysis. Write one fact in each box.</span>
+        ${fList("plan.facts", "Fact")}
+      </div>
+      <div class="field"><span class="lbl">4. The procedural posture and the client's objective <span class="opt">(required)</span></span>
+        <div class="sub">
+          ${fArea("plan.posture", "Procedural posture", { hint: "State where the matter stands. For example, no one has filed a lawsuit yet, or a lawsuit has been filed and a motion is pending." })}
+          ${fArea("plan.objective", "Client's objective", { hint: "State what the board wants to achieve." })}
+        </div>
+      </div>
+      ${fRadio("plan.gov", "5. Whether current law governs", [["current", "Current law governs."], ["earlier", "The law of an earlier time period applies."]], { opt: "required", col: true })}
+      ${fText("plan.period", "Time period whose law applies", { show: "plan.gov=earlier", opt: "required" })}
+    </section>
+
+    <section class="panel" id="panel-2" aria-labelledby="h-2">
+      <h2 id="h-2">Step 2: General-Purpose Prompts</h2>
+      <p>Record each prompt that you ran in AI Studio, Gemini (with your Penn State account), Harvey, or Copilot. You may run no more than three prompts in total across the four tools.</p>
+      ${S.gen.map((g, i) => `
+        <div class="sub">
+          <div class="panel-head"><span class="sub-title">Prompt ${i + 1}</span>${S.gen.length > 1 ? `<button type="button" class="btn-x" data-act="rm" data-p="gen" data-i="${i}" aria-label="Remove prompt ${i + 1}">Remove</button>` : ""}</div>
+          ${fRadio(`gen.${i}.tool`, "Tool that you ran the prompt in", TOOLS, { opt: "required" })}
+          ${fArea(`gen.${i}.prompt`, "Prompt text", { opt: "required", hint: i ? `Paste the full text of the prompt. If you ran an earlier prompt again in a different tool, write &ldquo;Same as Prompt ${i}&rdquo; or name the earlier prompt.` : "Paste the full text of the prompt." })}
+          ${fText(`gen.${i}.date`, "Date that you ran the prompt", { opt: "required", type: "date" })}
+          ${fText(`gen.${i}.model`, "Model or mode setting", { opt: "if the tool shows one" })}
+          <p class="hint">Upload the full output of this prompt to the Canvas assignment <strong>Upload AI Output from Steps 2 and 3</strong> as a separate file named <strong>Step2_Prompt${i + 1}_Output</strong>.</p>
+        </div>`).join("")}
+      <button type="button" class="btn-link" data-act="add" data-p="gen"${S.gen.length >= MAXG ? " disabled" : ""}>+ Add another prompt</button>
+      <span class="hint">${S.gen.length} of 3 prompts used.${S.gen.length >= MAXG ? " You have recorded the maximum of three prompts." : ""}</span>
+    </section>
+
+    <section class="panel" id="panel-3" aria-labelledby="h-3">
+      <h2 id="h-3">Step 3: Lexis and Westlaw Prompt</h2>
+      <p>Run essentially the same prompt in Lexis Prot&eacute;g&eacute; and in Westlaw Deep Research or CoCounsel, so any differences in the platforms&rsquo; outputs come from the tools, not the prompt. You might need to make minor variations for a platform. You may also run the prompt in the Bloomberg Law AI tool, but Bloomberg Law is optional.</p>
+      ${fArea("s3.prompt", "Prompt text", { opt: "required", hint: "Paste the full text of the prompt as you wrote it. Record any variation for a platform in that platform's box below." })}
+      ${platHTML("lexis")}${platHTML("west")}
+      ${fRadio("s3.useBloom", "Did you also run the prompt in the Bloomberg Law AI tool?", [["no", "No. I ran the prompt only in Lexis and Westlaw."], ["yes", "Yes. I also ran the prompt in Bloomberg Law."]], { opt: "Bloomberg Law is optional", col: true })}
+      <div data-show="s3.useBloom=yes">${platHTML("bloom")}</div>
+    </section>`;
+
+  const has1 = () => anyText(S.plan);
+  const has2 = () => anyText(S.gen);
+  const has3 = () => anyText(S.s3);
+  F.has = () => has1() || has2() || has3();
+
+  F.text = () => {
+    const o = [];
+    if (has1()) {
+      const p = S.plan, facts = filled(p.facts);
+      o.push("STEP 1: RESEARCH PLAN", "",
+        "1. Issue", B(p.issue), "",
+        "2. Jurisdiction and court", "Jurisdiction: " + B(p.juris), "Court that would decide the issue: " + B(p.court), "",
+        "3. Key facts", ...(facts.length ? facts.map(f => "- " + f) : ["[blank]"]), "",
+        "4. Procedural posture and client's objective", "Procedural posture: " + B(p.posture), "Client's objective: " + B(p.objective), "",
+        "5. Governing law",
+        p.gov === "current" ? "Current law governs." : p.gov === "earlier" ? "The law of an earlier time period applies: " + B(p.period) : "[blank]", "", "");
+    }
+    if (has2()) {
+      o.push("STEP 2: GENERAL-PURPOSE PROMPTS", "");
+      S.gen.forEach((g, i) => {
+        if (!anyText(g)) return;
+        o.push(`Prompt ${i + 1}`, "Tool: " + (TOOL[g.tool] || "[blank]"), "Date: " + (fmtDate(g.date) || "[blank]"), "Model or mode setting: " + (T(g.model) || "None shown"), "Prompt:", B(g.prompt), "");
+      });
+      o.push("");
+    }
+    if (has3()) {
+      o.push("STEP 3: LEXIS AND WESTLAW PROMPT", "", "Prompt:", B(S.s3.prompt), "");
+      activePlats().forEach(k => {
+        const x = S.s3[k];
+        o.push(PLAT_TXT[k], "Date: " + (fmtDate(x.date) || "[blank]"), (k === "west" ? "Westlaw tool and mode setting: " + B(x.model) : "Model or mode setting: " + (T(x.model) || "None shown")),
+          "Variation: " + (x.varied === "no" ? "None. I ran the prompt as written." : x.varied === "yes" ? B(x.variation) : "[blank]"), "");
+      });
+    }
+    return o.join("\n").trim() + "\n";
+  };
+
+  F.missing = () => {
+    const m = [];
+    if (has1()) {
+      const p = S.plan;
+      if (!T(p.issue)) m.push("issue question");
+      if (!T(p.juris) || !T(p.court)) m.push("jurisdiction and court");
+      if (!filled(p.facts).length) m.push("key facts");
+      if (!T(p.posture)) m.push("procedural posture");
+      if (!T(p.objective)) m.push("client's objective");
+      if (!p.gov) m.push("governing law");
+      if (p.gov === "earlier" && !T(p.period)) m.push("governing time period");
+    }
+    if (has2()) S.gen.forEach((g, i) => { if (!g.tool) m.push(`Step 2 prompt ${i + 1} tool`); if (!T(g.prompt)) m.push(`Step 2 prompt ${i + 1} text`); if (!g.date) m.push(`Step 2 prompt ${i + 1} date`); });
+    if (has3()) {
+      if (!T(S.s3.prompt)) m.push("Step 3 prompt text");
+      activePlats().forEach(k => {
+        const x = S.s3[k];
+        if (!x.date) m.push(PLAT_TXT[k] + " date");
+        if (k === "west" && !T(x.model)) m.push("Westlaw tool (Deep Research or CoCounsel)");
+        if (!x.varied) m.push(PLAT_TXT[k] + " variation answer");
+        if (x.varied === "yes" && !T(x.variation)) m.push(PLAT_TXT[k] + " variation description");
+      });
+    }
+    return m;
+  };
+
+
+  const PASTE = "Paste the text into the text box of the Canvas assignment " + F.target + ", and check that all of it appears there before you close this tab.";
+  // Canvas text boxes accept formatted text, so every form copies HTML as well as plain text.
+  const textToHtml = t => t.trim().split(/\n{2,}/).map(b => { const ls = b.split("\n"); const head = /^[A-Z0-9 :,'-]+$/.test(ls[0]) && /[A-Z]{3}/.test(ls[0]); return (head ? `<h3>${esc(ls.shift())}</h3>` : "") + (ls.length ? `<p>${ls.map(esc).join("<br>")}</p>` : ""); }).join("");
+  function evalShow(expr) {
+    let m = /^(.+?)(!=|=)(.*)$/.exec(expr);
+    if (!m) return !!get(expr);
+    const v = get(m[1]);
+    const hit = m[3].split("|").includes(v);
+    return m[2] === "=" ? hit : !hit;
+  }
+  function refresh() {
+    document.querySelectorAll("[data-show]").forEach(el => { el.hidden = !evalShow(el.dataset.show); });
+    (F.counts || []).forEach(c => {
+      const el = document.getElementById(c.id); if (!el) return;
+      const n = c.n();
+      el.textContent = n > c.limit ? `${c.label}: ${n} / ${c.limit} words. You are over the limit.` : `${c.label}: ${n} / ${c.limit} words`;
+      el.classList.toggle("over", n > c.limit);
+    });
+  }
+  function render() { document.getElementById("form").innerHTML = F.render(); refresh(); }
+  function onEdit(e) {
+    const t = e.target, p = t.dataset && t.dataset.s; if (!p) return;
+    if (t.type === "checkbox") set(p, t.checked);
+    else if (t.type === "radio") { if (t.checked) set(p, t.value); }
+    else set(p, t.value);
+    if (F.rerenderOn && F.rerenderOn(p)) { render(); const el = document.getElementById(t.id); if (el) el.focus(); return; }
+    refresh();
+  }
+  document.addEventListener("input", onEdit);
+  document.addEventListener("change", onEdit);
+  document.addEventListener("click", e => {
+    const b = e.target.closest("button[data-act]"); if (!b) return;
+    const d = b.dataset, arr = get(d.p), i = +d.i;
+    let focus = null;
+    if (d.act === "add") {
+      if (F.max && F.max[d.p] && arr.length >= F.max[d.p]) return;
+      arr.push(F.blanks && F.blanks[d.p] ? F.blanks[d.p]() : "");
+      focus = F.focus && F.focus[d.p] ? F.focus[d.p](arr.length - 1) : fid(d.p + "." + (arr.length - 1));
+    } else if (d.act === "rm") {
+      arr.splice(i, 1);
+      if (!arr.length) arr.push(F.blanks && F.blanks[d.p] ? F.blanks[d.p]() : "");
+    } else if (d.act === "up" && i > 0) {
+      [arr[i - 1], arr[i]] = [arr[i], arr[i - 1]]; focus = b.id || null;
+    } else if (d.act === "down" && i < arr.length - 1) {
+      [arr[i + 1], arr[i]] = [arr[i], arr[i + 1]];
+    }
+    render();
+    if (focus) { const el = document.getElementById(focus); if (el) { el.scrollIntoView({ block: "center" }); el.focus({ preventScroll: true }); } }
+  });
+
+  let timer;
+  function flash(msg) {
+    const s = document.getElementById("status"); s.textContent = msg; clearTimeout(timer);
+    timer = setTimeout(() => { s.textContent = "Not saved. Copy your work before you close this tab."; }, 8000);
+  }
+  const stillBlank = () => { const m = F.missing(); return m.length ? " Still blank: " + m.join(", ") + "." : ""; };
+  function showText() {
+    const panel = document.getElementById("outPanel"), box = document.getElementById("outBox");
+    box.value = F.text(); panel.hidden = false; panel.scrollIntoView({ block: "start" });
+  }
+  document.getElementById("copyBtn").addEventListener("click", () => {
+    if (!F.has()) { flash("Nothing to copy yet. Fill in the form first."); return; }
+    const txt = F.text();
+    const ok = () => flash("Copied. " + PASTE + stillBlank());
+    const fail = () => { showText(); flash("Copy the text below."); };
+    try {
+      const html = F.html ? F.html() : textToHtml(txt);
+      if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+        navigator.clipboard.write([new ClipboardItem({
+          "text/html": new Blob([html], { type: "text/html" }),
+          "text/plain": new Blob([txt], { type: "text/plain" })
+        })]).then(ok, () => navigator.clipboard.writeText(txt).then(ok, fail));
+      } else {
+        navigator.clipboard.writeText(txt).then(ok, fail);
+      }
+    } catch (err) { fail(); }
+  });
+  document.getElementById("showBtn").addEventListener("click", () => {
+    if (!F.has()) { flash("Nothing to show yet. Fill in the form first."); return; }
+    showText(); flash("Copy the text below.");
+  });
+  window.addEventListener("beforeunload", e => { if (F.has()) { e.preventDefault(); e.returnValue = ""; } });
+  render();
+
+
+})();
+</script>
+
+</body>
+</html>

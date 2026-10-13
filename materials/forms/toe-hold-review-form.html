@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Toe-Hold Review and Comparison Essay Form | AI and Legal Research</title>
+<style>body { margin: 0; }</style>
+</head>
+<body>
+<style>
+/* Layout: one 820px column; navy title bar, jump links, one panel per AI output, comparison panel, sticky action bar. Matches the course's Canvas pages. */
+:root {
+  --bg: #ffffff; --fg: #2d3b45; --muted: #5b6770; --navy: #001e44; --head: #1e407c; --accent: #2b7abc;
+  --callout: #f0f4f9; --line: #c5d3e3; --field: #ffffff; --danger: #b3261e; --onnavy: #ffffff; --eyebrow: #e3e9f2;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f1722; --fg: #dde4ec; --muted: #a3afbb; --navy: #001e44; --head: #9ec9f0; --accent: #6fb0e6;
+  --callout: #172434; --line: #34475d; --field: #131d2a; --danger: #ff8a80; --onnavy: #ffffff; --eyebrow: #c9d6e6; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0f1722; --fg: #dde4ec; --muted: #a3afbb; --navy: #001e44; --head: #9ec9f0; --accent: #6fb0e6;
+  --callout: #172434; --line: #34475d; --field: #131d2a; --danger: #ff8a80; --onnavy: #ffffff; --eyebrow: #c9d6e6; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font-family: var(--font); font-size: 16px; line-height: 1.5; }
+header { background: var(--navy); color: var(--onnavy); padding-block: 20px 22px; padding-inline: 16px; }
+.wrap { max-width: 820px; margin: 0 auto; }
+.eyebrow { font-size: 14px; letter-spacing: .05em; text-transform: uppercase; color: var(--eyebrow); }
+h1 { margin: 4px 0 0; font-size: 28px; font-weight: 900; line-height: 1.2; text-wrap: balance; }
+main { padding-block: 24px 120px; padding-inline: 16px; }
+main > .wrap { display: flex; flex-direction: column; gap: 28px; }
+h2 { margin: 0; color: var(--head); font-size: 21px; border-bottom: 2px solid var(--accent); padding-bottom: 4px; text-wrap: balance; }
+p { margin: 0; }
+.stack { display: flex; flex-direction: column; gap: 12px; }
+.callout { background: var(--callout); border-left: 4px solid var(--head); padding: 14px 16px; }
+.callout strong { color: var(--head); }
+.caps { margin-top: 6px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; font-size: 13px; }
+ul.tight { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 4px; }
+nav.jump { display: flex; flex-wrap: wrap; gap: 8px; }
+nav.jump a { color: var(--head); border: 1px solid var(--line); padding: 4px 10px; border-radius: 3px; text-decoration: none; font-size: 14px; }
+nav.jump a:hover { border-color: var(--accent); }
+section.panel { display: flex; flex-direction: column; gap: 18px; border: 1px solid var(--line); padding: 18px; border-radius: 4px; }
+.panel-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px; }
+.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+label, .lbl { font-weight: 700; color: var(--fg); }
+.opt { font-weight: 400; color: var(--muted); font-size: 14px; }
+.hint { color: var(--muted); font-size: 14px; }
+.count { font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.count.over { color: var(--danger); font-weight: 700; }
+input[type=text], textarea { font: inherit; color: var(--fg); background: var(--field); border: 1px solid var(--line); border-radius: 3px; padding: 8px 10px; width: 100%; box-sizing: border-box; }
+textarea { min-height: 84px; resize: vertical; }
+input:focus-visible, textarea:focus-visible, button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.row { display: flex; gap: 8px; align-items: center; }
+.row input { flex: 1; min-width: 0; }
+.case { border: 1px solid var(--line); border-radius: 3px; padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+.checks { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+.checks label { font-weight: 400; display: flex; gap: 6px; align-items: center; }
+button { font: inherit; cursor: pointer; border-radius: 3px; }
+.btn-link { background: none; border: 1px dashed var(--accent); color: var(--head); padding: 6px 12px; align-self: flex-start; }
+.btn-link[disabled] { opacity: .45; cursor: not-allowed; }
+.btn-x { background: none; border: 1px solid var(--line); color: var(--muted); padding: 4px 10px; font-size: 14px; }
+.preview { font-size: 14px; color: var(--muted); }
+footer.credit { font-size: 14px; color: var(--muted); display: flex; flex-direction: column; gap: 6px; }
+footer.credit a { color: var(--head); }
+.bar { position: fixed; left: 0; right: 0; bottom: 0; background: var(--bg); border-top: 2px solid var(--accent); padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); }
+.bar .wrap { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.status { font-size: 14px; color: var(--muted); min-width: 0; flex: 1 1 260px; }
+.btn-main { background: var(--head); color: var(--bg); border: 1px solid var(--head); padding: 8px 16px; font-weight: 700; }
+.btn-alt { background: none; color: var(--head); border: 1px solid var(--head); padding: 8px 16px; font-weight: 700; }
+#outBox { min-height: 220px; font-size: 14px; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Final Capstone Project &middot; Steps 4 and 5 &middot; Optional drafting form</div>
+    <h1>Toe-Hold Review and Comparison Essay Form</h1>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="stack">
+      <p>Use this form to record your first reading of each AI output in Step 4 and your review of a secondary source in Step 5, and to draft your Step 5 comparison essay. You write these reviews:</p>
+      <ul class="tight">
+        <li>One review for each general AI tool that you used in Step 2 (Reviews A.1 to A.3).</li>
+        <li>One review for the Lexis Prot&eacute;g&eacute; output from Step 3 (Review B).</li>
+        <li>One review for the Westlaw Deep Research or CoCounsel output from Step 3 (Review C).</li>
+        <li>One review for the Bloomberg Law output from Step 3 (Review D), only if you ran your Step 3 prompt in Bloomberg Law.</li>
+      </ul>
+      <p>When you finish, copy your work and paste it into the text box of the Canvas assignment <strong>Text Box for Toe-Hold Reviews, Secondary Source Review, and Comparison Essay (Steps 4 and 5)</strong>. <em>This form is optional, and you use it at your own risk.</em> You can also type your work directly into the Canvas text box instead.</p>
+      <div class="stack" style="gap:4px">
+        <strong style="color:var(--head)">Reminders</strong>
+        <ul class="tight">
+          <li>Write each review before you verify anything. At this stage, you assume that the information in the AI output is complete and correct. You are not trying to verify every authority and every legal and factual assertion in the AI output.</li>
+          <li>More is not necessarily better. List a case or other authority only when it looks important.</li>
+          <li>This form uses no AI, because Steps 4 and 5 do not allow AI for the reviews or the comparison essay. In Step 5, you may use AI only to help you select the secondary source.</li>
+        </ul>
+      </div>
+      <div class="callout" role="note">
+        <strong>This form does not save your work.</strong> Your text stays in this browser tab only, and nothing goes to Canvas or to your instructor.
+        <div class="caps">Copy your work before you close this tab. You cannot recover text after the tab closes.</div>
+      </div>
+    </div>
+
+    <section class="panel" id="panel-tools" aria-labelledby="h-tools">
+      <h2 id="h-tools">Your Tools</h2>
+      <p>Check the tools that you used. The form adds one review for each tool that you check.</p>
+      <div class="field"><span class="lbl">General AI tools that you used in Step 2 <span class="opt">(check all that apply)</span></span>
+        <div class="checks" id="toolChecks"></div>
+        <span class="hint">If you ran more than one prompt in the same tool, one review covers all of that tool&rsquo;s outputs. Because you may run no more than three prompts in total, you will write no more than three Review A&rsquo;s.</span>
+      </div>
+      <div class="field"><span class="lbl">Bloomberg Law <span class="opt">(optional in Step 3)</span></span>
+        <div class="checks"><label><input type="checkbox" id="useBloom" data-bloom="1"> I also ran my Step 3 prompt in the Bloomberg Law AI tool.</label></div>
+      </div>
+    </section>
+
+    <nav class="jump" id="jump" aria-label="Jump to a review"></nav>
+
+    <div class="stack" style="gap:6px">
+      <h2>Step 4: Toe-Hold Reviews</h2>
+      <p>Write one review for each AI output. Each review has four parts: Conclusion; Statutes, Court Rules, Constitutional Provisions, and Regulations; Cases; and Secondary Sources.</p>
+    </div>
+
+    <div id="panels" class="stack" style="gap:28px"></div>
+
+    <div class="stack" style="gap:6px">
+      <h2>Step 5: Secondary Source</h2>
+      <p>After you review what you learned from the AI outputs, research the issue in one traditional secondary source, such as a treatise, a practice guide, a legal encyclopedia, an ALR annotation, or a law review article. You may use more than one section of the source. You must read the source itself, because an AI tool&rsquo;s summary of a source does not count as the source. Then complete Review E and the comparison essay below.</p>
+    </div>
+
+    <div id="panelsD" class="stack" style="gap:28px"></div>
+
+    <section class="panel" id="panel-compare" aria-labelledby="h-compare">
+      <h2 id="h-compare">Step 5: Comparison Essay</h2>
+      <p>Explain how well your AI outputs and the secondary source fit together. Answer all three questions below. Together, your answers can run no more than 300 words.</p>
+      <div class="field">
+        <label for="essay-same">Do the AI outputs and the secondary source reach the same conclusion?</label>
+        <textarea id="essay-same" data-essay="same"></textarea>
+      </div>
+      <div class="field">
+        <label for="essay-overlap">How much do the authorities that they cite overlap?</label>
+        <span class="hint" id="essay-overlap-h">This question asks about the overlap among the AI outputs, and also about the overlap between the AI outputs and the secondary source.</span>
+        <textarea id="essay-overlap" data-essay="overlap" aria-describedby="essay-overlap-h"></textarea>
+      </div>
+      <div class="field">
+        <label for="essay-sw">What are the relative strengths and weaknesses of generative AI research reports and secondary sources as legal research tools?</label>
+        <textarea id="essay-sw" data-essay="sw"></textarea>
+      </div>
+      <div class="count" id="essayCount" aria-live="polite">Comparison essay: 0 / 300 words</div>
+    </section>
+
+    <section class="panel" id="outPanel" hidden aria-labelledby="h-out">
+      <h2 id="h-out">Your Text</h2>
+      <p>Your browser did not let the form copy automatically. The text is selected below, so press Ctrl+C (Windows) or Command+C (Mac) to copy it.</p>
+      <textarea id="outBox" readonly aria-label="Your toe-hold reviews as text"></textarea>
+    </section>
+
+    <footer class="credit">
+      <p><strong>Acknowledgment.</strong> The toe-hold approach in this form draws on Rebecca Fordon, <a href="https://www.ailawlibrarians.com/2025/10/28/legal-research-trapping-you-in-an-ai-tunnel-use-a-toe-hold-to-get-out/" target="_blank" rel="noopener"><em>Legal Research Trapping You in an &ldquo;AI Tunnel&rdquo;? Use a Toe-hold to Get Out</em></a>, AI Law Librarians (Oct. 28, 2025).</p>
+      <p><a href="../toe-hold-review-form.html">About this form, and how to make your own version</a></p>
+      <p>Form created by Professor Julie Tedjeske Crane. This form is licensed under a <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)</a>.</p>
+    </footer>
+  </div>
+</main>
+
+<div class="bar">
+  <div class="wrap">
+    <span class="status" id="status" aria-live="polite">Not saved. Copy your work before you close this tab.</span>
+    <div class="row">
+      <button class="btn-alt" id="showBtn" type="button">Show as text</button>
+      <button class="btn-main" id="copyBtn" type="button">Copy all</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const MAX_CASES = 5, MAX_SEC = 3, ESSAY_LIMIT = 300;
+  const TARGET = "Text Box for Toe-Hold Reviews, Secondary Source Review, and Comparison Essay (Steps 4 and 5)";
+  // Labels shown in the form, and the headings that the copied text uses (the headings match the Canvas instructions).
+  const PARTS = [
+    "1. The output's conclusion as the output applied it to the facts",
+    "2. Potentially relevant statutes, court rules, constitutional provisions, or regulations",
+    "3. Potentially relevant cases",
+    "4. Secondary sources you might review"
+  ];
+  const SPARTS = [
+    "1. The source's conclusion on the issue, as the source's explanation of the law would apply to your facts",
+    "2. Potentially relevant statutes, court rules, constitutional provisions, or regulations",
+    "3. Potentially relevant cases",
+    "4. Other secondary sources you might review"
+  ];
+  const HEADS = ["Conclusion", "Statutes, Court Rules, Constitutional Provisions, and Regulations", "Cases", "Secondary Sources"];
+  const TOOLS = [["studio", "AI Studio"], ["gemini", "Gemini"], ["harvey", "Harvey"], ["copilot", "Copilot"]];
+  const ABBR = new Set("v vs inc corp co ltd no nos id cir ct app supp stat ann rev reg fed pa st mr ms mrs dr jr sr al cf n nn pp sec art amend const cl ch pt div dist bankr cert ed e f u s".split(" "));
+  const blankCase = () => ({ cite: "", why: "", binding: false, test: false, facts: false, other: false, otherText: "" });
+  const blankReview = () => ({ conclusion: "", statutes: [""], cases: [blankCase()], secondary: [""] });
+  const state = {
+    tools: { studio: false, gemini: false, harvey: false, copilot: false },
+    useBloom: false,
+    reviews: { studio: blankReview(), gemini: blankReview(), harvey: blankReview(), copilot: blankReview(), B: blankReview(), C: blankReview(), D: blankReview(), E: blankReview() },
+    essay: { same: "", overlap: "", sw: "" },
+    src: { cite: "", sections: "", kind: "" }
+  };
+  const DDEF = { key: "E", label: "E", title: "Review E: Secondary Source (Step 5)", src: true };
+
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const words = t => (t.trim().match(/\S+/g) || []).length;
+  function sentences(t) {
+    const toks = t.trim().split(/\s+/).filter(Boolean);
+    let n = 0;
+    toks.forEach((w, i) => {
+      if (/[.!?]["')\]]*$/.test(w)) {
+        const core = w.replace(/[.!?"')\]]+$/, "").toLowerCase();
+        if (ABBR.has(core) || /^\d+$/.test(core) || /^[a-z]$/.test(core)) return;
+        if (i < toks.length - 1 && /^[a-z0-9(]/.test(toks[i + 1])) return;
+        n++;
+      } else if (i === toks.length - 1) n++;
+    });
+    return n;
+  }
+
+  // One Review A for each checked Step 2 tool, numbered in the order shown; then B and C; then D if the student used Bloomberg Law.
+  function panelDefs() {
+    const a = TOOLS.filter(([k]) => state.tools[k]).map(([k, name], i) => ({ key: k, label: "A." + (i + 1), title: `Review A.${i + 1}: ${name} (Step 2)`, general: true, tool: name }));
+    const out = a.concat([{ key: "B", label: "B", title: "Review B: Lexis Protégé (Step 3)" }, { key: "C", label: "C", title: "Review C: Westlaw Deep Research or CoCounsel (Step 3)" }]);
+    if (state.useBloom) out.push({ key: "D", label: "D", title: "Review D: Bloomberg Law AI Tool (Step 3)" });
+    return out;
+  }
+
+  function reasonText(c) {
+    const p = [];
+    if (c.binding) p.push("Binding authority");
+    if (c.test) p.push("States a legal test or definition");
+    if (c.facts) p.push("Closely matches the facts");
+    if (c.other) p.push(c.otherText.trim() || "Other");
+    return p.length ? p.join("; ") + "." : "";
+  }
+  const caseWhy = c => [reasonText(c), c.why.trim()].filter(Boolean).join(" ");
+
+  function listHTML(key, field, noun, max) {
+    const arr = state.reviews[key][field];
+    let h = arr.map((v, i) => `<div class="row"><input type="text" id="${field}-${key}-${i}" aria-label="${noun} ${i + 1}" data-k="${key}" data-f="${field}" data-i="${i}" value="${esc(v)}"><button type="button" class="btn-x" data-rm="${field}" data-k="${key}" data-i="${i}" aria-label="Remove ${noun.toLowerCase()} ${i + 1}">Remove</button></div>`).join("");
+    const full = max && arr.length >= max;
+    h += `<button type="button" class="btn-link" data-add="${field}" data-k="${key}" ${full ? "disabled" : ""}>+ Add ${noun.toLowerCase()}</button>`;
+    if (full) h += `<span class="hint">You have listed the maximum of ${max === 3 ? "three" : "five"}.</span>`;
+    return h;
+  }
+
+  function render() {
+    document.getElementById("toolChecks").innerHTML = TOOLS.map(([k, name]) => `<label><input type="checkbox" id="tool-${k}" data-tool="${k}" ${state.tools[k] ? "checked" : ""}> ${name}</label>`).join("");
+    document.getElementById("useBloom").checked = state.useBloom;
+    const defs = panelDefs();
+    document.getElementById("jump").innerHTML = defs.map(p => `<a href="#panel-${p.key}">Review ${p.label}</a>`).join("") + `<a href="#panel-E">Review E</a><a href="#panel-compare">Comparison Essay</a>`;
+    document.getElementById("panels").innerHTML = (state.tools.studio || state.tools.gemini || state.tools.harvey || state.tools.copilot ? "" : `<p class="hint">Check at least one general AI tool above to add your Review A.</p>`) + defs.map(panelHTML).join("");
+    document.getElementById("panelsD").innerHTML = panelHTML(DDEF);
+  }
+
+  function panelHTML(p) {
+    const r = state.reviews[p.key], k = p.key;
+    const cases = r.cases.map((c, i) => `
+      <div class="case">
+        <div class="panel-head"><span class="lbl">Case ${i + 1}</span><button type="button" class="btn-x" data-rmcase="${i}" data-k="${k}" aria-label="Remove case ${i + 1}">Remove</button></div>
+        <div class="field"><label for="cite-${k}-${i}">Case citation</label><input type="text" id="cite-${k}-${i}" data-k="${k}" data-ci="${i}" data-cf="cite" value="${esc(c.cite)}"></div>
+        <div class="field"><span class="lbl">Reason the case matters <span class="opt">(optional helper)</span></span>
+          <div class="checks">
+            <label><input type="checkbox" id="b-${k}-${i}" data-k="${k}" data-ci="${i}" data-cb="binding" ${c.binding ? "checked" : ""}> Binding authority</label>
+            <label><input type="checkbox" id="t-${k}-${i}" data-k="${k}" data-ci="${i}" data-cb="test" ${c.test ? "checked" : ""}> States a legal test or definition</label>
+            <label><input type="checkbox" id="f-${k}-${i}" data-k="${k}" data-ci="${i}" data-cb="facts" ${c.facts ? "checked" : ""}> Closely matches the facts</label>
+            <label><input type="checkbox" id="o-${k}-${i}" data-k="${k}" data-ci="${i}" data-cb="other" ${c.other ? "checked" : ""}> Other</label>
+          </div>
+          ${c.other ? `<input type="text" id="ot-${k}-${i}" aria-label="Other reason" data-k="${k}" data-ci="${i}" data-cf="otherText" value="${esc(c.otherText)}" placeholder="Name the other reason">` : ""}
+        </div>
+        <div class="field"><label for="why-${k}-${i}">Why it matters</label><input type="text" id="why-${k}-${i}" data-k="${k}" data-ci="${i}" data-cf="why" value="${esc(c.why)}"></div>
+        <div class="preview" data-prev="${k}-${i}">${caseWhy(c) ? "Will appear as: " + esc(caseWhy(c)) : ""}</div>
+      </div>`).join("");
+    const caseFull = r.cases.length >= MAX_CASES;
+    const sc = sentences(r.conclusion);
+    const P = p.src ? SPARTS : PARTS, who = p.src ? "source" : "output";
+    return `
+    <section class="panel" id="panel-${k}" aria-labelledby="h-${k}">
+      <div class="panel-head"><h2 id="h-${k}">${esc(p.title)}</h2></div>
+      ${p.src ? `<p class="hint">Complete this review for Step 5. If you have not reached Step 5 yet, leave it blank.</p>
+      <div class="field"><label for="src-cite">Secondary source: full citation <span class="opt">(required for Step 5)</span></label><input type="text" id="src-cite" data-src="cite" value="${esc(state.src.cite)}"></div>
+      <div class="field"><label for="src-sections">Sections that you used <span class="opt">(required for Step 5)</span></label><input type="text" id="src-sections" data-src="sections" value="${esc(state.src.sections)}"></div>
+      <div class="field"><label for="src-kind">Kind of secondary source <span class="opt">(required for Step 5)</span></label><span class="hint">For example, a treatise, a practice guide, a legal encyclopedia, an ALR annotation, or a law review article.</span><input type="text" id="src-kind" data-src="kind" value="${esc(state.src.kind)}"></div>` : ""}
+      <div class="field">
+        <label for="concl-${k}">${P[0]} <span class="opt">(required${p.src ? " for Step 5" : ""})</span></label>
+        <span class="hint">One to three sentences.</span>
+        <textarea id="concl-${k}" data-k="${k}" data-concl="1">${esc(r.conclusion)}</textarea>
+        <span class="count ${sc > 3 ? "over" : ""}" data-sc="${k}">${sc > 3 ? "About " + sc + " sentences. The limit is 3." : "About " + sc + " of 3 sentences"}</span>
+      </div>
+      <div class="field"><span class="lbl">${P[1]} that the ${who} cited <span class="opt">(optional, depending on the ${who})</span></span>${listHTML(k, "statutes", "Provision", 0)}</div>
+      <div class="field"><span class="lbl">${P[2]}${p.src ? " that the source cited" : ""} <span class="opt">(optional, depending on the ${who})</span></span>
+        <span class="hint">No more than five. ${r.cases.length} of 5 used.</span>${cases}
+        <button type="button" class="btn-link" data-addcase="${k}" ${caseFull ? "disabled" : ""}>+ Add case</button>
+        ${caseFull ? `<span class="hint">You have listed the maximum of five cases.</span>` : ""}</div>
+      <div class="field"><span class="lbl">${P[3]}${p.src ? " that the source cited" : ""} <span class="opt">(optional, depending on the ${who})</span></span>
+        <span class="hint">No more than three. ${r.secondary.length} of 3 used.</span>${listHTML(k, "secondary", "Secondary source", MAX_SEC)}</div>
+    </section>`;
+  }
+
+  function updateEssay() {
+    const n = Object.values(state.essay).reduce((a, t) => a + words(t), 0);
+    const el = document.getElementById("essayCount");
+    el.textContent = n > ESSAY_LIMIT ? `Comparison essay: ${n} / 300 words. You are over the limit.` : `Comparison essay: ${n} / 300 words`;
+    el.classList.toggle("over", n > ESSAY_LIMIT);
+  }
+
+  const hasReview = r => r.conclusion.trim() || r.statutes.some(x => x.trim()) || r.secondary.some(x => x.trim()) || r.cases.some(c => c.cite.trim() || c.why.trim());
+  const step4Has = () => panelDefs().some(p => hasReview(state.reviews[p.key]));
+  const step5Has = () => hasReview(state.reviews.E) || Object.values(state.essay).some(t => t.trim()) || state.src.cite.trim() || state.src.sections.trim() || state.src.kind.trim();
+
+  function refocus(id) { const el = document.getElementById(id); if (el) { el.focus(); } }
+
+  document.addEventListener("input", e => {
+    const t = e.target, d = t.dataset;
+    if (d.essay) { state.essay[d.essay] = t.value; updateEssay(); return; }
+    if (d.src) { state.src[d.src] = t.value; return; }
+    if (!d.k) return;
+    const r = state.reviews[d.k];
+    if (d.concl) {
+      r.conclusion = t.value;
+      const sc = sentences(t.value), el = document.querySelector(`[data-sc="${d.k}"]`);
+      el.textContent = sc > 3 ? `About ${sc} sentences. The limit is 3.` : `About ${sc} of 3 sentences`;
+      el.classList.toggle("over", sc > 3);
+    } else if (d.f) { r[d.f][+d.i] = t.value; }
+    else if (d.cf) {
+      const c = r.cases[+d.ci]; c[d.cf] = t.value;
+      document.querySelector(`[data-prev="${d.k}-${d.ci}"]`).textContent = caseWhy(c) ? "Will appear as: " + caseWhy(c) : "";
+    }
+  });
+
+  document.addEventListener("change", e => {
+    const d = e.target.dataset;
+    if (d.tool) { state.tools[d.tool] = e.target.checked; render(); refocus(e.target.id); return; }
+    if (d.bloom) { state.useBloom = e.target.checked; render(); refocus("useBloom"); return; }
+    if (!d.cb) return;
+    state.reviews[d.k].cases[+d.ci][d.cb] = e.target.checked;
+    render(); refocus(e.target.id);
+  });
+
+  document.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    const d = b.dataset, r = d.k ? state.reviews[d.k] : null;
+    if (d.add) { r[d.add].push(""); render(); refocus(`${d.add}-${d.k}-${r[d.add].length - 1}`); }
+    else if (d.rm) { r[d.rm].splice(+d.i, 1); if (!r[d.rm].length) r[d.rm].push(""); render(); }
+    else if (d.addcase !== undefined) { const rc = state.reviews[d.addcase]; if (rc && rc.cases.length < MAX_CASES) { rc.cases.push(blankCase()); render(); refocus(`cite-${d.addcase}-${rc.cases.length - 1}`); } }
+    else if (d.rmcase !== undefined) { r.cases.splice(+d.rmcase, 1); if (!r.cases.length) r.cases.push(blankCase()); render(); }
+  });
+
+  function missing() {
+    const m = [];
+    if (step4Has()) panelDefs().forEach(p => {
+      const r = state.reviews[p.key];
+      if (!r.conclusion.trim()) m.push("Review " + p.label + " conclusion");
+    });
+    if (step5Has()) {
+      if (!state.src.cite.trim()) m.push("secondary source citation");
+      if (!state.src.sections.trim()) m.push("sections used");
+      if (!state.src.kind.trim()) m.push("kind of secondary source");
+      if (!state.reviews.E.conclusion.trim()) m.push("Review E conclusion");
+    }
+    return m;
+  }
+
+  function buildText() {
+    let txt = "";
+    const block = p => {
+      const r = state.reviews[p.key];
+      const entries = [
+        [r.conclusion.trim()],
+        r.statutes.map(s => s.trim()).filter(Boolean),
+        r.cases.filter(c => c.cite.trim() || caseWhy(c)).map((c, i) => `${i + 1}. ${c.cite.trim() || "[citation]"}. Why it matters: ${caseWhy(c) || "[blank]"}`),
+        r.secondary.map(s => s.trim()).filter(Boolean)
+      ];
+      txt += `${p.title.replace(/ \(Step \d\)$/, "")}\n\n`;
+      if (p.src) txt += `Citation: ${state.src.cite.trim() || "[blank]"}\nSections Used: ${state.src.sections.trim() || "[blank]"}\nKind of Source: ${state.src.kind.trim() || "[blank]"}\n\n`;
+      HEADS.forEach((h, i) => { const l = entries[i].filter(Boolean); txt += h + "\n" + (l.length ? l.join("\n") : "[blank]") + "\n\n"; });
+    };
+    if (step4Has()) { txt += "STEP 4: TOE-HOLD REVIEWS\n\n"; panelDefs().forEach(block); }
+    if (step5Has()) {
+      txt += "STEP 5: SECONDARY SOURCE REVIEW\n\n"; block(DDEF);
+      const qs = [["same", "Do the AI outputs and the secondary source reach the same conclusion?"], ["overlap", "How much do the authorities that they cite overlap?"], ["sw", "What are the relative strengths and weaknesses of generative AI research reports and secondary sources as legal research tools?"]];
+      const ans = qs.filter(([k]) => state.essay[k].trim());
+      if (ans.length) { txt += "STEP 5: COMPARISON ESSAY\n\n"; ans.forEach(([k, l]) => { txt += l + "\n" + state.essay[k].trim() + "\n\n"; }); }
+    }
+    return txt.trim() + "\n";
+  }
+
+  let timer;
+  function flash(msg) {
+    const s = document.getElementById("status"); s.textContent = msg; clearTimeout(timer);
+    timer = setTimeout(() => { s.textContent = "Not saved. Copy your work before you close this tab."; }, 8000);
+  }
+  function showText() {
+    const panel = document.getElementById("outPanel"), box = document.getElementById("outBox");
+    box.value = buildText(); panel.hidden = false; box.focus(); box.select();
+  }
+  document.getElementById("copyBtn").addEventListener("click", () => {
+    if (!step4Has() && !step5Has()) { flash("Nothing to copy yet. Fill in a review first."); return; }
+    const m = missing();
+    if (m.length) { flash("Complete the required fields first: " + m.join(", ") + "."); return; }
+    const txt = buildText();
+    try {
+      navigator.clipboard.writeText(txt).then(
+        () => flash("Copied. Paste the text into the text box of the Canvas assignment " + TARGET + ", and check that all of it appears there before you close this tab."),
+        () => { showText(); flash("Automatic copy did not work. Copy the selected text instead."); });
+    } catch (err) { showText(); flash("Automatic copy did not work. Copy the selected text instead."); }
+  });
+  document.getElementById("showBtn").addEventListener("click", () => { showText(); flash("Your text is selected at the bottom of the form."); });
+
+  window.addEventListener("beforeunload", e => {
+    if (step4Has() || step5Has()) { e.preventDefault(); e.returnValue = ""; }
+  });
+
+  render(); updateEssay();
+})();
+</script>
+
+
+</body>
+</html>
