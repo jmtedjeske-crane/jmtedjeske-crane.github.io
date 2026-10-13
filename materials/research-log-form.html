@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Research Log Form | AI and Legal Research</title>
+<style>body { margin: 0; }</style>
+</head>
+<body>
+<style>
+/* Layout: one 820px column; navy title bar, one panel per search, stopping statement panel, sticky action bar. Matches the Toe-Hold Review and Comparison Essay Form and the course's Canvas pages. */
+:root {
+  --bg: #ffffff; --fg: #2d3b45; --muted: #5b6770; --navy: #001e44; --head: #1e407c; --accent: #2b7abc;
+  --callout: #f0f4f9; --line: #c5d3e3; --field: #ffffff; --danger: #b3261e; --onnavy: #ffffff; --eyebrow: #e3e9f2;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f1722; --fg: #dde4ec; --muted: #a3afbb; --navy: #001e44; --head: #9ec9f0; --accent: #6fb0e6;
+  --callout: #172434; --line: #34475d; --field: #131d2a; --danger: #ff8a80; --onnavy: #ffffff; --eyebrow: #c9d6e6; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0f1722; --fg: #dde4ec; --muted: #a3afbb; --navy: #001e44; --head: #9ec9f0; --accent: #6fb0e6;
+  --callout: #172434; --line: #34475d; --field: #131d2a; --danger: #ff8a80; --onnavy: #ffffff; --eyebrow: #c9d6e6; color-scheme: dark }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font); font-size: 16px; line-height: 1.5; }
+header { background: var(--navy); color: var(--onnavy); padding-block: 20px 22px; padding-inline: 16px; }
+.wrap { max-width: 820px; margin: 0 auto; }
+.eyebrow { font-size: 14px; letter-spacing: .05em; text-transform: uppercase; color: var(--eyebrow); }
+h1 { margin: 4px 0 0; font-size: 28px; font-weight: 900; line-height: 1.2; text-wrap: balance; }
+main { padding-block: 24px 140px; padding-inline: 16px; }
+main > .wrap { display: flex; flex-direction: column; gap: 28px; }
+h2 { margin: 0; color: var(--head); font-size: 21px; border-bottom: 2px solid var(--accent); padding-bottom: 4px; text-wrap: balance; }
+p { margin: 0; }
+.stack { display: flex; flex-direction: column; gap: 12px; }
+.callout { background: var(--callout); border-left: 4px solid var(--head); padding: 14px 16px; }
+.callout strong { color: var(--head); }
+.caps { margin-top: 6px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; font-size: 13px; }
+ul.tight { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 4px; }
+section.panel { display: flex; flex-direction: column; gap: 18px; border: 1px solid var(--line); padding: 18px; border-radius: 4px; }
+.panel-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; }
+.panel-head h2 { flex: 1 1 200px; }
+.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+fieldset.field { border: 0; margin: 0; padding: 0; }
+legend { padding: 0; margin-bottom: 6px; }
+label, .lbl { font-weight: 700; color: var(--fg); }
+.opt { font-weight: 400; color: var(--muted); font-size: 14px; }
+.hint { color: var(--muted); font-size: 14px; }
+.count { font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.count.over { color: var(--danger); font-weight: 700; }
+input[type=text], select, textarea { font: inherit; color: var(--fg); background: var(--field); border: 1px solid var(--line); border-radius: 3px; padding: 8px 10px; width: 100%; box-sizing: border-box; }
+textarea { min-height: 84px; resize: vertical; }
+input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.row { display: flex; gap: 8px; align-items: center; }
+.checks { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.checks label { font-weight: 400; display: flex; gap: 6px; align-items: center; }
+button { font: inherit; cursor: pointer; border-radius: 3px; }
+.btn-link { background: none; border: 1px dashed var(--accent); color: var(--head); padding: 8px 14px; align-self: flex-start; font-weight: 700; }
+.btn-x { background: none; border: 1px solid var(--line); color: var(--muted); padding: 4px 10px; font-size: 14px; }
+.btn-x[disabled] { opacity: .45; cursor: not-allowed; }
+.tally { font-size: 14px; color: var(--muted); }
+footer.credit { font-size: 14px; color: var(--muted); display: flex; flex-direction: column; gap: 6px; }
+footer.credit a { color: var(--head); }
+.bar { position: fixed; left: 0; right: 0; bottom: 0; background: var(--bg); border-top: 2px solid var(--accent); padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); }
+.bar .wrap { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.status { font-size: 14px; color: var(--muted); min-width: 0; flex: 1 1 260px; }
+.btn-main { background: var(--head); color: var(--bg); border: 1px solid var(--head); padding: 8px 16px; font-weight: 700; }
+.btn-alt { background: none; color: var(--head); border: 1px solid var(--head); padding: 8px 16px; font-weight: 700; }
+#outBox { min-height: 220px; font-size: 14px; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Final Capstone Project &middot; Step 6 &middot; Optional drafting form</div>
+    <h1>Research Log Form</h1>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="stack">
+      <p>Use this form for Option A of Step 6. The form helps you record each search as you run it and then write your stopping statement. For each search or technique, the log records five things: the platform, the resource or technique, the authority that you started from, what you found, and whether you added any authority to your list.</p>
+      <p>When you finish, copy your work and paste it into the text box of the Canvas assignment <strong>Text Box or Upload for Research Log or Essay (Step 6)</strong>, or download your log as a Word table and upload the Word file to that assignment. <em>This form is optional, and you use it at your own risk.</em></p>
+      <p><strong>This form is not a required format.</strong> If you already have your own way of keeping a research log, such as a notebook, a spreadsheet, or a document in your own layout, you may use your own log instead. Your log only needs to give your instructor enough information to see what you did. If you choose Option B, the descriptive essay, you do not need this form.</p>
+      <div class="stack" style="gap:4px">
+        <strong style="color:var(--head)">Reminders</strong>
+        <ul class="tight">
+          <li>Record every search, including a search that found nothing new.</li>
+          <li>The log has no word limit. The stopping statement can run no more than 100 words.</li>
+          <li>You may use AI for the research in Step 6, but you may not use AI to write the log or the stopping statement. This form uses no AI.</li>
+        </ul>
+      </div>
+      <div class="callout" role="note">
+        <strong>This form does not save your work.</strong> Your text stays in this browser tab only, and nothing goes to Canvas or to your instructor. If you research over more than one session, copy your log into a Word document or into the Canvas text box at the end of each session. You can also click <strong>Download as Word</strong> to save your work to your computer as a Word document named <strong>Step6_ResearchLog.docx</strong>. The Word document puts your log in a table and adds your stopping statement below the table.
+        <div class="caps">Copy your work before you close this tab. You cannot recover text after the tab closes.</div>
+      </div>
+    </div>
+
+    <div class="stack" style="gap:6px">
+      <div class="panel-head"><h2>Research Log</h2><span class="tally" id="tally" aria-live="polite"></span></div>
+      <p>Add one entry for each search or technique, in the order that you ran them.</p>
+    </div>
+
+    <div id="entries" class="stack" style="gap:28px"></div>
+    <button type="button" class="btn-link" id="addBtn">+ Add another search</button>
+
+    <section class="panel" id="panel-stop" aria-labelledby="h-stop">
+      <h2 id="h-stop">Stopping Statement</h2>
+      <div class="field">
+        <label for="stop">Why did you conclude that your list was complete enough to stop searching? <span class="opt">(required)</span></label>
+        <span class="hint" id="stop-h">No more than 100 words.</span>
+        <textarea id="stop" aria-describedby="stop-h"></textarea>
+        <span class="count" id="stopCount" aria-live="polite">Stopping statement: 0 / 100 words</span>
+      </div>
+    </section>
+
+    <section class="panel" id="outPanel" hidden aria-labelledby="h-out">
+      <h2 id="h-out">Your Text</h2>
+      <p>The text is selected below. Press Ctrl+C (Windows) or Command+C (Mac) to copy it.</p>
+      <textarea id="outBox" readonly aria-label="Your research log and stopping statement as text"></textarea>
+    </section>
+
+    <footer class="credit">
+      <p><a href="../index.html#assignments">Return to the AI and Legal Research course page</a></p>
+      <p>Form created by Professor Julie Tedjeske Crane. This form is licensed under a <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0)</a>.</p>
+    </footer>
+  </div>
+</main>
+
+<div class="bar">
+  <div class="wrap">
+    <span class="status" id="status" aria-live="polite">Not saved. Copy your work before you close this tab.</span>
+    <div class="row">
+      <button class="btn-alt" id="showBtn" type="button">Show as text</button>
+      <button class="btn-alt" id="dlBtn" type="button" hidden>Download as Word</button>
+      <button class="btn-main" id="copyBtn" type="button">Copy all</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const STOP_LIMIT = 100;
+  const TARGET = "Text Box or Upload for Research Log or Essay (Step 6)";
+  const IDLE = "Not saved. Copy your work before you close this tab.";
+  const PLATFORMS = ["Lexis", "Westlaw", "Bloomberg Law", "Other"];
+  // The four groups and their techniques match the Step 6 instructions. The last group covers AI-assisted research and any other technique.
+  const GROUPS = [
+    ["One good case method", [
+      ["citeCase", "Citator for a case (KeyCite, Shepard’s, or BCite)"],
+      ["keynum", "Key Numbers"],
+      ["topics", "Topics"],
+      ["headnotes", "Headnotes"],
+      ["toa", "Table of Authorities"]]],
+    ["Statutes, regulations, court rules, and constitutional provisions", [
+      ["citeProv", "Citator for a statute, regulation, court rule, or constitutional provision"],
+      ["notes", "Notes of Decisions or Notes to Decisions"]]],
+    ["Cutting-edge search", [
+      ["parallel", "Parallel Search (Westlaw)"],
+      ["ravel", "Ravel View (Lexis)"]]],
+    ["Basic search", [
+      ["tc", "Terms and connectors search"],
+      ["nl", "Natural language search"]]],
+    ["Other", [
+      ["ai", "AI-assisted research"],
+      ["other", "Another resource or technique"]]]
+  ];
+  const TECH = Object.fromEntries(GROUPS.flatMap(([, items]) => items));
+  const blank = () => ({ platform: "", platformText: "", tech: "", techText: "", details: "", start: "", found: "", added: "", addedText: "" });
+  const state = { entries: [blank()], stop: "" };
+
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const words = t => (t.trim().match(/\S+/g) || []).length;
+  const T = s => String(s || "").trim();
+
+  function techHint(k) {
+    if (k === "ai") return { label: "Name the AI tool and describe what you asked it to do", req: true };
+    if (k === "other") return { label: "Name the resource or technique", req: true };
+    return null;
+  }
+
+  function entryHTML(e, i, n) {
+    const id = s => `${s}-${i}`;
+    const th = techHint(e.tech);
+    return `
+    <section class="panel" id="entry-${i}" aria-labelledby="h-entry-${i}">
+      <div class="panel-head">
+        <h2 id="h-entry-${i}">Search ${i + 1}</h2>
+        <div class="row">
+          <button type="button" class="btn-x" data-act="up" data-i="${i}" aria-label="Move search ${i + 1} up"${i === 0 ? " disabled" : ""}>Up</button>
+          <button type="button" class="btn-x" data-act="down" data-i="${i}" aria-label="Move search ${i + 1} down"${i === n - 1 ? " disabled" : ""}>Down</button>
+          <button type="button" class="btn-x" data-act="rm" data-i="${i}" aria-label="Remove search ${i + 1}">Remove</button>
+        </div>
+      </div>
+      <fieldset class="field">
+        <legend class="lbl">Platform <span class="opt">(required)</span></legend>
+        <div class="checks">${PLATFORMS.map((p, j) => `<label><input type="radio" name="${id("plat")}" id="${id("plat")}-${j}" data-i="${i}" data-f="platform" value="${p}"${e.platform === p ? " checked" : ""}> ${p}</label>`).join("")}</div>
+      </fieldset>
+      ${e.platform === "Other" ? `<div class="field"><label for="${id("platformText")}">Describe the other platform <span class="opt">(required)</span></label><span class="hint" id="${id("platformText")}-h">For example, a free site such as Google Scholar or CourtListener, a court or legislature website, or a print source.</span><input type="text" id="${id("platformText")}" data-i="${i}" data-f="platformText" value="${esc(e.platformText)}" aria-describedby="${id("platformText")}-h"></div>` : ""}
+      <div class="field">
+        <label for="${id("tech")}">Resource or technique <span class="opt">(required)</span></label>
+        <select id="${id("tech")}" data-i="${i}" data-f="tech">
+          <option value=""${e.tech ? "" : " selected"}>Choose one</option>
+          ${GROUPS.map(([g, items]) => `<optgroup label="${esc(g)}">${items.map(([k, l]) => `<option value="${k}"${e.tech === k ? " selected" : ""}>${esc(l)}</option>`).join("")}</optgroup>`).join("")}
+        </select>
+      </div>
+      ${th ? `<div class="field"><label for="${id("techText")}">${th.label} <span class="opt">(required)</span></label><input type="text" id="${id("techText")}" data-i="${i}" data-f="techText" value="${esc(e.techText)}"></div>` : ""}
+      <div class="field">
+        <label for="${id("details")}">Details <span class="opt">(optional)</span></label>
+        <span class="hint" id="${id("details")}-h">For example, your search string, the Key Number, the topic, or the headnote that you followed.</span>
+        <input type="text" id="${id("details")}" data-i="${i}" data-f="details" value="${esc(e.details)}" aria-describedby="${id("details")}-h">
+      </div>
+      <div class="field">
+        <label for="${id("start")}">Starting authority <span class="opt">(if any)</span></label>
+        <span class="hint" id="${id("start")}-h">The case, statute, or other authority that you started from. Leave this blank for a search that did not start from an authority.</span>
+        <input type="text" id="${id("start")}" data-i="${i}" data-f="start" value="${esc(e.start)}" aria-describedby="${id("start")}-h">
+      </div>
+      <div class="field">
+        <label for="${id("found")}">What you found <span class="opt">(required)</span></label>
+        <span class="hint" id="${id("found")}-h">If the search found nothing new, say so.</span>
+        <textarea id="${id("found")}" data-i="${i}" data-f="found" aria-describedby="${id("found")}-h">${esc(e.found)}</textarea>
+      </div>
+      <fieldset class="field">
+        <legend class="lbl">Did you add any authority to your list? <span class="opt">(required)</span></legend>
+        <div class="checks">${["Yes", "No"].map(v => `<label><input type="radio" name="${id("added")}" id="${id("added")}-${v}" data-i="${i}" data-f="added" value="${v}"${e.added === v ? " checked" : ""}> ${v}</label>`).join("")}</div>
+      </fieldset>
+      ${e.added === "Yes" ? `<div class="field">
+        <label for="${id("addedText")}">Authority that you added <span class="opt">(required)</span></label>
+        <span class="hint" id="${id("addedText")}-h">Give a short citation for each authority that you added. If you added many, you may summarize them instead, for example, &ldquo;I added four Third Circuit cases on the same point.&rdquo;</span>
+        <textarea id="${id("addedText")}" data-i="${i}" data-f="addedText" aria-describedby="${id("addedText")}-h">${esc(e.addedText)}</textarea>
+      </div>` : ""}
+    </section>`;
+  }
+
+  const entryHas = e => !!(e.platform || T(e.platformText) || e.tech || T(e.techText) || T(e.details) || T(e.start) || T(e.found) || e.added || T(e.addedText));
+  const used = () => state.entries.filter(entryHas);
+  const anyWork = () => used().length > 0 || !!T(state.stop);
+
+  function tally() {
+    const n = used().length;
+    document.getElementById("tally").textContent = n === 1 ? "1 search logged" : n + " searches logged";
+  }
+  function render() {
+    const n = state.entries.length;
+    document.getElementById("entries").innerHTML = state.entries.map((e, i) => entryHTML(e, i, n)).join("");
+    tally();
+  }
+  function updateStop() {
+    const n = words(state.stop), el = document.getElementById("stopCount");
+    el.textContent = n > STOP_LIMIT ? `Stopping statement: ${n} / 100 words. You are over the limit.` : `Stopping statement: ${n} / 100 words`;
+    el.classList.toggle("over", n > STOP_LIMIT);
+  }
+  function refocus(id) { const el = document.getElementById(id); if (el) el.focus(); }
+
+  document.addEventListener("input", ev => {
+    const t = ev.target;
+    if (t.id === "stop") { state.stop = t.value; updateStop(); return; }
+    const d = t.dataset; if (d.i === undefined || !d.f || t.type === "radio" || t.tagName === "SELECT") return;
+    state.entries[+d.i][d.f] = t.value; tally();
+  });
+  document.addEventListener("change", ev => {
+    const t = ev.target, d = t.dataset;
+    if (d.i === undefined || !d.f) return;
+    if (t.type === "radio") { if (!t.checked) return; state.entries[+d.i][d.f] = t.value; }
+    else if (t.tagName === "SELECT") state.entries[+d.i][d.f] = t.value;
+    else return;
+    // The platform choice, the technique choice, and the Yes/No answer show or hide a follow-up field, so the entry redraws.
+    if (d.f === "platform" || d.f === "tech" || d.f === "added") { render(); refocus(t.id); } else tally();
+  });
+  document.addEventListener("click", ev => {
+    const b = ev.target.closest("button[data-act]"); if (!b) return;
+    const i = +b.dataset.i, a = state.entries;
+    if (b.dataset.act === "rm") {
+      if (entryHas(a[i]) && !confirmRemove(i)) return;
+      const had = entryHas(a[i]);
+      a.splice(i, 1); if (!a.length) a.push(blank()); render();
+      flash(had ? `Removed Search ${i + 1}. The searches below it moved up one number.` : IDLE, had ? 6000 : 0);
+      refocus(`h-entry-${Math.min(i, a.length - 1)}`);
+    } else if (b.dataset.act === "up" && i > 0) { [a[i - 1], a[i]] = [a[i], a[i - 1]]; render(); refocus(`entry-${i - 1}`); }
+    else if (b.dataset.act === "down" && i < a.length - 1) { [a[i + 1], a[i]] = [a[i], a[i + 1]]; render(); refocus(`entry-${i + 1}`); }
+  });
+  // A filled entry needs a second click on Remove within five seconds, so one stray click cannot erase it.
+  let armed = null, armTimer;
+  function confirmRemove(i) {
+    if (armed === i) { armed = null; clearTimeout(armTimer); return true; }
+    armed = i; clearTimeout(armTimer);
+    armTimer = setTimeout(() => { armed = null; flash(IDLE, 0); }, 5000);
+    flash(`Click Remove again to delete Search ${i + 1}.`, 5000);
+    return false;
+  }
+  document.getElementById("addBtn").addEventListener("click", () => {
+    state.entries.push(blank()); render();
+    const i = state.entries.length - 1, el = document.getElementById(`entry-${i}`);
+    el.scrollIntoView({ block: "start" }); refocus(`plat-${i}-0`);
+  });
+
+  function techLine(e) {
+    let s = TECH[e.tech] || "[blank]";
+    if (e.tech === "ai") s = "AI-assisted research: " + (T(e.techText) || "[blank]");
+    if (e.tech === "other") s = T(e.techText) || "[blank]";
+    return s;
+  }
+  function missing() {
+    const m = [];
+    used().forEach(e => {
+      const n = state.entries.indexOf(e) + 1, p = [];
+      if (!e.platform) p.push("platform");
+      if (e.platform === "Other" && !T(e.platformText)) p.push("other platform");
+      if (!e.tech) p.push("resource or technique");
+      if ((e.tech === "ai" || e.tech === "other") && !T(e.techText)) p.push(e.tech === "ai" ? "AI tool" : "technique name");
+      if (!T(e.found)) p.push("what you found");
+      if (!e.added) p.push("whether you added authority");
+      if (e.added === "Yes" && !T(e.addedText)) p.push("authority that you added");
+      if (p.length) m.push(`Search ${n} (${p.join(", ")})`);
+    });
+    if (!T(state.stop)) m.push("stopping statement");
+    return m;
+  }
+  function buildText() {
+    const o = ["Research Log", ""];
+    const list = used();
+    if (!list.length) o.push("[no searches logged]", "");
+    list.forEach((e, k) => {
+      o.push(`Search ${k + 1}`);
+      o.push("Platform: " + (e.platform === "Other" ? "Other: " + (T(e.platformText) || "[blank]") : (e.platform || "[blank]")));
+      o.push("Resource or technique: " + techLine(e));
+      if (T(e.details)) o.push("Details: " + T(e.details));
+      o.push("Starting authority: " + (T(e.start) || "None"));
+      o.push("What I found: " + (T(e.found) || "[blank]"));
+      o.push("Added authority? " + (e.added === "Yes" ? "Yes. " + (T(e.addedText) || "[blank]") : e.added === "No" ? "No." : "[blank]"));
+      o.push("");
+    });
+    o.push("Stopping Statement", "", T(state.stop) || "[blank]");
+    return o.join("\n").trim() + "\n";
+  }
+
+  let timer;
+  function flash(msg, ms = 10000) {
+    const s = document.getElementById("status"); s.textContent = msg; clearTimeout(timer);
+    if (ms) timer = setTimeout(() => { s.textContent = IDLE; }, ms);
+  }
+  const stillBlank = () => { const m = missing(); return m.length ? " Still blank: " + m.join("; ") + "." : ""; };
+  function showText() {
+    const panel = document.getElementById("outPanel"), box = document.getElementById("outBox");
+    box.value = buildText(); panel.hidden = false; box.focus(); box.select();
+  }
+  document.getElementById("copyBtn").addEventListener("click", () => {
+    if (!anyWork()) { flash("Nothing to copy yet. Fill in a search first."); return; }
+    const txt = buildText();
+    const fail = () => { showText(); flash("Automatic copy did not work. Copy the selected text instead." + stillBlank()); };
+    try {
+      navigator.clipboard.writeText(txt).then(
+        () => flash("Copied. Paste the text into the text box of the Canvas assignment " + TARGET + ", and check that all of it appears there before you close this tab." + stillBlank(), 15000),
+        fail);
+    } catch (err) { fail(); }
+  });
+  document.getElementById("showBtn").addEventListener("click", () => {
+    if (!anyWork()) { flash("Nothing to show yet. Fill in a search first."); return; }
+    showText(); flash("Your text is selected at the bottom of the form." + stillBlank());
+  });
+
+  // Builds a small Word document: a landscape page, the log as a table with a repeating header row, and the stopping statement below it.
+  // The page writes the .docx itself as an uncompressed zip, so it needs no library.
+  const CRC = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+  const crc32 = b => { let c = 0xFFFFFFFF; for (let i = 0; i < b.length; i++) c = CRC[(c ^ b[i]) & 0xFF] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; };
+  function zip(files) {
+    const enc = new TextEncoder(), parts = [], central = []; let off = 0;
+    files.forEach(([name, text]) => {
+      const nb = enc.encode(name), db = enc.encode(text), crc = crc32(db);
+      const h = new DataView(new ArrayBuffer(30));
+      h.setUint32(0, 0x04034b50, true); h.setUint16(4, 20, true); h.setUint16(6, 0x0800, true); h.setUint16(8, 0, true);
+      h.setUint16(10, 0, true); h.setUint16(12, 0x21, true); h.setUint32(14, crc, true); h.setUint32(18, db.length, true); h.setUint32(22, db.length, true);
+      h.setUint16(26, nb.length, true); h.setUint16(28, 0, true);
+      const c = new DataView(new ArrayBuffer(46));
+      c.setUint32(0, 0x02014b50, true); c.setUint16(4, 20, true); c.setUint16(6, 20, true); c.setUint16(8, 0x0800, true); c.setUint16(10, 0, true);
+      c.setUint16(12, 0, true); c.setUint16(14, 0x21, true); c.setUint32(16, crc, true); c.setUint32(20, db.length, true); c.setUint32(24, db.length, true);
+      c.setUint16(28, nb.length, true); c.setUint32(42, off, true);
+      parts.push(new Uint8Array(h.buffer), nb, db); central.push(new Uint8Array(c.buffer), nb);
+      off += 30 + nb.length + db.length;
+    });
+    const cdSize = central.reduce((a, b) => a + b.length, 0), e = new DataView(new ArrayBuffer(22));
+    e.setUint32(0, 0x06054b50, true); e.setUint16(8, files.length, true); e.setUint16(10, files.length, true); e.setUint32(12, cdSize, true); e.setUint32(16, off, true);
+    return new Blob([...parts, ...central, new Uint8Array(e.buffer)], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
+  }
+  const xe = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, "");
+  const run = (t, o = {}) => String(t).split("\n").map((line, i) => `<w:r><w:rPr><w:rFonts w:ascii="Calibri" w:hAnsi="Calibri" w:cs="Calibri"/>${o.b ? "<w:b/>" : ""}${o.color ? `<w:color w:val="${o.color}"/>` : ""}<w:sz w:val="${o.sz || 20}"/></w:rPr>${i ? "<w:br/>" : ""}<w:t xml:space="preserve">${xe(line)}</w:t></w:r>`).join("");
+  const para = (t, o = {}) => `<w:p><w:pPr><w:spacing w:before="${o.before || 0}" w:after="${o.after == null ? 120 : o.after}"/></w:pPr>${run(t, o)}</w:p>`;
+  const COLS = [["#", 500], ["Platform", 1700], ["Resource or technique", 3000], ["Starting authority", 2600], ["What I found", 3600], ["Added authority?", 3000]];
+  const cell = (t, w, o = {}) => `<w:tc><w:tcPr><w:tcW w:w="${w}" w:type="dxa"/>${o.fill ? `<w:shd w:val="clear" w:color="auto" w:fill="${o.fill}"/>` : ""}</w:tcPr>${para(t, { ...o, after: 0 })}</w:tc>`;
+  function buildDocx() {
+    const B = "single", bd = `<w:top w:val="${B}" w:sz="4" w:color="8FA6C1"/><w:left w:val="${B}" w:sz="4" w:color="8FA6C1"/><w:bottom w:val="${B}" w:sz="4" w:color="8FA6C1"/><w:right w:val="${B}" w:sz="4" w:color="8FA6C1"/><w:insideH w:val="${B}" w:sz="4" w:color="8FA6C1"/><w:insideV w:val="${B}" w:sz="4" w:color="8FA6C1"/>`;
+    const head = `<w:tr><w:trPr><w:tblHeader/></w:trPr>${COLS.map(([h, w]) => cell(h, w, { b: true, color: "FFFFFF", fill: "001E44" })).join("")}</w:tr>`;
+    const list = used();
+    const rows = list.length ? list.map((e, k) => {
+      const plat = e.platform === "Other" ? "Other: " + (T(e.platformText) || "[blank]") : (e.platform || "[blank]");
+      const tech = techLine(e) + (T(e.details) ? "\nDetails: " + T(e.details) : "");
+      const added = e.added === "Yes" ? "Yes. " + (T(e.addedText) || "[blank]") : e.added === "No" ? "No." : "[blank]";
+      const vals = [String(k + 1), plat, tech, T(e.start) || "None", T(e.found) || "[blank]", added];
+      return `<w:tr><w:trPr><w:cantSplit/></w:trPr>${vals.map((v, i) => cell(v, COLS[i][1])).join("")}</w:tr>`;
+    }).join("") : `<w:tr>${COLS.map(([, w], i) => cell(i ? "" : "[no searches logged]", w)).join("")}</w:tr>`;
+    const table = `<w:tbl><w:tblPr><w:tblW w:w="14400" w:type="dxa"/><w:tblBorders>${bd}</w:tblBorders><w:tblLayout w:type="fixed"/><w:tblCellMar><w:top w:w="60" w:type="dxa"/><w:left w:w="100" w:type="dxa"/><w:bottom w:w="60" w:type="dxa"/><w:right w:w="100" w:type="dxa"/></w:tblCellMar></w:tblPr><w:tblGrid>${COLS.map(([, w]) => `<w:gridCol w:w="${w}"/>`).join("")}</w:tblGrid>${head}${rows}</w:tbl>`;
+    const body = para("Research Log", { b: true, sz: 32, color: "1E407C", after: 160 }) + table +
+      para("Stopping Statement", { b: true, sz: 28, color: "1E407C", before: 360, after: 120 }) +
+      (T(state.stop) || "[blank]").split(/\n+/).map(t => para(t, { sz: 22 })).join("");
+    const doc = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>${body}<w:sectPr><w:pgSz w:w="15840" w:h="12240" w:orient="landscape"/><w:pgMar w:top="720" w:right="720" w:bottom="720" w:left="720" w:header="360" w:footer="360" w:gutter="0"/></w:sectPr></w:body></w:document>`;
+    return zip([
+      ["[Content_Types].xml", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>`],
+      ["_rels/.rels", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>`],
+      ["word/document.xml", doc]
+    ]);
+  }
+  // The download button appears only when the viewer can save files from this page. The viewer confirms each download.
+  const FILE = "Step6_ResearchLog.docx";
+  let downloads = null;
+  const dlBtn = document.getElementById("dlBtn");
+  // On claude.ai, the page asks the viewer's permission through the downloads capability.
+  // On an ordinary web page, such as the course website, the browser downloads the file directly. Either way the file is built in this tab and goes nowhere else.
+  const plainPage = !(window.claude && typeof window.claude.use === "function");
+  if (plainPage) dlBtn.hidden = false;
+  else window.claude.use("downloads").then(ns => { downloads = ns; dlBtn.hidden = !ns; }, () => {});
+  dlBtn.addEventListener("click", () => {
+    if (!anyWork()) { flash("Nothing to download yet. Fill in a search first."); return; }
+    if (plainPage) {
+      const a = document.createElement("a"), url = URL.createObjectURL(buildDocx());
+      a.href = url; a.download = FILE; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+      flash("Saved " + FILE + " to your downloads folder. Open the file to check that all of your work is there." + stillBlank());
+      return;
+    }
+    if (!downloads) return;
+    downloads.save({ filename: FILE, data: buildDocx() }).then(
+      () => flash("Saved " + FILE + ". Open the file to check that all of your work is there." + stillBlank()),
+      err => {
+        const c = err && err.code;
+        if (c === "declined") flash("Download canceled.");
+        else if (c === "rate_limited") flash("A download prompt is already open. Finish it, then try again.");
+        else { dlBtn.hidden = true; flash("This view cannot download files. Use Copy all instead."); }
+      });
+  });
+  window.addEventListener("beforeunload", ev => { if (anyWork()) { ev.preventDefault(); ev.returnValue = ""; } });
+
+  render(); updateStop();
+})();
+</script>
+
+</body>
+</html>
