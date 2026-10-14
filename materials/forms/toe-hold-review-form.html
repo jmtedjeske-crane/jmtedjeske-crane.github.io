@@ -82,9 +82,9 @@ footer.credit a { color: var(--head); }
       <p>Use this form to record your first reading of each AI output in Step 4 and your review of a secondary source in Step 5, and to draft your Step 5 comparison essay. You write these reviews:</p>
       <ul class="tight">
         <li>One review for each general AI tool that you used in Step 2 (Reviews A.1 to A.3).</li>
-        <li>One review for the Lexis Prot&eacute;g&eacute; output from Step 3 (Review B).</li>
-        <li>One review for the Westlaw Deep Research or CoCounsel output from Step 3 (Review C).</li>
-        <li>One review for the Bloomberg Law output from Step 3 (Review D), only if you ran your Step 3 prompt in Bloomberg Law.</li>
+        <li>One review for the [legal AI tool 1] output from Step 3 (Review B).</li>
+        <li>One review for the [legal AI tool 2] output from Step 3 (Review C).</li>
+        <li>One review for the [optional legal AI tool] output from Step 3 (Review D), only if you ran your Step 3 prompt in that tool.</li>
       </ul>
       <p>When you finish, copy your work and paste it into the text box of the Canvas assignment <strong>Text Box for Toe-Hold Reviews, Secondary Source Review, and Comparison Essay (Steps 4 and 5)</strong>. <em>This form is optional, and you use it at your own risk.</em> You can also type your work directly into the Canvas text box instead.</p>
       <div class="stack" style="gap:4px">
@@ -109,8 +109,8 @@ footer.credit a { color: var(--head); }
         <div class="checks" id="toolChecks"></div>
         <span class="hint">If you ran more than one prompt in the same tool, one review covers all of that tool&rsquo;s outputs. Because you may run no more than three prompts in total, you will write no more than three Review A&rsquo;s.</span>
       </div>
-      <div class="field"><span class="lbl">Bloomberg Law <span class="opt">(optional in Step 3)</span></span>
-        <div class="checks"><label><input type="checkbox" id="useBloom" data-bloom="1"> I also ran my Step 3 prompt in the Bloomberg Law AI tool.</label></div>
+      <div class="field"><span class="lbl">[Optional legal AI tool] <span class="opt">(optional in Step 3)</span></span>
+        <div class="checks"><label><input type="checkbox" id="useBloom" data-bloom="1"> I also ran my Step 3 prompt in [optional legal AI tool].</label></div>
       </div>
     </section>
 
@@ -192,7 +192,7 @@ footer.credit a { color: var(--head); }
     "4. Other secondary sources you might review"
   ];
   const HEADS = ["Conclusion", "Statutes, Court Rules, Constitutional Provisions, and Regulations", "Cases", "Secondary Sources"];
-  const TOOLS = [["studio", "AI Studio"], ["gemini", "Gemini"], ["harvey", "Harvey"], ["copilot", "Copilot"]];
+  const TOOLS = [["studio", "[AI tool 1]"], ["gemini", "[AI tool 2]"], ["harvey", "[AI tool 3]"], ["copilot", "[AI tool 4]"]];
   const ABBR = new Set("v vs inc corp co ltd no nos id cir ct app supp stat ann rev reg fed pa st mr ms mrs dr jr sr al cf n nn pp sec art amend const cl ch pt div dist bankr cert ed e f u s".split(" "));
   const blankCase = () => ({ cite: "", why: "", binding: false, test: false, facts: false, other: false, otherText: "" });
   const blankReview = () => ({ conclusion: "", statutes: [""], cases: [blankCase()], secondary: [""] });
@@ -221,11 +221,11 @@ footer.credit a { color: var(--head); }
     return n;
   }
 
-  // One Review A for each checked Step 2 tool, numbered in the order shown; then B and C; then D if the student used Bloomberg Law.
+  // One Review A for each checked Step 2 tool, numbered in the order shown; then B and C; then D if the student used the optional legal AI tool.
   function panelDefs() {
     const a = TOOLS.filter(([k]) => state.tools[k]).map(([k, name], i) => ({ key: k, label: "A." + (i + 1), title: `Review A.${i + 1}: ${name} (Step 2)`, general: true, tool: name }));
-    const out = a.concat([{ key: "B", label: "B", title: "Review B: Lexis Protégé (Step 3)" }, { key: "C", label: "C", title: "Review C: Westlaw Deep Research or CoCounsel (Step 3)" }]);
-    if (state.useBloom) out.push({ key: "D", label: "D", title: "Review D: Bloomberg Law AI Tool (Step 3)" });
+    const out = a.concat([{ key: "B", label: "B", title: "Review B: [Legal AI tool 1] (Step 3)" }, { key: "C", label: "C", title: "Review C: [Legal AI tool 2] (Step 3)" }]);
+    if (state.useBloom) out.push({ key: "D", label: "D", title: "Review D: [Optional legal AI tool] (Step 3)" });
     return out;
   }
 

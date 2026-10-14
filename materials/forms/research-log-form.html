@@ -225,7 +225,7 @@ footer.credit a { color: var(--head); }
       </fieldset>
       ${e.added === "Yes" ? `<div class="field">
         <label for="${id("addedText")}">Authority that you added <span class="opt">(required)</span></label>
-        <span class="hint" id="${id("addedText")}-h">Give a short citation for each authority that you added. If you added many, you may summarize them instead, for example, &ldquo;I added four Third Circuit cases on the same point.&rdquo;</span>
+        <span class="hint" id="${id("addedText")}-h">Give a short citation for each authority that you added. If you added many, you may summarize them instead, for example, &ldquo;I added four cases from [the jurisdiction in the hypo fact pattern] on the same point.&rdquo;</span>
         <textarea id="${id("addedText")}" data-i="${i}" data-f="addedText" aria-describedby="${id("addedText")}-h">${esc(e.addedText)}</textarea>
       </div>` : ""}
     </section>`;

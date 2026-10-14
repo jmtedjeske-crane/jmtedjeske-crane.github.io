@@ -230,7 +230,7 @@ footer.credit a { color: var(--head); }
         ${fText(p + ".court", "Issuing body", { opt: "required", show: `${p}.cat=other`, hint: "Name the legislature, court, agency, or author that issued the authority." })}
         ${fArea(p + ".holding", "Holding", { opt: "required", show: `${p}.cat=case`, hint: "State the holding on the point that matters to the issue." })}
         ${fArea(p + ".holding", "What the authority provides", { opt: "required", show: `${p}.cat=other`, hint: "State the rule or explanation that matters to the issue." })}
-        ${fRadio(p + ".binding", "Does the authority bind the courts in the Third Circuit?", [["yes", "Yes"], ["no", "No"]], { opt: "required" })}
+        ${fRadio(p + ".binding", "Does the authority bind the courts in [the jurisdiction in the hypo fact pattern]?", [["yes", "Yes"], ["no", "No"]], { opt: "required" })}
         ${fArea(p + ".prop", "Proposition that you will cite it for", { opt: "required" })}
         ${fText(p + ".pin", "Pinpoint citation or exact provision", { opt: "required", hint: "For a case, give the page or paragraph that supports the proposition, for example, <em>at 1238</em>. For a statute, court rule, or regulation, give the exact subsection, for example, <em>subsection (b)(2)</em>." })}
         <div class="field"><span class="lbl">Validation</span>
@@ -280,9 +280,9 @@ footer.credit a { color: var(--head); }
   F.html = () => {
     let h = `<p><b>Step 7: Authority Table</b></p>`;
     const c = cases(), o = others();
-    if (c.length) h += table(["Authority", "Court", "Holding", "Binds courts in the Third Circuit?", "Proposition you will cite it for", "Pinpoint citation or exact provision", "Validation"],
+    if (c.length) h += table(["Authority", "Court", "Holding", "Binds courts in [the jurisdiction in the hypo fact pattern]?", "Proposition you will cite it for", "Pinpoint citation or exact provision", "Validation"],
       c.map(a => [B(a.cite), B(a.court), B(a.holding), BIND[a.binding] || "[blank]", B(a.prop), B(a.pin), validation(a)]), "Case Authority");
-    if (o.length) h += table(["Authority", "Type", "Issuing body", "What it provides", "Binds courts in the Third Circuit?", "Proposition you will cite it for", "Pinpoint citation or exact provision", "Validation"],
+    if (o.length) h += table(["Authority", "Type", "Issuing body", "What it provides", "Binds courts in [the jurisdiction in the hypo fact pattern]?", "Proposition you will cite it for", "Pinpoint citation or exact provision", "Validation"],
       o.map(a => [B(a.cite), TYPE[a.type], B(a.court), B(a.holding), BIND[a.binding] || "[blank]", B(a.prop), B(a.pin), validation(a)]), "Other Authority");
     return h;
   };
@@ -293,12 +293,12 @@ footer.credit a { color: var(--head); }
     if (c.length) {
       out.push("CASE AUTHORITY", "");
       c.forEach((a, i) => out.push(`${i + 1}. ${B(a.cite)}`, "Court: " + B(a.court), "Holding: " + B(a.holding),
-        "Binds courts in the Third Circuit: " + (BIND[a.binding] || "[blank]"), "Proposition: " + B(a.prop), "Pinpoint citation or exact provision: " + B(a.pin), "Validation: " + validation(a), ""));
+        "Binds courts in [the jurisdiction in the hypo fact pattern]: " + (BIND[a.binding] || "[blank]"), "Proposition: " + B(a.prop), "Pinpoint citation or exact provision: " + B(a.pin), "Validation: " + validation(a), ""));
     }
     if (o.length) {
       out.push("OTHER AUTHORITY", "");
       o.forEach((a, i) => out.push(`${i + 1}. ${B(a.cite)} (${TYPE[a.type]})`, "Issuing body: " + B(a.court), "What it provides: " + B(a.holding),
-        "Binds courts in the Third Circuit: " + (BIND[a.binding] || "[blank]"), "Proposition: " + B(a.prop), "Pinpoint citation or exact provision: " + B(a.pin), "Validation: " + validation(a), ""));
+        "Binds courts in [the jurisdiction in the hypo fact pattern]: " + (BIND[a.binding] || "[blank]"), "Proposition: " + B(a.prop), "Pinpoint citation or exact provision: " + B(a.pin), "Validation: " + validation(a), ""));
     }
     return out.join("\n").trim() + "\n";
   };
@@ -311,7 +311,7 @@ footer.credit a { color: var(--head); }
       if (!T(a.cite)) m.push(n + " citation");
       if (!T(a.court)) m.push(n + (isCase ? " court" : " issuing body"));
       if (!T(a.holding)) m.push(n + (isCase ? " holding" : " description"));
-      if (!a.binding) m.push(n + " Third Circuit answer");
+      if (!a.binding) m.push(n + " binding-authority answer");
       if (!T(a.prop)) m.push(n + " proposition");
       if (!T(a.pin)) m.push(n + " pinpoint citation");
       if (!a.citator) m.push(n + " citator");
@@ -443,8 +443,8 @@ footer.credit a { color: var(--head); }
   const xe = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, "");
   const run = (t, o = {}) => String(t).split("\n").map((line, i) => `<w:r><w:rPr><w:rFonts w:ascii="Calibri" w:hAnsi="Calibri" w:cs="Calibri"/>${o.b ? "<w:b/>" : ""}${o.color ? `<w:color w:val="${o.color}"/>` : ""}<w:sz w:val="${o.sz || 20}"/></w:rPr>${i ? "<w:br/>" : ""}<w:t xml:space="preserve">${xe(line)}</w:t></w:r>`).join("");
   const para = (t, o = {}) => `<w:p><w:pPr><w:spacing w:before="${o.before || 0}" w:after="${o.after == null ? 120 : o.after}"/></w:pPr>${run(t, o)}</w:p>`;
-  const WCASE = [["Authority", 2000], ["Court", 1300], ["Holding", 2600], ["Binds courts in the Third Circuit?", 1100], ["Proposition you will cite it for", 2500], ["Pinpoint citation or exact provision", 1500], ["Validation", 3400]];
-  const WOTHER = [["Authority", 1900], ["Type", 1100], ["Issuing body", 1300], ["What it provides", 2400], ["Binds courts in the Third Circuit?", 1100], ["Proposition you will cite it for", 2200], ["Pinpoint citation or exact provision", 1400], ["Validation", 3000]];
+  const WCASE = [["Authority", 2000], ["Court", 1300], ["Holding", 2600], ["Binds courts in [the jurisdiction in the hypo fact pattern]?", 1100], ["Proposition you will cite it for", 2500], ["Pinpoint citation or exact provision", 1500], ["Validation", 3400]];
+  const WOTHER = [["Authority", 1900], ["Type", 1100], ["Issuing body", 1300], ["What it provides", 2400], ["Binds courts in [the jurisdiction in the hypo fact pattern]?", 1100], ["Proposition you will cite it for", 2200], ["Pinpoint citation or exact provision", 1400], ["Validation", 3000]];
   const wcell = (t, w, o = {}) => `<w:tc><w:tcPr><w:tcW w:w="${w}" w:type="dxa"/>${o.fill ? `<w:shd w:val="clear" w:color="auto" w:fill="${o.fill}"/>` : ""}</w:tcPr>${para(t, { sz: 18, ...o, after: 0 })}</w:tc>`;
   function wtable(cols, rows, caption) {
     const bd = ["top", "left", "bottom", "right", "insideH", "insideV"].map(k => `<w:${k} w:val="single" w:sz="4" w:color="8FA6C1"/>`).join("");
