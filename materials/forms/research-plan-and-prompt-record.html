@@ -95,7 +95,6 @@ footer.credit a { color: var(--head); }
         <ul class="tight">
           <li>Complete the Step 1 research plan before you open any research tool. You may not use AI in Step 1.</li>
           <li>Write the Step 2 and Step 3 prompts yourself, without AI. You must use AI to run them.</li>
-          <li>In every step, including the steps that do not allow AI, you may use the basic level of Grammarly or a similar writing tool to fix word choice, grammar, and typos.</li>
         </ul>
       </div>
       <div class="callout" role="note">
@@ -215,7 +214,7 @@ footer.credit a { color: var(--head); }
     <div class="sub">
       <span class="sub-title">${PLAT[k]}</span>
       ${fText(`s3.${k}.date`, "Date that you ran the prompt", { opt: "required", type: "date" })}
-      ${fText(`s3.${k}.model`, "Model and mode settings", { opt: "if the platform shows them", hint: "Write the tool, model, or mode that you used, and write whether you used a deep research or deep reasoning mode." })}
+      ${fText(`s3.${k}.model`, "Model and mode settings", { opt: "if the platform shows them", hint: "Write the tool, model, or mode that you used, and write whether you used a deep research or deep reasoning mode. If the tool offers versions of its answer, such as a concise version and an expanded version, write the version that you chose." })}
       ${fText(`s3.${k}.src`, "Sources and jurisdiction", { opt: "if you set any", hint: "Write whether the tool searched the platform&rsquo;s own content, the web, or both, and name any jurisdiction or source filter that you set, or write &ldquo;None.&rdquo;" })}
       ${fRadio(`s3.${k}.varied`, "Did you make a variation in the prompt for this platform?", VARY, { opt: "required", col: true })}
       ${fArea(`s3.${k}.variation`, "Describe the variation, or paste the changed wording", { show: `s3.${k}.varied=yes` })}
