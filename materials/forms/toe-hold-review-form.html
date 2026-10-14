@@ -33,7 +33,7 @@ p { margin: 0; }
 .callout { background: var(--callout); border-left: 4px solid var(--head); padding: 14px 16px; }
 .callout strong { color: var(--head); }
 .caps { margin-top: 6px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; font-size: 13px; }
-ul.tight { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 4px; }
+ul.tight, ol.tight { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 4px; }
 nav.jump { display: flex; flex-wrap: wrap; gap: 8px; }
 nav.jump a { color: var(--head); border: 1px solid var(--line); padding: 4px 10px; border-radius: 3px; text-decoration: none; font-size: 14px; }
 nav.jump a:hover { border-color: var(--accent); }
@@ -65,7 +65,9 @@ footer.credit a { color: var(--head); }
 .status { font-size: 14px; color: var(--muted); min-width: 0; flex: 1 1 260px; }
 .btn-main { background: var(--head); color: var(--bg); border: 1px solid var(--head); padding: 8px 16px; font-weight: 700; }
 .btn-alt { background: none; color: var(--head); border: 1px solid var(--head); padding: 8px 16px; font-weight: 700; }
-#outBox { min-height: 220px; font-size: 14px; }
+#outBox { min-height: 320px; font-size: 14px; }
+#promptBox { min-height: 420px; font-size: 14px; }
+.optflag { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--head); border: 1px solid var(--head); border-radius: 3px; padding: 1px 8px; }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
 </style>
 
@@ -86,13 +88,17 @@ footer.credit a { color: var(--head); }
         <li>One review for the [legal AI tool 2] output from Step 3 (Review C).</li>
         <li>One review for the [optional legal AI tool] output from Step 3 (Review D), only if you ran your Step 3 prompt in that tool.</li>
       </ul>
-      <p>When you finish, copy your work and paste it into the text box of the Canvas assignment <strong>Text Box for Toe-Hold Reviews, Secondary Source Review, and Comparison Essay (Steps 4 and 5)</strong>. <em>This form is optional, and you use it at your own risk.</em> You can also type your work directly into the Canvas text box instead.</p>
+      <p>When you finish, copy your work from the box at the bottom of this form, and paste it into the text box of the Canvas assignment <strong>Text Box for Toe-Hold Reviews, Secondary Source Review, and Comparison Essay (Steps 4 and 5)</strong>. <em>This form is optional, and you use it at your own risk.</em> You can also type your work directly into the Canvas text box instead.</p>
       <div class="stack" style="gap:4px">
         <strong style="color:var(--head)">Reminders</strong>
         <ul class="tight">
           <li>Write each review before you verify anything. At this stage, you assume that the information in the AI output is complete and correct. You are not trying to verify every authority and every legal and factual assertion in the AI output.</li>
           <li>More is not necessarily better. List a case or other authority only when it looks important.</li>
+          <li>You may not use AI to write the toe-hold reviews, but you may copy and paste text from the AI reports themselves. Clean up any text that you paste so that it answers the part of the review where you put it, and summarize longer passages instead of pasting them whole.</li>
+          <li>If a report does not give a complete citation, use the citation information that the report gives, or click through to the source to find the full citation. Keep your click-throughs quick, and spend most of your time examining the report itself, because you will review the underlying materials later.</li>
+          <li>You do not need to use Bluebook form in the toe-hold reviews.</li>
           <li>This form uses no AI, because Steps 4 and 5 do not allow AI for the reviews or the comparison essay. In Step 5, you may use AI only to help you select the secondary source.</li>
+          <li>After you finish your reviews, you may use the <strong>Optional AI Formatting Prompt</strong> at the bottom of this form to clean up the formatting of your reviews. The prompt is optional, not required.</li>
         </ul>
       </div>
       <div class="callout" role="note">
@@ -149,10 +155,88 @@ footer.credit a { color: var(--head); }
       <div class="count" id="essayCount" aria-live="polite">Comparison essay: 0 / 300 words</div>
     </section>
 
-    <section class="panel" id="outPanel" hidden aria-labelledby="h-out">
-      <h2 id="h-out">Your Text</h2>
-      <p>Your browser did not let the form copy automatically. The text is selected below, so press Ctrl+C (Windows) or Command+C (Mac) to copy it.</p>
-      <textarea id="outBox" readonly aria-label="Your toe-hold reviews as text"></textarea>
+    <section class="panel" id="outPanel" aria-labelledby="h-out">
+      <h2 id="h-out">Your Text: Copy It into Canvas</h2>
+      <p>The box below holds all of your work as one block of text, and the box updates as you type. To move your work into Canvas, follow these four steps.</p>
+      <ol class="tight">
+        <li><strong>Click inside the box.</strong> When you click inside the box, the form highlights all of the text in the box. If the text is not highlighted, click inside the box again, and then press Ctrl+A (Windows) or Command+A (Mac). Click inside the box before you press Ctrl+A, because Ctrl+A outside the box selects the whole page instead of your work.</li>
+        <li><strong>Copy the text.</strong> Press Ctrl+C (Windows) or Command+C (Mac).</li>
+        <li><strong>Paste the text into Canvas.</strong> Click inside the text box of the Canvas assignment <strong>Text Box for Toe-Hold Reviews, Secondary Source Review, and Comparison Essay (Steps 4 and 5)</strong>, and press Ctrl+V (Windows) or Command+V (Mac).</li>
+        <li><strong>Check Canvas.</strong> Scroll through the Canvas text box, and confirm that all of your text appears there before you close this tab.</li>
+      </ol>
+      <p class="hint" id="outMissing" aria-live="polite"></p>
+      <textarea id="outBox" readonly aria-label="All of your work as text, ready to copy into Canvas" placeholder="Your text appears here as you fill in the form."></textarea>
+    </section>
+
+    <section class="panel" id="panel-synth" aria-labelledby="h-synth">
+      <div class="panel-head"><h2 id="h-synth">Optional AI Formatting Prompt</h2><span class="optflag">Optional</span></div>
+      <p>This prompt asks an AI tool to clean up the formatting of your toe-hold reviews and your Review E. The AI tool puts each review under a consistent heading, puts your cases in a table with your Why it matters labels and your short descriptions, marks blank entries, and corrects obvious errors in spelling, punctuation, capitalization, and spacing. The AI tool copies your secondary sources exactly as you wrote them. The AI tool then lists every change it made and every gap it found.</p>
+      <div class="callout" role="note">
+        <strong>This prompt is optional, not required.</strong> You do not need to use the prompt, and you lose no credit if you skip it.
+        <ul class="tight" style="margin-top:8px">
+          <li>Use the prompt only after you write all of your reviews yourself. The prompt changes formatting only. The prompt does not write your reviews or your comparison essay, and you must write both without AI.</li>
+          <li>You remain responsible for everything that you submit. Edit the AI output, and review it against your own reviews line by line before you submit it. The AI tool can change a citation, drop a case or a reason label that you checked, or reword a conclusion, even though the prompt tells the tool not to.</li>
+          <li>The prompt does not verify anything. A wrong citation or a wrong description in your review stays wrong after formatting. You verify the authorities yourself in Step 6.</li>
+          <li>Do not submit the Formatting notes that the AI tool adds at the end of its output. Read the notes yourself, fix in your own work any problem that they list, and delete the notes before you submit.</li>
+        </ul>
+      </div>
+      <button type="button" class="btn-alt" id="synthBtn" aria-expanded="false" aria-controls="synthBody" style="align-self:flex-start">Show the full prompt</button>
+      <div id="synthBody" class="stack" hidden>
+        <p>To use the prompt, follow these four steps.</p>
+        <ol class="tight">
+          <li><strong>Copy the prompt.</strong> Click inside the box below, which highlights all of the prompt, and press Ctrl+C (Windows) or Command+C (Mac).</li>
+          <li><strong>Paste the prompt into an AI tool.</strong> Paste the prompt into a new conversation in the AI tool that you choose.</li>
+          <li><strong>Add your reviews.</strong> Copy all of the text from the box <strong>Your Text: Copy It into Canvas</strong> above, and paste it at the end of the prompt, below the line MY WORKSHEET.</li>
+          <li><strong>Check the result.</strong> Compare the AI tool&rsquo;s output with your own reviews line by line, and correct any error. Read the Formatting notes at the end of the output, and fix in your own work any problem that the notes list. Do not submit the Formatting notes: delete them before you paste your work into Canvas.</li>
+        </ol>
+        <textarea id="promptBox" readonly aria-label="Optional AI formatting prompt">Instructions for Formatting TOE-HOLD Reviews
+
+TASK
+You will receive a student's research worksheet. Reformat only Step 4, the TOE-HOLD reviews, and Step 5, the secondary source review. Copy every other part of the worksheet exactly as the student supplied it. If the worksheet includes a comparison essay, copy the comparison essay exactly as the student wrote it, after Step 5. If the worksheet contains neither Step 4 nor Step 5, say so in one sentence and change nothing else.
+
+WHAT YOU MAY NOT DO
+Do not add any case, statute, citation, holding, fact, or legal analysis that the worksheet does not contain. Do not move text from one field to another, even when the student appears to have put the text in the wrong field. Instead, report the problem in the formatting notes.
+
+BLANK ENTRIES
+Treat "[blank]," an empty field, and a missing field the same way. For an empty Conclusion or an empty labeled field, write "Not provided." For an empty Statutes, Cases, or Secondary Sources section, write "None listed." In a case table, write "Not provided" in any empty cell.
+
+WHAT YOU MUST COPY EXACTLY
+Copy the following items exactly as the worksheet gives them: quotations, review names and labels, citations, tool names, reason labels, and secondary sources. Copy secondary sources exactly, even when they contain errors in spelling, punctuation, or formatting. You may make only two changes to case names and case citations:
+- Capitalize each word of each party's name, except short words such as "a," "an," "and," "as," "at," "by," "for," "in," "of," "on," "or," "the," and "to," and except "v." Capitalize a short word when it is the first word of a party's name.
+- Delete punctuation that the student typed twice by mistake, such as "..".
+In all other text, correct only obvious errors in spelling, punctuation, capitalization, and spacing. Replace a double hyphen with a colon or a period, not with a dash.
+
+HEADINGS
+Use three heading levels. Level 1 is the part name. Write "STEP 4: TOE-HOLD REVIEWS" and "STEP 5: SECONDARY SOURCE REVIEW" exactly, even if the worksheet words them differently. Level 2 is the review name, followed by the review's label in parentheses, for example "[AI tool 1] (Review A.1)." Level 3 is the section headings described below. Keep the reviews in the order in which the worksheet presents them.
+
+SECTIONS
+Give every review in Step 4 and Step 5 these four Level 3 sections in this order: Conclusion; Statutes, Court Rules, Constitutional Provisions, and Regulations; Cases; Secondary Sources. Within each section, keep the entries in the worksheet's order. If every section of a review is blank, keep the review and its headings, and report the blank review in the notes.
+
+STEP 5 FIELDS
+In each Step 5 review, place three labeled lines directly under the review name and above the Conclusion: "Citation:", "Sections Used:", and "Kind of Source:". Put each label and its value on a separate line. Copy the Citation and Sections Used values exactly.
+
+CONCLUSION
+Use the worksheet's own wording, edited only as the rules above allow. Keep any uncertainty or competing argument that the worksheet states.
+
+STATUTES, COURT RULES, CONSTITUTIONAL PROVISIONS, AND REGULATIONS
+Put each authority on its own line.
+
+CASES
+Present the cases in a table with three columns in this order: "Case name or citation," "Why it matters," and "Short description." Use one row for each case.
+- In the first column, copy the case name and citation, changed only as the rules above allow. If the citation is missing entirely, write "(citation not provided)" after the case name. If the citation is incomplete, copy it as given and list the missing parts in the notes. If the entry names no case, write "Case not identified."
+- In the second column, copy only the student's reason labels, word for word. The worksheet gives the reason labels on the line that begins "Why it matters:", separated by semicolons. The standard labels are "Binding authority," "States a legal test or definition," and "Closely matches the facts," and the student may add another label of the student's own. Do not add a label that the student did not give, and do not drop a label that the student gave. Put no other text in this column.
+- In the third column, copy the text from the line that begins "Short description:". If the worksheet has no "Short description:" line, and the "Why it matters:" line contains text after the reason labels, that text is the short description, so put it in this column.
+- If the destination cannot display a table, present each case as three labeled lines instead.
+
+SECONDARY SOURCES
+Put each source on its own line, copied exactly as the worksheet gives it.
+
+WHAT TO RETURN
+Return the formatted worksheet first. After the worksheet, add a section headed "Formatting notes" that contains two lists. Under "Corrections," list each change you made. Under "Missing or unclear," list each problem you found, and name the review and section where it appears.
+
+MY WORKSHEET
+[Paste the text from the "Your Text: Copy It into Canvas" box below this line.]</textarea>
+      </div>
     </section>
 
     <footer class="credit">
@@ -167,9 +251,7 @@ footer.credit a { color: var(--head); }
   <div class="wrap">
     <span class="status" id="status" aria-live="polite">Not saved. Copy your work before you close this tab.</span>
     <div class="row">
-      <button class="btn-alt" id="showBtn" type="button">Show as text</button>
-      <button class="btn-alt" id="dlBtn" type="button">Download as Word</button>
-      <button class="btn-main" id="copyBtn" type="button">Copy all</button>
+      <button class="btn-alt" id="dlBtn" type="button" hidden>Download as Word</button>
     </div>
   </div>
 </div>
@@ -235,9 +317,11 @@ footer.credit a { color: var(--head); }
     if (c.test) p.push("States a legal test or definition");
     if (c.facts) p.push("Closely matches the facts");
     if (c.other) p.push(c.otherText.trim() || "Other");
-    return p.length ? p.join("; ") + "." : "";
+    return p.join("; ");
   }
-  const caseWhy = c => [reasonText(c), c.why.trim()].filter(Boolean).join(" ");
+  // The checkboxes give the "Why it matters" line; the open box gives the "Short description" line.
+  const caseWhy = c => reasonText(c) || c.why.trim();
+  const casePreview = c => (reasonText(c) || c.why.trim()) ? `Will appear as: Why it matters: ${reasonText(c) || "[blank]"} | Short description: ${c.why.trim() || "[blank]"}` : "";
 
   function listHTML(key, field, noun, max) {
     const arr = state.reviews[key][field];
@@ -252,7 +336,7 @@ footer.credit a { color: var(--head); }
     document.getElementById("toolChecks").innerHTML = TOOLS.map(([k, name]) => `<label><input type="checkbox" id="tool-${k}" data-tool="${k}" ${state.tools[k] ? "checked" : ""}> ${name}</label>`).join("");
     document.getElementById("useBloom").checked = state.useBloom;
     const defs = panelDefs();
-    document.getElementById("jump").innerHTML = defs.map(p => `<a href="#panel-${p.key}">Review ${p.label}</a>`).join("") + `<a href="#panel-E">Review E</a><a href="#panel-compare">Comparison Essay</a>`;
+    document.getElementById("jump").innerHTML = defs.map(p => `<a href="#panel-${p.key}">Review ${p.label}</a>`).join("") + `<a href="#panel-E">Review E</a><a href="#panel-compare">Comparison Essay</a><a href="#panel-synth">Optional AI Formatting Prompt</a>`;
     document.getElementById("panels").innerHTML = (state.tools.studio || state.tools.gemini || state.tools.harvey || state.tools.copilot ? "" : `<p class="hint">Check at least one general AI tool above to add your Review A.</p>`) + defs.map(panelHTML).join("");
     document.getElementById("panelsD").innerHTML = panelHTML(DDEF);
   }
@@ -262,8 +346,8 @@ footer.credit a { color: var(--head); }
     const cases = r.cases.map((c, i) => `
       <div class="case">
         <div class="panel-head"><span class="lbl">Case ${i + 1}</span><button type="button" class="btn-x" data-rmcase="${i}" data-k="${k}" aria-label="Remove case ${i + 1}">Remove</button></div>
-        <div class="field"><label for="cite-${k}-${i}">Case citation</label><input type="text" id="cite-${k}-${i}" data-k="${k}" data-ci="${i}" data-cf="cite" value="${esc(c.cite)}"></div>
-        <div class="field"><span class="lbl">Reason the case matters <span class="opt">(optional helper)</span></span>
+        <div class="field"><label for="cite-${k}-${i}">Case citation</label><span class="hint" id="cite-${k}-${i}-h">Use the citation that the report gives. If the citation is incomplete, you may click through to find the full citation. Bluebook form is not needed.</span><input type="text" aria-describedby="cite-${k}-${i}-h" id="cite-${k}-${i}" data-k="${k}" data-ci="${i}" data-cf="cite" value="${esc(c.cite)}"></div>
+        <div class="field"><span class="lbl">Why it matters <span class="opt">(check all that apply)</span></span>
           <div class="checks">
             <label><input type="checkbox" id="b-${k}-${i}" data-k="${k}" data-ci="${i}" data-cb="binding" ${c.binding ? "checked" : ""}> Binding authority</label>
             <label><input type="checkbox" id="t-${k}-${i}" data-k="${k}" data-ci="${i}" data-cb="test" ${c.test ? "checked" : ""}> States a legal test or definition</label>
@@ -272,8 +356,8 @@ footer.credit a { color: var(--head); }
           </div>
           ${c.other ? `<input type="text" id="ot-${k}-${i}" aria-label="Other reason" data-k="${k}" data-ci="${i}" data-cf="otherText" value="${esc(c.otherText)}" placeholder="Name the other reason">` : ""}
         </div>
-        <div class="field"><label for="why-${k}-${i}">Why it matters</label><input type="text" id="why-${k}-${i}" data-k="${k}" data-ci="${i}" data-cf="why" value="${esc(c.why)}"></div>
-        <div class="preview" data-prev="${k}-${i}">${caseWhy(c) ? "Will appear as: " + esc(caseWhy(c)) : ""}</div>
+        <div class="field"><label for="why-${k}-${i}">Short description</label><span class="hint" id="why-${k}-${i}-h">In a sentence or phrase, describe the case.</span><input type="text" id="why-${k}-${i}" aria-describedby="why-${k}-${i}-h" data-k="${k}" data-ci="${i}" data-cf="why" value="${esc(c.why)}"></div>
+        <div class="preview" data-prev="${k}-${i}">${esc(casePreview(c))}</div>
       </div>`).join("");
     const caseFull = r.cases.length >= MAX_CASES;
     const sc = sentences(r.conclusion);
@@ -297,7 +381,7 @@ footer.credit a { color: var(--head); }
         <button type="button" class="btn-link" data-addcase="${k}" ${caseFull ? "disabled" : ""}>+ Add case</button>
         ${caseFull ? `<span class="hint">You have listed the maximum of five cases.</span>` : ""}</div>
       <div class="field"><span class="lbl">${P[3]}${p.src ? " that the source cited" : ""} <span class="opt">(optional, depending on the ${who})</span></span>
-        <span class="hint">No more than three. ${r.secondary.length} of 3 used.</span>${listHTML(k, "secondary", "Secondary source", MAX_SEC)}</div>
+        <span class="hint">No more than three. If the ${who} names a section or chapter of a secondary source, include the section or chapter. ${r.secondary.length} of 3 used.</span>${listHTML(k, "secondary", "Secondary source", MAX_SEC)}</div>
     </section>`;
   }
 
@@ -328,7 +412,7 @@ footer.credit a { color: var(--head); }
     } else if (d.f) { r[d.f][+d.i] = t.value; }
     else if (d.cf) {
       const c = r.cases[+d.ci]; c[d.cf] = t.value;
-      document.querySelector(`[data-prev="${d.k}-${d.ci}"]`).textContent = caseWhy(c) ? "Will appear as: " + caseWhy(c) : "";
+      document.querySelector(`[data-prev="${d.k}-${d.ci}"]`).textContent = casePreview(c);
     }
   });
 
@@ -372,7 +456,7 @@ footer.credit a { color: var(--head); }
       const entries = [
         [r.conclusion.trim()],
         r.statutes.map(s => s.trim()).filter(Boolean),
-        r.cases.filter(c => c.cite.trim() || caseWhy(c)).map((c, i) => `${i + 1}. ${c.cite.trim() || "[citation]"}. Why it matters: ${caseWhy(c) || "[blank]"}`),
+        r.cases.filter(c => c.cite.trim() || caseWhy(c)).map((c, i) => `${i + 1}. ${c.cite.trim() || "[citation]"}\nWhy it matters: ${reasonText(c) || "[blank]"}\nShort description: ${c.why.trim() || "[blank]"}`),
         r.secondary.map(s => s.trim()).filter(Boolean)
       ];
       txt += `${p.title.replace(/ \(Step \d\)$/, "")}\n\n`;
@@ -398,21 +482,30 @@ footer.credit a { color: var(--head); }
     const panel = document.getElementById("outPanel"), box = document.getElementById("outBox");
     box.value = buildText(); panel.hidden = false; box.focus(); box.select();
   }
-  document.getElementById("copyBtn").addEventListener("click", () => {
-    if (!step4Has() && !step5Has()) { flash("Nothing to copy yet. Fill in a review first."); return; }
-    const m = missing();
-    if (m.length) { flash("Complete the required fields first: " + m.join(", ") + "."); return; }
-    const txt = buildText();
-    try {
-      navigator.clipboard.writeText(txt).then(
-        () => flash("Copied. Paste the text into the text box of the Canvas assignment " + TARGET + ", and check that all of it appears there before you close this tab."),
-        () => { showText(); flash("Automatic copy did not work. Copy the selected text instead."); });
-    } catch (err) { showText(); flash("Automatic copy did not work. Copy the selected text instead."); }
+  // The output box at the bottom always shows the current text. Clicking in the box selects all of it, so the student can copy it with Ctrl+C or Command+C.
+  const outBox = document.getElementById("outBox"), outMissing = document.getElementById("outMissing");
+  function updateOut() {
+    const txt = (step4Has() || step5Has()) ? buildText() : "";
+    if (outBox.value !== txt) outBox.value = txt;
+    const m = txt ? missing() : [];
+    outMissing.textContent = m.length ? "Still blank: " + m.join(", ") + "." : "";
+  }
+  ["input", "change", "click"].forEach(ev => document.addEventListener(ev, e => { if (e.target !== outBox) setTimeout(updateOut, 0); }));
+  outBox.addEventListener("focus", () => outBox.select());
+  outBox.addEventListener("click", () => outBox.select());
+  // Optional formatting prompt: the button shows or hides the whole prompt, and clicking inside the prompt box selects all of the prompt.
+  const synthBtn = document.getElementById("synthBtn"), synthBody = document.getElementById("synthBody"), promptBox = document.getElementById("promptBox");
+  synthBtn.addEventListener("click", () => {
+    const open = synthBody.hidden;
+    synthBody.hidden = !open;
+    synthBtn.setAttribute("aria-expanded", String(open));
+    synthBtn.textContent = open ? "Hide the full prompt" : "Show the full prompt";
   });
-  document.getElementById("showBtn").addEventListener("click", () => { showText(); flash("Your text is selected at the bottom of the form."); });
+  promptBox.addEventListener("focus", () => promptBox.select());
+  promptBox.addEventListener("click", () => promptBox.select());
+  updateOut();
 
-
-  // Download as Word: the page builds a .docx from the same text that Copy all produces, and the browser saves it. Nothing leaves this tab.
+  // Download as Word: the page builds a .docx from the same text that the box at the bottom shows, and the browser saves it. Nothing leaves this tab.
   // A line in capital letters, a short line that stands alone, or a line that starts a block of several lines becomes a bold heading.
   const CRC = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
   const crc32 = b => { let c = 0xFFFFFFFF; for (let i = 0; i < b.length; i++) c = CRC[(c ^ b[i]) & 0xFF] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; };
@@ -458,12 +551,32 @@ footer.credit a { color: var(--head); }
       ["word/document.xml", doc]
     ]);
   }
-  document.getElementById("dlBtn").addEventListener("click", () => {
+  // On claude.ai, the page asks the viewer's permission through the downloads capability; on an ordinary web page, the browser saves the file directly.
+  const WFILE = "Toe-Hold_Reviews_and_Comparison_Essay.docx";
+  let downloads = null;
+  const dlBtn = document.getElementById("dlBtn");
+  const plainPage = !(window.claude && typeof window.claude.use === "function");
+  if (plainPage) dlBtn.hidden = false;
+  else window.claude.use("downloads").then(ns => { downloads = ns; dlBtn.hidden = !ns; }, () => {});
+  dlBtn.addEventListener("click", () => {
     if (!((step4Has() || step5Has()))) { flash("Nothing to download yet. Fill in the form first."); return; }
-    const a = document.createElement("a"), url = URL.createObjectURL(textToDocx(buildText(), "Toe-Hold Reviews and Comparison Essay"));
-    a.href = url; a.download = "Toe-Hold_Reviews_and_Comparison_Essay.docx"; document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 2000);
-    flash("Saved Toe-Hold_Reviews_and_Comparison_Essay.docx to your downloads folder. Open the file to check that all of your work is there." + (missing().length ? " Still blank: " + missing().join(", ") + "." : ""));
+    const blob = textToDocx(buildText(), "Toe-Hold Reviews and Comparison Essay");
+    if (plainPage) {
+      const a = document.createElement("a"), url = URL.createObjectURL(blob);
+      a.href = url; a.download = WFILE; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+      flash("Saved " + WFILE + " to your downloads folder. Open the file to check that all of your work is there." + (missing().length ? " Still blank: " + missing().join(", ") + "." : ""));
+      return;
+    }
+    if (!downloads) return;
+    downloads.save({ filename: WFILE, data: blob }).then(
+      () => flash("Saved " + WFILE + ". Open the file to check that all of your work is there." + (missing().length ? " Still blank: " + missing().join(", ") + "." : "")),
+      err => {
+        const code = err && err.code;
+        if (code === "declined") flash("Download canceled.");
+        else if (code === "rate_limited") flash("A download prompt is already open. Finish it, then try again.");
+        else { dlBtn.hidden = true; flash("This view cannot download files. Copy the text in the box at the bottom of the form instead."); }
+      });
   });
   window.addEventListener("beforeunload", e => {
     if (step4Has() || step5Has()) { e.preventDefault(); e.returnValue = ""; }
@@ -472,7 +585,6 @@ footer.credit a { color: var(--head); }
   render(); updateEssay();
 })();
 </script>
-
 
 </body>
 </html>
