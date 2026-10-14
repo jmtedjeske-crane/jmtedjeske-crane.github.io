@@ -31,7 +31,7 @@ p { margin: 0; }
 .callout { background: var(--callout); border-left: 4px solid var(--head); padding: 14px 16px; }
 .callout strong { color: var(--head); }
 .caps { margin-top: 6px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; font-size: 13px; }
-ul.tight { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 4px; }
+ul.tight, ol.tight { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 4px; }
 nav.jump { display: flex; flex-wrap: wrap; gap: 8px; }
 nav.jump a { color: var(--head); border: 1px solid var(--line); padding: 4px 10px; border-radius: 3px; text-decoration: none; font-size: 14px; }
 nav.jump a:hover { border-color: var(--accent); }
@@ -74,7 +74,7 @@ footer.credit a { color: var(--head); }
 .status { font-size: 14px; color: var(--muted); min-width: 0; flex: 1 1 260px; }
 .btn-main { background: var(--head); color: var(--bg); border: 1px solid var(--head); padding: 8px 16px; font-weight: 700; }
 .btn-alt { background: none; color: var(--head); border: 1px solid var(--head); padding: 8px 16px; font-weight: 700; }
-#outBox { min-height: 220px; font-size: 14px; }
+#outBox { min-height: 320px; font-size: 14px; }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
 </style>
 </head>
@@ -102,7 +102,7 @@ footer.credit a { color: var(--head); }
         <strong>This form does not save your work.</strong> Your text stays in this browser tab only, and nothing goes to Canvas or to your instructor.
         <div class="caps">Copy your work before you close this tab. You cannot recover text after the tab closes.</div>
         <p style="margin-top:6px">You can also click <strong>Download as Word</strong> to save your work to your computer as a Word document named <strong>Research_Plan_and_Prompt_Record.docx</strong>.</p>
-        <p style="margin-top:6px">Your browser may not allow the form to copy your text. After you click <strong>Copy all</strong>, paste the text into the text box of the Canvas assignment <strong>Text Box for Research Plan (Step 1) and Record of Prompts for Steps 2 and 3</strong> and check that all of it appears there before you close this tab. If the text did not copy, click <strong>Show as text</strong> and copy the text by hand.</p>
+        <p style="margin-top:6px">To move your work into Canvas, use the box at the bottom of this form, under <strong>Your Text: Copy It into Canvas</strong>. The box updates as you type. Click inside the box to highlight all of the text, copy it, and paste it into the Canvas text box.</p>
       </div>
 
     </div>
@@ -111,10 +111,17 @@ footer.credit a { color: var(--head); }
 
     <div id="form"></div>
 
-    <section class="panel" id="outPanel" hidden aria-labelledby="h-out">
-      <h2 id="h-out">Your Text</h2>
-      <p>Copy the text below. To copy it, click in the box, press Ctrl+A and then Ctrl+C (Windows), or press Command+A and then Command+C (Mac).</p>
-      <textarea id="outBox" readonly aria-label="Your work as text"></textarea>
+    <section class="panel" id="outPanel" aria-labelledby="h-out">
+      <h2 id="h-out">Your Text: Copy It into Canvas</h2>
+      <p>The box below holds all of your work as one block of text, and the box updates as you type. To move your work into Canvas, follow these four steps.</p>
+      <ol class="tight">
+        <li><strong>Click inside the box.</strong> When you click inside the box, the form highlights all of the text in the box. If the text is not highlighted, click inside the box again, and then press Ctrl+A (Windows) or Command+A (Mac). Click inside the box before you press Ctrl+A, because Ctrl+A outside the box selects the whole page instead of your work.</li>
+        <li><strong>Copy the text.</strong> Press Ctrl+C (Windows) or Command+C (Mac).</li>
+        <li><strong>Paste the text into Canvas.</strong> Click inside the text box of the Canvas assignment <strong>Text Box for Research Plan (Step 1) and Record of Prompts for Steps 2 and 3</strong>, and press Ctrl+V (Windows) or Command+V (Mac).</li>
+        <li><strong>Check Canvas.</strong> Scroll through the Canvas text box, and confirm that all of your text appears there before you close this tab.</li>
+      </ol>
+      <p class="hint" id="outMissing" aria-live="polite"></p>
+      <textarea id="outBox" readonly aria-label="All of your work as text, ready to copy into Canvas" placeholder="Your text appears here as you fill in the form."></textarea>
     </section>
 
     <footer class="credit">
@@ -128,9 +135,7 @@ footer.credit a { color: var(--head); }
   <div class="wrap">
     <span class="status" id="status" aria-live="polite">Not saved. Copy your work before you close this tab.</span>
     <div class="row">
-      <button class="btn-alt" id="showBtn" type="button">Show as text</button>
-      <button class="btn-alt" id="dlBtn" type="button">Download as Word</button>
-      <button class="btn-main" id="copyBtn" type="button">Copy all</button>
+      <button class="btn-alt" id="dlBtn" type="button" hidden>Download as Word</button>
     </div>
   </div>
 </div>
@@ -186,9 +191,9 @@ footer.credit a { color: var(--head); }
   F.target = "Text Box for Research Plan (Step 1) and Record of Prompts for Steps 2 and 3";
 
   const blankGen = () => ({ prompt: "", tool: "", date: "", model: "" });
-  const blankPlat = () => ({ date: "", model: "", varied: "", variation: "" });
+  const blankPlat = () => ({ date: "", model: "", src: "", varied: "", variation: "" });
   S = {
-    plan: { issue: "", juris: "", court: "", facts: [""], posture: "", objective: "", gov: "", period: "" },
+    plan: { issue: "", juris: "", court: "", facts: [""], posture: "", goal: "", task: "", gov: "", period: "" },
     gen: [blankGen()],
     s3: { prompt: "", useBloom: "", lexis: blankPlat(), west: blankPlat(), bloom: blankPlat() }
   };
@@ -210,7 +215,8 @@ footer.credit a { color: var(--head); }
     <div class="sub">
       <span class="sub-title">${PLAT[k]}</span>
       ${fText(`s3.${k}.date`, "Date that you ran the prompt", { opt: "required", type: "date" })}
-      ${fText(`s3.${k}.model`, "Model or mode setting", { opt: "if the platform shows one" })}
+      ${fText(`s3.${k}.model`, "Model and mode settings", { opt: "if the platform shows them", hint: "Write the tool, model, or mode that you used, and write whether you used a deep research or deep reasoning mode." })}
+      ${fText(`s3.${k}.src`, "Sources and jurisdiction", { opt: "if you set any", hint: "Write whether the tool searched the platform&rsquo;s own content, the web, or both, and name any jurisdiction or source filter that you set, or write &ldquo;None.&rdquo;" })}
       ${fRadio(`s3.${k}.varied`, "Did you make a variation in the prompt for this platform?", VARY, { opt: "required", col: true })}
       ${fArea(`s3.${k}.variation`, "Describe the variation, or paste the changed wording", { show: `s3.${k}.varied=yes` })}
       <p class="hint">Upload the full ${PLAT[k]} output to the Canvas assignment <strong>Upload AI Output from Steps 2 and 3</strong> as a separate file named <strong>${PLAT_FILE[k]}</strong>.</p>
@@ -230,13 +236,10 @@ footer.credit a { color: var(--head); }
         <span class="hint">List only the facts that change the legal analysis. Write one fact in each box.</span>
         ${fList("plan.facts", "Fact")}
       </div>
-      <div class="field"><span class="lbl">4. The procedural posture and the client's objective <span class="opt">(required)</span></span>
-        <div class="sub">
-          ${fArea("plan.posture", "Procedural posture", { hint: "State where the matter stands. For example, no one has filed a lawsuit yet, or a lawsuit has been filed and a motion is pending." })}
-          ${fArea("plan.objective", "Client's objective", { hint: "State what the board wants to achieve." })}
-        </div>
-      </div>
-      ${fRadio("plan.gov", "5. Whether current law governs", [["current", "Current law governs."], ["earlier", "The law of an earlier time period applies."]], { opt: "required", col: true })}
+      ${fArea("plan.posture", "4. The procedural posture", { opt: "required", hint: "State where the matter stands. For example, no one has filed a lawsuit yet, or a lawsuit has been filed and a motion is pending." })}
+      ${fArea("plan.goal", "5. The client's ultimate goal", { opt: "required", hint: "State what the client ultimately wants to achieve in this matter." })}
+      ${fArea("plan.task", "6. What the client or assigning attorney has specifically asked you to research or do", { opt: "required", hint: "State the specific questions or tasks that the client or the assigning attorney has given you." })}
+      ${fRadio("plan.gov", "7. Whether current law governs", [["current", "Current law governs."], ["earlier", "The law of an earlier time period applies."]], { opt: "required", col: true })}
       ${fText("plan.period", "Time period whose law applies", { show: "plan.gov=earlier", opt: "required" })}
     </section>
 
@@ -249,7 +252,7 @@ footer.credit a { color: var(--head); }
           ${fRadio(`gen.${i}.tool`, "Tool that you ran the prompt in", TOOLS, { opt: "required" })}
           ${fArea(`gen.${i}.prompt`, "Prompt text", { opt: "required", hint: i ? `Paste the full text of the prompt. If you ran an earlier prompt again in a different tool, write &ldquo;Same as Prompt ${i}&rdquo; or name the earlier prompt.` : "Paste the full text of the prompt." })}
           ${fText(`gen.${i}.date`, "Date that you ran the prompt", { opt: "required", type: "date" })}
-          ${fText(`gen.${i}.model`, "Model or mode setting", { opt: "if the tool shows one" })}
+          ${fArea(`gen.${i}.model`, "Model and mode settings", { opt: "if the tool shows them", hint: "Write the model that you selected, or write &ldquo;Default&rdquo; if you did not select one. Some tools let you select an underlying model or use the default. Also write whether you used a deep reasoning or deep research mode, and write any sources that you selected, such as legal sources, the web, or both." })}
           <p class="hint">Upload the full output of this prompt to the Canvas assignment <strong>Upload AI Output from Steps 2 and 3</strong> as a separate file named <strong>Step2_Prompt${i + 1}_Output</strong>.</p>
         </div>`).join("")}
       <button type="button" class="btn-link" data-act="add" data-p="gen"${S.gen.length >= MAXG ? " disabled" : ""}>+ Add another prompt</button>
@@ -278,15 +281,17 @@ footer.credit a { color: var(--head); }
         "1. Issue", B(p.issue), "",
         "2. Jurisdiction and court", "Jurisdiction: " + B(p.juris), "Court that would decide the issue: " + B(p.court), "",
         "3. Key facts", ...(facts.length ? facts.map(f => "- " + f) : ["[blank]"]), "",
-        "4. Procedural posture and client's objective", "Procedural posture: " + B(p.posture), "Client's objective: " + B(p.objective), "",
-        "5. Governing law",
+        "4. Procedural posture", B(p.posture), "",
+        "5. Client's ultimate goal", B(p.goal), "",
+        "6. What the client or assigning attorney has specifically asked you to research or do", B(p.task), "",
+        "7. Governing law",
         p.gov === "current" ? "Current law governs." : p.gov === "earlier" ? "The law of an earlier time period applies: " + B(p.period) : "[blank]", "", "");
     }
     if (has2()) {
       o.push("STEP 2: GENERAL-PURPOSE PROMPTS", "");
       S.gen.forEach((g, i) => {
         if (!anyText(g)) return;
-        o.push(`Prompt ${i + 1}`, "Tool: " + (TOOL[g.tool] || "[blank]"), "Date: " + (fmtDate(g.date) || "[blank]"), "Model or mode setting: " + (T(g.model) || "None shown"), "Prompt:", B(g.prompt), "");
+        o.push(`Prompt ${i + 1}`, "Tool: " + (TOOL[g.tool] || "[blank]"), "Date: " + (fmtDate(g.date) || "[blank]"), "Model and mode settings: " + (T(g.model) || "None recorded"), "Prompt:", B(g.prompt), "");
       });
       o.push("");
     }
@@ -294,7 +299,8 @@ footer.credit a { color: var(--head); }
       o.push("STEP 3: LEGAL AI TOOL PROMPT", "", "Prompt:", B(S.s3.prompt), "");
       activePlats().forEach(k => {
         const x = S.s3[k];
-        o.push(PLAT_TXT[k], "Date: " + (fmtDate(x.date) || "[blank]"), ("Model or mode setting: " + (T(x.model) || "None shown")),
+        o.push(PLAT_TXT[k], "Date: " + (fmtDate(x.date) || "[blank]"), ("Model and mode settings: " + (T(x.model) || "None recorded")),
+          "Sources and jurisdiction: " + (T(x.src) || "None recorded"),
           "Variation: " + (x.varied === "no" ? "None. I ran the prompt as written." : x.varied === "yes" ? B(x.variation) : "[blank]"), "");
       });
     }
@@ -309,7 +315,8 @@ footer.credit a { color: var(--head); }
       if (!T(p.juris) || !T(p.court)) m.push("jurisdiction and court");
       if (!filled(p.facts).length) m.push("key facts");
       if (!T(p.posture)) m.push("procedural posture");
-      if (!T(p.objective)) m.push("client's objective");
+      if (!T(p.goal)) m.push("client's ultimate goal");
+      if (!T(p.task)) m.push("what the client or assigning attorney has asked you to research or do");
       if (!p.gov) m.push("governing law");
       if (p.gov === "earlier" && !T(p.period)) m.push("governing time period");
     }
@@ -319,7 +326,6 @@ footer.credit a { color: var(--head); }
       activePlats().forEach(k => {
         const x = S.s3[k];
         if (!x.date) m.push(PLAT_TXT[k] + " date");
-        
         if (!x.varied) m.push(PLAT_TXT[k] + " variation answer");
         if (x.varied === "yes" && !T(x.variation)) m.push(PLAT_TXT[k] + " variation description");
       });
@@ -388,29 +394,19 @@ footer.credit a { color: var(--head); }
     const panel = document.getElementById("outPanel"), box = document.getElementById("outBox");
     box.value = F.text(); panel.hidden = false; panel.scrollIntoView({ block: "start" });
   }
-  document.getElementById("copyBtn").addEventListener("click", () => {
-    if (!F.has()) { flash("Nothing to copy yet. Fill in the form first."); return; }
-    const txt = F.text();
-    const ok = () => flash("Copied. " + PASTE + stillBlank());
-    const fail = () => { showText(); flash("Copy the text below."); };
-    try {
-      const html = F.html ? F.html() : textToHtml(txt);
-      if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
-        navigator.clipboard.write([new ClipboardItem({
-          "text/html": new Blob([html], { type: "text/html" }),
-          "text/plain": new Blob([txt], { type: "text/plain" })
-        })]).then(ok, () => navigator.clipboard.writeText(txt).then(ok, fail));
-      } else {
-        navigator.clipboard.writeText(txt).then(ok, fail);
-      }
-    } catch (err) { fail(); }
-  });
-  document.getElementById("showBtn").addEventListener("click", () => {
-    if (!F.has()) { flash("Nothing to show yet. Fill in the form first."); return; }
-    showText(); flash("Copy the text below.");
-  });
-
-  // Download as Word: the page builds a .docx from the same text that Copy all produces, and the browser saves it. Nothing leaves this tab.
+  // The output box at the bottom always shows the current text. Clicking in the box selects all of it, so the student can copy it with Ctrl+C or Command+C.
+  const outBox = document.getElementById("outBox"), outMissing = document.getElementById("outMissing");
+  function updateOut() {
+    const txt = (F.has()) ? F.text() : "";
+    if (outBox.value !== txt) outBox.value = txt;
+    const m = txt ? F.missing() : [];
+    outMissing.textContent = m.length ? "Still blank: " + m.join(", ") + "." : "";
+  }
+  ["input", "change", "click"].forEach(ev => document.addEventListener(ev, e => { if (e.target !== outBox) setTimeout(updateOut, 0); }));
+  outBox.addEventListener("focus", () => outBox.select());
+  outBox.addEventListener("click", () => outBox.select());
+  updateOut();
+  // Download as Word: the page builds a .docx from the same text that the box at the bottom shows, and the browser saves it. Nothing leaves this tab.
   // A line in capital letters, a short line that stands alone, or a line that starts a block of several lines becomes a bold heading.
   const CRC = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
   const crc32 = b => { let c = 0xFFFFFFFF; for (let i = 0; i < b.length; i++) c = CRC[(c ^ b[i]) & 0xFF] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; };
@@ -456,12 +452,32 @@ footer.credit a { color: var(--head); }
       ["word/document.xml", doc]
     ]);
   }
-  document.getElementById("dlBtn").addEventListener("click", () => {
+  // On claude.ai, the page asks the viewer's permission through the downloads capability; on an ordinary web page, the browser saves the file directly.
+  const WFILE = "Research_Plan_and_Prompt_Record.docx";
+  let downloads = null;
+  const dlBtn = document.getElementById("dlBtn");
+  const plainPage = !(window.claude && typeof window.claude.use === "function");
+  if (plainPage) dlBtn.hidden = false;
+  else window.claude.use("downloads").then(ns => { downloads = ns; dlBtn.hidden = !ns; }, () => {});
+  dlBtn.addEventListener("click", () => {
     if (!(F.has())) { flash("Nothing to download yet. Fill in the form first."); return; }
-    const a = document.createElement("a"), url = URL.createObjectURL(textToDocx(F.text(), "Research Plan and Prompt Record"));
-    a.href = url; a.download = "Research_Plan_and_Prompt_Record.docx"; document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 2000);
-    flash("Saved Research_Plan_and_Prompt_Record.docx to your downloads folder. Open the file to check that all of your work is there." + stillBlank());
+    const blob = textToDocx(F.text(), "Research Plan and Prompt Record");
+    if (plainPage) {
+      const a = document.createElement("a"), url = URL.createObjectURL(blob);
+      a.href = url; a.download = WFILE; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+      flash("Saved " + WFILE + " to your downloads folder. Open the file to check that all of your work is there." + stillBlank());
+      return;
+    }
+    if (!downloads) return;
+    downloads.save({ filename: WFILE, data: blob }).then(
+      () => flash("Saved " + WFILE + ". Open the file to check that all of your work is there." + stillBlank()),
+      err => {
+        const code = err && err.code;
+        if (code === "declined") flash("Download canceled.");
+        else if (code === "rate_limited") flash("A download prompt is already open. Finish it, then try again.");
+        else { dlBtn.hidden = true; flash("This view cannot download files. Copy the text in the box at the bottom of the form instead."); }
+      });
   });
   window.addEventListener("beforeunload", e => { if (F.has()) { e.preventDefault(); e.returnValue = ""; } });
   render();
