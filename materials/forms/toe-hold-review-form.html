@@ -67,6 +67,8 @@ footer.credit a { color: var(--head); }
 .btn-alt { background: none; color: var(--head); border: 1px solid var(--head); padding: 8px 16px; font-weight: 700; }
 #outBox { min-height: 320px; font-size: 14px; }
 #promptBox { min-height: 420px; font-size: 14px; }
+summary#synthBtn { display: inline-block; list-style: none; }
+summary#synthBtn::-webkit-details-marker { display: none; }
 .optflag { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--head); border: 1px solid var(--head); border-radius: 3px; padding: 1px 8px; }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
 </style>
@@ -104,7 +106,6 @@ footer.credit a { color: var(--head); }
       <div class="callout" role="note">
         <strong>This form does not save your work.</strong> Your text stays in this browser tab only, and nothing goes to Canvas or to your instructor.
         <div class="caps">Copy your work before you close this tab. You cannot recover text after the tab closes.</div>
-        <p style="margin-top:6px">You can also click <strong>Download as Word</strong> to save your work to your computer as a Word document named <strong>Toe-Hold_Reviews_and_Comparison_Essay.docx</strong>.</p>
       </div>
     </div>
 
@@ -180,8 +181,9 @@ footer.credit a { color: var(--head); }
           <li>Do not submit the Formatting notes that the AI tool adds at the end of its output. Read the notes yourself, fix in your own work any problem that they list, and delete the notes before you submit.</li>
         </ul>
       </div>
-      <button type="button" class="btn-alt" id="synthBtn" aria-expanded="false" aria-controls="synthBody" style="align-self:flex-start">Show the full prompt</button>
-      <div id="synthBody" class="stack" hidden>
+      <details id="synthDetails">
+      <summary class="btn-alt" id="synthBtn">Show the full prompt</summary>
+      <div id="synthBody" class="stack" style="margin-top:14px">
         <p>To use the prompt, follow these four steps.</p>
         <ol class="tight">
           <li><strong>Copy the prompt.</strong> Click inside the box below, which highlights all of the prompt, and press Ctrl+C (Windows) or Command+C (Mac).</li>
@@ -236,7 +238,9 @@ Return the formatted worksheet first. After the worksheet, add a section headed 
 
 MY WORKSHEET
 [Paste the text from the "Your Text: Copy It into Canvas" box below this line.]</textarea>
+        <button type="button" class="btn-alt" id="synthClose" style="align-self:flex-start">Hide the full prompt</button>
       </div>
+      </details>
     </section>
 
     <footer class="credit">
@@ -251,7 +255,6 @@ MY WORKSHEET
   <div class="wrap">
     <span class="status" id="status" aria-live="polite">Not saved. Copy your work before you close this tab.</span>
     <div class="row">
-      <button class="btn-alt" id="dlBtn" type="button" hidden>Download as Word</button>
     </div>
   </div>
 </div>
@@ -494,90 +497,14 @@ MY WORKSHEET
   outBox.addEventListener("focus", () => outBox.select());
   outBox.addEventListener("click", () => outBox.select());
   // Optional formatting prompt: the button shows or hides the whole prompt, and clicking inside the prompt box selects all of the prompt.
-  const synthBtn = document.getElementById("synthBtn"), synthBody = document.getElementById("synthBody"), promptBox = document.getElementById("promptBox");
-  synthBtn.addEventListener("click", () => {
-    const open = synthBody.hidden;
-    synthBody.hidden = !open;
-    synthBtn.setAttribute("aria-expanded", String(open));
-    synthBtn.textContent = open ? "Hide the full prompt" : "Show the full prompt";
-  });
+  // Optional formatting prompt: the details element shows or hides the whole prompt without script; the script only updates the label and adds a second Hide button.
+  const synthDetails = document.getElementById("synthDetails"), synthBtn = document.getElementById("synthBtn"), promptBox = document.getElementById("promptBox");
+  synthDetails.addEventListener("toggle", () => { synthBtn.textContent = synthDetails.open ? "Hide the full prompt" : "Show the full prompt"; });
+  document.getElementById("synthClose").addEventListener("click", () => { synthDetails.open = false; synthBtn.scrollIntoView({ block: "center" }); synthBtn.focus(); });
   promptBox.addEventListener("focus", () => promptBox.select());
   promptBox.addEventListener("click", () => promptBox.select());
   updateOut();
 
-  // Download as Word: the page builds a .docx from the same text that the box at the bottom shows, and the browser saves it. Nothing leaves this tab.
-  // A line in capital letters, a short line that stands alone, or a line that starts a block of several lines becomes a bold heading.
-  const CRC = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
-  const crc32 = b => { let c = 0xFFFFFFFF; for (let i = 0; i < b.length; i++) c = CRC[(c ^ b[i]) & 0xFF] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; };
-  function zip(files) {
-    const enc = new TextEncoder(), parts = [], central = []; let off = 0;
-    files.forEach(([name, text]) => {
-      const nb = enc.encode(name), db = enc.encode(text), crc = crc32(db);
-      const h = new DataView(new ArrayBuffer(30));
-      h.setUint32(0, 0x04034b50, true); h.setUint16(4, 20, true); h.setUint16(6, 0x0800, true); h.setUint16(8, 0, true);
-      h.setUint16(10, 0, true); h.setUint16(12, 0x21, true); h.setUint32(14, crc, true); h.setUint32(18, db.length, true); h.setUint32(22, db.length, true);
-      h.setUint16(26, nb.length, true); h.setUint16(28, 0, true);
-      const c = new DataView(new ArrayBuffer(46));
-      c.setUint32(0, 0x02014b50, true); c.setUint16(4, 20, true); c.setUint16(6, 20, true); c.setUint16(8, 0x0800, true); c.setUint16(10, 0, true);
-      c.setUint16(12, 0, true); c.setUint16(14, 0x21, true); c.setUint32(16, crc, true); c.setUint32(20, db.length, true); c.setUint32(24, db.length, true);
-      c.setUint16(28, nb.length, true); c.setUint32(42, off, true);
-      parts.push(new Uint8Array(h.buffer), nb, db); central.push(new Uint8Array(c.buffer), nb);
-      off += 30 + nb.length + db.length;
-    });
-    const cdSize = central.reduce((a, b) => a + b.length, 0), e = new DataView(new ArrayBuffer(22));
-    e.setUint32(0, 0x06054b50, true); e.setUint16(8, files.length, true); e.setUint16(10, files.length, true); e.setUint32(12, cdSize, true); e.setUint32(16, off, true);
-    return new Blob([...parts, ...central, new Uint8Array(e.buffer)], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
-  }
-  const xe = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, "");
-  const run = (t, o = {}) => String(t).split("\n").map((line, i) => `<w:r><w:rPr><w:rFonts w:ascii="Calibri" w:hAnsi="Calibri" w:cs="Calibri"/>${o.b ? "<w:b/>" : ""}${o.color ? `<w:color w:val="${o.color}"/>` : ""}<w:sz w:val="${o.sz || 20}"/></w:rPr>${i ? "<w:br/>" : ""}<w:t xml:space="preserve">${xe(line)}</w:t></w:r>`).join("");
-  const para = (t, o = {}) => `<w:p><w:pPr><w:spacing w:before="${o.before || 0}" w:after="${o.after == null ? 120 : o.after}"/></w:pPr>${run(t, o)}</w:p>`;
-  function textToDocx(text, title) {
-    const blocks = text.trim().split(/\n\s*\n/);
-    let body = para(title, { b: true, sz: 32, color: "1E407C", after: 240 });
-    blocks.forEach(bl => {
-      const lines = bl.split("\n");
-      lines.forEach((ln, i) => {
-        const caps = /^[A-Z0-9 :,'()&.-]+$/.test(ln) && /[A-Z]{3}/.test(ln);
-        if (caps) body += para(ln, { b: true, sz: 26, color: "1E407C", before: 240, after: 120 });
-        else if (lines.length === 1 && ln.length < 90 && !/[.?!\]]$/.test(ln)) body += para(ln, { b: true, sz: 24, color: "1E407C", before: 200, after: 80 });
-        else if (i === 0 && lines.length > 1) body += para(ln, { b: true, sz: 22, before: 120, after: 60 });
-        else body += para(ln, { sz: 22, after: i === lines.length - 1 ? 160 : 60 });
-      });
-    });
-    const doc = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>${body}<w:sectPr><w:pgSz w:w="12240" w:h="15840"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr></w:body></w:document>`;
-    return zip([
-      ["[Content_Types].xml", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>`],
-      ["_rels/.rels", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>`],
-      ["word/document.xml", doc]
-    ]);
-  }
-  // On claude.ai, the page asks the viewer's permission through the downloads capability; on an ordinary web page, the browser saves the file directly.
-  const WFILE = "Toe-Hold_Reviews_and_Comparison_Essay.docx";
-  let downloads = null;
-  const dlBtn = document.getElementById("dlBtn");
-  const plainPage = !(window.claude && typeof window.claude.use === "function");
-  if (plainPage) dlBtn.hidden = false;
-  else window.claude.use("downloads").then(ns => { downloads = ns; dlBtn.hidden = !ns; }, () => {});
-  dlBtn.addEventListener("click", () => {
-    if (!((step4Has() || step5Has()))) { flash("Nothing to download yet. Fill in the form first."); return; }
-    const blob = textToDocx(buildText(), "Toe-Hold Reviews and Comparison Essay");
-    if (plainPage) {
-      const a = document.createElement("a"), url = URL.createObjectURL(blob);
-      a.href = url; a.download = WFILE; document.body.appendChild(a); a.click(); a.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 2000);
-      flash("Saved " + WFILE + " to your downloads folder. Open the file to check that all of your work is there." + (missing().length ? " Still blank: " + missing().join(", ") + "." : ""));
-      return;
-    }
-    if (!downloads) return;
-    downloads.save({ filename: WFILE, data: blob }).then(
-      () => flash("Saved " + WFILE + ". Open the file to check that all of your work is there." + (missing().length ? " Still blank: " + missing().join(", ") + "." : "")),
-      err => {
-        const code = err && err.code;
-        if (code === "declined") flash("Download canceled.");
-        else if (code === "rate_limited") flash("A download prompt is already open. Finish it, then try again.");
-        else { dlBtn.hidden = true; flash("This view cannot download files. Copy the text in the box at the bottom of the form instead."); }
-      });
-  });
   window.addEventListener("beforeunload", e => {
     if (step4Has() || step5Has()) { e.preventDefault(); e.returnValue = ""; }
   });
