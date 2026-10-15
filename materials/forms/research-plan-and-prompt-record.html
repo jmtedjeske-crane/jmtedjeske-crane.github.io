@@ -190,7 +190,7 @@ footer.credit a { color: var(--head); }
   F.target = "Text Box for Research Plan (Step 1) and Record of Prompts for Steps 2 and 3";
 
   const blankGen = () => ({ prompt: "", tool: "", date: "", model: "" });
-  const blankPlat = () => ({ date: "", model: "", src: "", varied: "", variation: "" });
+  const blankPlat = () => ({ date: "", ver: "", src: "", varied: "", variation: "" });
   S = {
     plan: { issue: "", juris: "", court: "", facts: [""], posture: "", goal: "", task: "", gov: "", period: "" },
     gen: [blankGen()],
@@ -214,8 +214,8 @@ footer.credit a { color: var(--head); }
     <div class="sub">
       <span class="sub-title">${PLAT[k]}</span>
       ${fText(`s3.${k}.date`, "Date that you ran the prompt", { opt: "required", type: "date" })}
-      ${fText(`s3.${k}.model`, "Model and mode settings", { opt: "if the platform shows them", hint: "Write the tool, model, or mode that you used, and write whether you used a deep research or deep reasoning mode. If the tool offers versions of its answer, such as a concise version and an expanded version, write the version that you chose." })}
       ${fText(`s3.${k}.src`, "Sources and jurisdiction", { opt: "if you set any", hint: "Write whether the tool searched the platform&rsquo;s own content, the web, or both, and name any jurisdiction or source filter that you set, or write &ldquo;None.&rdquo;" })}
+      ${fText(`s3.${k}.ver`, "Version of the answer", { opt: "if the platform offers more than one", hint: "If the tool offers more than one version of its answer, such as a concise version and an expanded version, write the version that you chose." })}
       ${fRadio(`s3.${k}.varied`, "Did you make a variation in the prompt for this platform?", VARY, { opt: "required", col: true })}
       ${fArea(`s3.${k}.variation`, "Describe the variation, or paste the changed wording", { show: `s3.${k}.varied=yes` })}
       <p class="hint">Upload the full ${PLAT[k]} output to the Canvas assignment <strong>Upload AI Output from Steps 2 and 3</strong> as a separate file named <strong>${PLAT_FILE[k]}</strong>.</p>
@@ -294,8 +294,9 @@ footer.credit a { color: var(--head); }
       o.push("STEP 3: LEGAL AI TOOL PROMPT", "", "Prompt:", B(S.s3.prompt), "");
       activePlats().forEach(k => {
         const x = S.s3[k];
-        o.push(PLAT_TXT[k], "Date: " + (fmtDate(x.date) || "[blank]"), ("Model and mode settings: " + (T(x.model) || "None recorded")),
+        o.push(PLAT_TXT[k], "Date: " + (fmtDate(x.date) || "[blank]"),
           "Sources and jurisdiction: " + (T(x.src) || "None recorded"),
+          ...(T(x.ver) ? ["Version: " + T(x.ver)] : []),
           "Variation: " + (x.varied === "no" ? "None. I ran the prompt as written." : x.varied === "yes" ? B(x.variation) : "[blank]"), "");
       });
     }
