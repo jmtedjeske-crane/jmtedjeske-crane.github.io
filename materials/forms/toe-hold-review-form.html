@@ -85,10 +85,9 @@ summary#synthBtn::-webkit-details-marker { display: none; }
     <div class="stack">
       <p>Use this form to record your first reading of each AI output in Step 4 and your review of a secondary source in Step 5, and to draft your Step 5 comparison essay. You write these reviews:</p>
       <ul class="tight">
-        <li>One review for each general AI tool that you used in Step 2 (Reviews A.1 to A.3).</li>
+        <li>One review for the general AI output from Step 2 (Review A).</li>
         <li>One review for the [legal AI tool 1] output from Step 3 (Review B).</li>
         <li>One review for the [legal AI tool 2] output from Step 3 (Review C).</li>
-        <li>One review for the [optional legal AI tool] output from Step 3 (Review D), only if you ran your Step 3 prompt in that tool.</li>
       </ul>
       <p>When you finish, copy your work from the box at the bottom of this form, and paste it into the text box of the Canvas assignment <strong>Text Box for Toe-Hold Reviews, Secondary Source Review, and Comparison Essay (Steps 4 and 5)</strong>. <em>This form is optional, and you use it at your own risk.</em> You can also type your work directly into the Canvas text box instead.</p>
       <div class="stack" style="gap:4px">
@@ -110,14 +109,10 @@ summary#synthBtn::-webkit-details-marker { display: none; }
     </div>
 
     <section class="panel" id="panel-tools" aria-labelledby="h-tools">
-      <h2 id="h-tools">Your Tools</h2>
-      <p>Check the tools that you used. The form adds one review for each tool that you check.</p>
-      <div class="field"><span class="lbl">General AI tools that you used in Step 2 <span class="opt">(check all that apply)</span></span>
+      <h2 id="h-tools">Your Step 2 Tool</h2>
+      <p>Choose the general AI tool that you used in Step 2. The form then adds your Review A.</p>
+      <div class="field"><span class="lbl">General AI tool that you used in Step 2 <span class="opt">(choose one)</span></span>
         <div class="checks" id="toolChecks"></div>
-        <span class="hint">If you ran more than one prompt in the same tool, one review covers all of that tool&rsquo;s outputs. Because you may run no more than three prompts in total, you will write no more than three Review A&rsquo;s.</span>
-      </div>
-      <div class="field"><span class="lbl">[Optional legal AI tool] <span class="opt">(optional in Step 3)</span></span>
-        <div class="checks"><label><input type="checkbox" id="useBloom" data-bloom="1"> I also ran my Step 3 prompt in [optional legal AI tool].</label></div>
       </div>
     </section>
 
@@ -209,7 +204,7 @@ Copy the following items exactly as the worksheet gives them: quotations, review
 In all other text, correct only obvious errors in spelling, punctuation, capitalization, and spacing. Replace a double hyphen with a colon or a period, not with a dash.
 
 HEADINGS
-Use three heading levels. Level 1 is the part name. Write "STEP 4: TOE-HOLD REVIEWS" and "STEP 5: SECONDARY SOURCE REVIEW" exactly, even if the worksheet words them differently. Level 2 is the review name, followed by the review's label in parentheses, for example "[AI tool 1] (Review A.1)." Level 3 is the section headings described below. Keep the reviews in the order in which the worksheet presents them.
+Use three heading levels. Level 1 is the part name. Write "STEP 4: TOE-HOLD REVIEWS" and "STEP 5: SECONDARY SOURCE REVIEW" exactly, even if the worksheet words them differently. Level 2 is the review name, followed by the review's label in parentheses, for example "[AI tool 1] (Review A)." Level 3 is the section headings described below. Keep the reviews in the order in which the worksheet presents them.
 
 SECTIONS
 Give every review in Step 4 and Step 5 these four Level 3 sections in this order: Conclusion; Statutes, Court Rules, Constitutional Provisions, and Regulations; Cases; Secondary Sources. Within each section, keep the entries in the worksheet's order. If every section of a review is blank, keep the review and its headings, and report the blank review in the notes.
@@ -283,8 +278,7 @@ MY WORKSHEET
   const blankReview = () => ({ conclusion: "", statutes: [""], cases: [blankCase()], secondary: [""] });
   const state = {
     tools: { studio: false, gemini: false, harvey: false, copilot: false },
-    useBloom: false,
-    reviews: { studio: blankReview(), gemini: blankReview(), harvey: blankReview(), copilot: blankReview(), B: blankReview(), C: blankReview(), D: blankReview(), E: blankReview() },
+    reviews: { studio: blankReview(), gemini: blankReview(), harvey: blankReview(), copilot: blankReview(), B: blankReview(), C: blankReview(), E: blankReview() },
     essay: { same: "", overlap: "", sw: "" },
     src: { cite: "", sections: "", kind: "" }
   };
@@ -306,11 +300,10 @@ MY WORKSHEET
     return n;
   }
 
-  // One Review A for each checked Step 2 tool, numbered in the order shown; then B and C; then D if the student used the optional legal AI tool.
+  // Review A for the one Step 2 tool that the student chose; then B and C.
   function panelDefs() {
-    const a = TOOLS.filter(([k]) => state.tools[k]).map(([k, name], i) => ({ key: k, label: "A." + (i + 1), title: `Review A.${i + 1}: ${name} (Step 2)`, general: true, tool: name }));
+    const a = TOOLS.filter(([k]) => state.tools[k]).slice(0, 1).map(([k, name]) => ({ key: k, label: "A", title: `Review A: ${name} (Step 2)`, general: true, tool: name }));
     const out = a.concat([{ key: "B", label: "B", title: "Review B: [Legal AI tool 1] (Step 3)" }, { key: "C", label: "C", title: "Review C: [Legal AI tool 2] (Step 3)" }]);
-    if (state.useBloom) out.push({ key: "D", label: "D", title: "Review D: [Optional legal AI tool] (Step 3)" });
     return out;
   }
 
@@ -336,11 +329,10 @@ MY WORKSHEET
   }
 
   function render() {
-    document.getElementById("toolChecks").innerHTML = TOOLS.map(([k, name]) => `<label><input type="checkbox" id="tool-${k}" data-tool="${k}" ${state.tools[k] ? "checked" : ""}> ${name}</label>`).join("");
-    document.getElementById("useBloom").checked = state.useBloom;
+    document.getElementById("toolChecks").innerHTML = TOOLS.map(([k, name]) => `<label><input type="radio" name="step2tool" id="tool-${k}" data-tool="${k}" ${state.tools[k] ? "checked" : ""}> ${name}</label>`).join("");
     const defs = panelDefs();
     document.getElementById("jump").innerHTML = defs.map(p => `<a href="#panel-${p.key}">Review ${p.label}</a>`).join("") + `<a href="#panel-E">Review E</a><a href="#panel-compare">Comparison Essay</a><a href="#panel-synth">Optional AI Formatting Prompt</a>`;
-    document.getElementById("panels").innerHTML = (state.tools.studio || state.tools.gemini || state.tools.harvey || state.tools.copilot ? "" : `<p class="hint">Check at least one general AI tool above to add your Review A.</p>`) + defs.map(panelHTML).join("");
+    document.getElementById("panels").innerHTML = (state.tools.studio || state.tools.gemini || state.tools.harvey || state.tools.copilot ? "" : `<p class="hint">Choose your Step 2 tool above to add your Review A.</p>`) + defs.map(panelHTML).join("");
     document.getElementById("panelsD").innerHTML = panelHTML(DDEF);
   }
 
@@ -421,8 +413,7 @@ MY WORKSHEET
 
   document.addEventListener("change", e => {
     const d = e.target.dataset;
-    if (d.tool) { state.tools[d.tool] = e.target.checked; render(); refocus(e.target.id); return; }
-    if (d.bloom) { state.useBloom = e.target.checked; render(); refocus("useBloom"); return; }
+    if (d.tool) { Object.keys(state.tools).forEach(k => { state.tools[k] = false; }); state.tools[d.tool] = e.target.checked; render(); refocus(e.target.id); return; }
     if (!d.cb) return;
     state.reviews[d.k].cases[+d.ci][d.cb] = e.target.checked;
     render(); refocus(e.target.id);

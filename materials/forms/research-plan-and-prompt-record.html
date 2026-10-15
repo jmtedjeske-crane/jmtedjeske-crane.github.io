@@ -106,7 +106,7 @@ footer.credit a { color: var(--head); }
 
     </div>
 
-    <nav class="jump" aria-label="Jump to a section"><a href="#panel-1">Step 1: Research Plan</a><a href="#panel-2">Step 2: General-Purpose Prompts</a><a href="#panel-3">Step 3: Legal AI Tool Prompt</a></nav>
+    <nav class="jump" aria-label="Jump to a section"><a href="#panel-1">Step 1: Research Plan</a><a href="#panel-2">Step 2: General-Purpose Prompt</a><a href="#panel-3">Step 3: Legal AI Tool Prompt</a></nav>
 
     <div id="form"></div>
 
@@ -194,9 +194,9 @@ footer.credit a { color: var(--head); }
   S = {
     plan: { issue: "", juris: "", court: "", facts: [""], posture: "", goal: "", task: "", gov: "", period: "" },
     gen: [blankGen()],
-    s3: { prompt: "", useBloom: "", lexis: blankPlat(), west: blankPlat(), bloom: blankPlat() }
+    s3: { prompt: "", lexis: blankPlat(), west: blankPlat() }
   };
-  const MAXG = 3;
+  const MAXG = 1;
   F.file = "Research Plan and Prompts.txt";
   F.max = { gen: MAXG };
   F.blanks = { gen: blankGen };
@@ -204,11 +204,11 @@ footer.credit a { color: var(--head); }
   const TOOLS = [["aistudio", "[AI tool 1]"], ["gemini", "[AI tool 2]"], ["harvey", "[AI tool 3]"], ["copilot", "[AI tool 4]"]];
   const TOOL = Object.fromEntries(TOOLS);
   const VARY = [["no", "No. I ran the prompt as written."], ["yes", "Yes. I made a variation for this platform."]];
-  const PLATS = ["lexis", "west", "bloom"];
-  const activePlats = () => PLATS.filter(k => k !== "bloom" || S.s3.useBloom === "yes");
-  const PLAT = { lexis: "[Legal AI tool 1]", west: "[Legal AI tool 2]", bloom: "[Optional legal AI tool]" };
-  const PLAT_TXT = { lexis: "[Legal AI tool 1]", west: "[Legal AI tool 2]", bloom: "[Optional legal AI tool]" };
-  const PLAT_FILE = { lexis: "Step3_Tool1_Output", west: "Step3_Tool2_Output", bloom: "Step3_Tool3_Output" };
+  const PLATS = ["lexis", "west"];
+  const activePlats = () => PLATS;
+  const PLAT = { lexis: "[Legal AI tool 1]", west: "[Legal AI tool 2]" };
+  const PLAT_TXT = { lexis: "[Legal AI tool 1]", west: "[Legal AI tool 2]" };
+  const PLAT_FILE = { lexis: "Step3_Tool1_Output", west: "Step3_Tool2_Output" };
 
   const platHTML = k => `
     <div class="sub">
@@ -243,28 +243,24 @@ footer.credit a { color: var(--head); }
     </section>
 
     <section class="panel" id="panel-2" aria-labelledby="h-2">
-      <h2 id="h-2">Step 2: General-Purpose Prompts</h2>
-      <p>Record each prompt that you ran in [your authorized AI tools, legal and general] [with your institutional account]. You may run no more than three prompts in total.</p>
+      <h2 id="h-2">Step 2: General-Purpose Prompt</h2>
+      <p>Record the one prompt that you ran in Step 2. Run one prompt in one of [your authorized general AI tools]. If a tool requires your institutional account, use that account.</p>
       ${S.gen.map((g, i) => `
         <div class="sub">
-          <div class="panel-head"><span class="sub-title">Prompt ${i + 1}</span>${S.gen.length > 1 ? `<button type="button" class="btn-x" data-act="rm" data-p="gen" data-i="${i}" aria-label="Remove prompt ${i + 1}">Remove</button>` : ""}</div>
+          <div class="panel-head"><span class="sub-title">Your Step 2 prompt</span>${S.gen.length > 1 ? `<button type="button" class="btn-x" data-act="rm" data-p="gen" data-i="${i}" aria-label="Remove prompt ${i + 1}">Remove</button>` : ""}</div>
           ${fRadio(`gen.${i}.tool`, "Tool that you ran the prompt in", TOOLS, { opt: "required" })}
-          ${fArea(`gen.${i}.prompt`, "Prompt text", { opt: "required", hint: i ? `Paste the full text of the prompt. If you ran an earlier prompt again in a different tool, write &ldquo;Same as Prompt ${i}&rdquo; or name the earlier prompt.` : "Paste the full text of the prompt." })}
+          ${fArea(`gen.${i}.prompt`, "Prompt text", { opt: "required", hint: "Paste the full text of the prompt." })}
           ${fText(`gen.${i}.date`, "Date that you ran the prompt", { opt: "required", type: "date" })}
           ${fArea(`gen.${i}.model`, "Model and mode settings", { opt: "if the tool shows them", hint: "Write the model that you selected, or write &ldquo;Default&rdquo; if you did not select one. Some tools let you select an underlying model or use the default. Also write whether you used a deep reasoning or deep research mode, and write any sources that you selected, such as legal sources, the web, or both." })}
-          <p class="hint">Upload the full output of this prompt to the Canvas assignment <strong>Upload AI Output from Steps 2 and 3</strong> as a separate file named <strong>Step2_Prompt${i + 1}_Output</strong>.</p>
+          <p class="hint">Upload the full output of this prompt to the Canvas assignment <strong>Upload AI Output from Steps 2 and 3</strong> as a separate file named <strong>Step2_Output</strong>.</p>
         </div>`).join("")}
-      <button type="button" class="btn-link" data-act="add" data-p="gen"${S.gen.length >= MAXG ? " disabled" : ""}>+ Add another prompt</button>
-      <span class="hint">${S.gen.length} of 3 prompts used.${S.gen.length >= MAXG ? " You have recorded the maximum of three prompts." : ""}</span>
     </section>
 
     <section class="panel" id="panel-3" aria-labelledby="h-3">
       <h2 id="h-3">Step 3: Legal AI Tool Prompt</h2>
-      <p>Run essentially the same prompt in [your authorized AI tools, legal and general]: [legal AI tool 1] and [legal AI tool 2], so any differences in the platforms&rsquo; outputs come from the tools, not the prompt. You might need to make minor variations for a platform. You may also run the prompt in [optional legal AI tool], but that tool is optional.</p>
+      <p>Run essentially the same prompt in [legal AI tool 1] and [legal AI tool 2], so any differences in the platforms&rsquo; outputs come from the tools, not the prompt. You might need to make minor variations for a platform.</p>
       ${fArea("s3.prompt", "Prompt text", { opt: "required", hint: "Paste the full text of the prompt as you wrote it. Record any variation for a platform in that platform's box below." })}
       ${platHTML("lexis")}${platHTML("west")}
-      ${fRadio("s3.useBloom", "Did you also run the prompt in [optional legal AI tool]?", [["no", "No. I ran the prompt only in [legal AI tool 1] and [legal AI tool 2]."], ["yes", "Yes. I also ran the prompt in [optional legal AI tool]."]], { opt: "this tool is optional", col: true })}
-      <div data-show="s3.useBloom=yes">${platHTML("bloom")}</div>
     </section>`;
 
   const has1 = () => anyText(S.plan);
@@ -287,10 +283,10 @@ footer.credit a { color: var(--head); }
         p.gov === "current" ? "Current law governs." : p.gov === "earlier" ? "The law of an earlier time period applies: " + B(p.period) : "[blank]", "", "");
     }
     if (has2()) {
-      o.push("STEP 2: GENERAL-PURPOSE PROMPTS", "");
+      o.push("STEP 2: GENERAL-PURPOSE PROMPT", "");
       S.gen.forEach((g, i) => {
         if (!anyText(g)) return;
-        o.push(`Prompt ${i + 1}`, "Tool: " + (TOOL[g.tool] || "[blank]"), "Date: " + (fmtDate(g.date) || "[blank]"), "Model and mode settings: " + (T(g.model) || "None recorded"), "Prompt:", B(g.prompt), "");
+        o.push("Tool: " + (TOOL[g.tool] || "[blank]"), "Date: " + (fmtDate(g.date) || "[blank]"), "Model and mode settings: " + (T(g.model) || "None recorded"), "Prompt:", B(g.prompt), "");
       });
       o.push("");
     }
@@ -319,7 +315,7 @@ footer.credit a { color: var(--head); }
       if (!p.gov) m.push("governing law");
       if (p.gov === "earlier" && !T(p.period)) m.push("governing time period");
     }
-    if (has2()) S.gen.forEach((g, i) => { if (!g.tool) m.push(`Step 2 prompt ${i + 1} tool`); if (!T(g.prompt)) m.push(`Step 2 prompt ${i + 1} text`); if (!g.date) m.push(`Step 2 prompt ${i + 1} date`); });
+    if (has2()) S.gen.forEach((g, i) => { if (!g.tool) m.push("Step 2 tool"); if (!T(g.prompt)) m.push("Step 2 prompt text"); if (!g.date) m.push("Step 2 date"); });
     if (has3()) {
       if (!T(S.s3.prompt)) m.push("Step 3 prompt text");
       activePlats().forEach(k => {
