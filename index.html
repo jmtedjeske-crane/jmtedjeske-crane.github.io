@@ -104,8 +104,8 @@ nav.site a:hover, nav.site a.active { border-bottom-color: var(--accent); }
 /* Sections */
 main { padding-block: 16px 64px; }
 section { padding-block: 44px 8px; scroll-margin-top: 60px; display: grid; gap: 22px; }
-section > h2 { font-size: 1.75rem; padding-bottom: 10px; position: relative; }
-section > h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 56px; height: 3px; background: var(--accent); }
+section > h2 { font-size: 1.75rem; padding-bottom: 10px; position: relative; width: fit-content; }
+section > h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 3px; background: var(--accent); }
 h3 { font-size: 1.2rem; }
 h4 { font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
 .prose { max-width: 65ch; display: grid; gap: 16px; }
@@ -285,8 +285,8 @@ footer a { color: var(--on-band); }
 </style>
 <style>
 .mat-intro { max-width: 68ch; }
-.intro-left > h2 { font-size: 1.75rem; padding-bottom: 10px; position: relative; margin-bottom: -6px; }
-.intro-left > h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 56px; height: 3px; background: var(--accent); }
+.intro-left > h2 { font-size: 1.75rem; padding-bottom: 10px; position: relative; width: fit-content; margin-bottom: -6px; }
+.intro-left > h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 3px; background: var(--accent); }
 .page-menu { padding: 24px 0 14px; border-bottom: 1px solid var(--rule); }
 .sec-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; max-width: 860px; }
 .to-top { font-size: inherit; white-space: nowrap; }

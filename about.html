@@ -99,8 +99,8 @@ nav.site a:hover, nav.site a.active { border-bottom-color: var(--accent); }
 main { padding-block: 16px 64px; }
 section { padding-block: 44px 8px; scroll-margin-top: 60px; display: grid; gap: 22px; }
 hr.part-rule { border: 0; border-top: 1px solid var(--rule); margin: 28px 0 0; }
-section > h2 { font-size: 1.75rem; padding-bottom: 10px; position: relative; }
-section > h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 56px; height: 3px; background: var(--accent); }
+section > h2 { font-size: 1.75rem; padding-bottom: 10px; position: relative; width: fit-content; }
+section > h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 3px; background: var(--accent); }
 h3 { font-size: 1.2rem; }
 h4 { font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
 .prose { max-width: 65ch; display: grid; gap: 16px; }
@@ -266,8 +266,8 @@ footer a { color: var(--on-band); }
 .disclaimer { color: var(--on-band-muted); font-size: 0.9rem; max-width: 70ch; border-top: 1px solid rgba(255,255,255,0.18); padding-top: 16px; }
 
 .sec-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; }
-.sec-head > h2 { font-size: 1.75rem; padding-bottom: 10px; position: relative; }
-.sec-head > h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 56px; height: 3px; background: var(--accent); }
+.sec-head > h2 { font-size: 1.75rem; padding-bottom: 10px; position: relative; width: fit-content; }
+.sec-head > h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 3px; background: var(--accent); }
 .to-top { font-size: inherit; white-space: nowrap; }
 /* One text size for all running text */
 .small, .facts dd, .dated .what .detail, .dated .when, .posts .date, details.acc > summary .acc-sub, .job .meta, .masthead .lead, .masthead .role,
