@@ -127,7 +127,7 @@ summary#synthBtn::-webkit-details-marker { display: none; }
 
     <div class="stack" style="gap:6px">
       <h2>Step 5: Secondary Source</h2>
-      <p>After you review what you learned from the AI outputs, research the issue in one traditional secondary source, such as a treatise, a practice guide, a legal encyclopedia, an ALR annotation, or a law review article. You may use more than one section of the source. You must read the source itself, because an AI tool&rsquo;s summary of a source does not count as the source. Then complete Review E and the comparison essay below.</p>
+      <p>After you review what you learned from the AI outputs, research the issue in one traditional secondary source, such as a treatise, a practice guide, a legal encyclopedia, an ALR annotation, or a law review article. You may use more than one section of the source. You must read the source itself, because an AI tool&rsquo;s summary of a source does not count as the source. Then complete Review D and the comparison essay below.</p>
     </div>
 
     <div id="panelsD" class="stack" style="gap:28px"></div>
@@ -166,7 +166,7 @@ summary#synthBtn::-webkit-details-marker { display: none; }
 
     <section class="panel" id="panel-synth" aria-labelledby="h-synth">
       <div class="panel-head"><h2 id="h-synth">Optional AI Formatting Prompt</h2><span class="optflag">Optional</span></div>
-      <p>This prompt asks an AI tool to clean up the formatting of your toe-hold reviews and your Review E. The AI tool puts each review under a consistent heading, puts your cases in a table with your Why it matters labels and your short descriptions, marks blank entries, and corrects obvious errors in spelling, punctuation, capitalization, and spacing. The AI tool copies your secondary sources exactly as you wrote them. The AI tool then lists every change it made and every gap it found.</p>
+      <p>This prompt asks an AI tool to clean up the formatting of your toe-hold reviews and your Review D. The AI tool puts each review under a consistent heading, puts your cases in a table with your Why it matters labels and your short descriptions, marks blank entries, and corrects obvious errors in spelling, punctuation, capitalization, and spacing. The AI tool copies your secondary sources exactly as you wrote them. The AI tool then lists every change it made and every gap it found.</p>
       <div class="callout" role="note">
         <strong>This prompt is optional, not required.</strong> You do not need to use the prompt, and you lose no credit if you skip it.
         <ul class="tight" style="margin-top:8px">
@@ -282,7 +282,7 @@ MY WORKSHEET
     essay: { same: "", overlap: "", sw: "" },
     src: { cite: "", sections: "", kind: "" }
   };
-  const DDEF = { key: "E", label: "E", title: "Review E: Secondary Source (Step 5)", src: true };
+  const DDEF = { key: "E", label: "D", title: "Review D: Secondary Source (Step 5)", src: true };
 
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const words = t => (t.trim().match(/\S+/g) || []).length;
@@ -331,7 +331,7 @@ MY WORKSHEET
   function render() {
     document.getElementById("toolChecks").innerHTML = TOOLS.map(([k, name]) => `<label><input type="radio" name="step2tool" id="tool-${k}" data-tool="${k}" ${state.tools[k] ? "checked" : ""}> ${name}</label>`).join("");
     const defs = panelDefs();
-    document.getElementById("jump").innerHTML = defs.map(p => `<a href="#panel-${p.key}">Review ${p.label}</a>`).join("") + `<a href="#panel-E">Review E</a><a href="#panel-compare">Comparison Essay</a><a href="#panel-synth">Optional AI Formatting Prompt</a>`;
+    document.getElementById("jump").innerHTML = defs.map(p => `<a href="#panel-${p.key}">Review ${p.label}</a>`).join("") + `<a href="#panel-E">Review D</a><a href="#panel-compare">Comparison Essay</a><a href="#panel-synth">Optional AI Formatting Prompt</a>`;
     document.getElementById("panels").innerHTML = (state.tools.studio || state.tools.gemini || state.tools.harvey || state.tools.copilot ? "" : `<p class="hint">Choose your Step 2 tool above to add your Review A.</p>`) + defs.map(panelHTML).join("");
     document.getElementById("panelsD").innerHTML = panelHTML(DDEF);
   }
@@ -438,7 +438,7 @@ MY WORKSHEET
       if (!state.src.cite.trim()) m.push("secondary source citation");
       if (!state.src.sections.trim()) m.push("sections used");
       if (!state.src.kind.trim()) m.push("kind of secondary source");
-      if (!state.reviews.E.conclusion.trim()) m.push("Review E conclusion");
+      if (!state.reviews.E.conclusion.trim()) m.push("Review D conclusion");
     }
     return m;
   }
