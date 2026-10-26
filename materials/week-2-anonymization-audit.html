@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Week 2: In-Class Exercise 1, Anonymization Audit | AI and Legal Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700&family=Lato:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+body { margin: 0; }
+img { max-width: 100%; }
+/* Layout: teal header band with name, one-line tagline, and anchor nav; one reading column of sections; long lists sit in accordions; teal footer with contact, profile links, and disclaimer. */
+:root {
+  --bg: #F7F8F9;
+  --surface: #EEF0F2;
+  --band: #1F5F63;
+  --on-band: #F7F8F9;
+  --on-band-muted: #C9DADB;
+  --text: #000000;
+  --heading: #1F5F63;
+  --link: #1B2A41;
+  --muted: #5E6873;
+  --accent: #E8A598;
+  --on-accent: #1B2A41;
+  --rule: #D9DDE1;
+
+  --font-display: 'Raleway', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1B2A41; --surface: #22344F; --band: #13202F; --on-band: #EEF0F2; --on-band-muted: #AEB8C2;
+    --text: #EEF0F2; --heading: #E8A598; --link: #F2C2B8; --muted: #AEB8C2;
+    --accent: #E8A598; --on-accent: #1B2A41; --rule: #34465F;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1B2A41; --surface: #22344F; --band: #13202F; --on-band: #EEF0F2; --on-band-muted: #AEB8C2;
+  --text: #EEF0F2; --heading: #E8A598; --link: #F2C2B8; --muted: #AEB8C2;
+  --accent: #E8A598; --on-accent: #1B2A41; --rule: #34465F;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.65;
+}
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-feature-settings: "lnum";
+  font-variant-numeric: lining-nums;
+  color: var(--heading);
+  text-wrap: balance;
+  margin: 0;
+  line-height: 1.2;
+}
+p { margin: 0; }
+a { color: var(--link); text-decoration: underline; text-underline-offset: 0.15em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 24px; }
+@media (max-width: 480px) { .wrap { padding-inline: 16px; } body { font-size: 17px; } }
+
+/* Header band */
+.band { background: var(--band); color: var(--on-band); }
+.masthead { padding-block: 52px 32px; display: grid; gap: 10px; }
+.masthead h1 { color: var(--on-band); font-size: clamp(2.1rem, 5.5vw, 3.2rem); letter-spacing: 0.005em; }
+.masthead .tagline { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.05rem, 2.4vw, 1.3rem); color: #F4C9C0; }
+.masthead .role { font-size: 1.05rem; color: var(--on-band-muted); }
+nav.site {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+  background: var(--band);
+  border-top: 1px solid rgba(255,255,255,0.14);
+}
+nav.site ul {
+  list-style: none; margin: 0; padding-block: 0;
+  display: flex; gap: 4px 24px; overflow-x: auto; scrollbar-width: none;
+}
+nav.site ul::-webkit-scrollbar { display: none; }
+nav.site a {
+  display: block; padding-block: 12px 10px; white-space: nowrap;
+  color: var(--on-band); text-decoration: none;
+  font-family: var(--font-display); font-weight: 600; font-size: 0.875rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  border-bottom: 3px solid transparent;
+}
+nav.site a:hover, nav.site a.active { border-bottom-color: var(--accent); }
+
+/* Sections */
+main { padding-block: 16px 64px; }
+section { padding-block: 44px 8px; scroll-margin-top: 60px; display: grid; gap: 22px; }
+section > h2 { font-size: 1.75rem; padding-bottom: 10px; position: relative; width: fit-content; }
+section > h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 3px; background: var(--accent); }
+h3 { font-size: 1.2rem; }
+h4 { font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+.prose { max-width: 65ch; display: grid; gap: 16px; }
+.muted { color: var(--muted); }
+.small { font-size: 0.9rem; }
+
+/* About */
+.about { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 40px; align-items: start; }
+@media (max-width: 760px) { .about { grid-template-columns: minmax(0, 1fr); } }
+.card { background: var(--surface); border-radius: 6px; padding: 20px; display: grid; gap: 14px; }
+.monogram {
+  aspect-ratio: 1 / 1; max-width: 100%; border-radius: 4px;
+  background: var(--accent); color: var(--on-accent);
+  display: grid; place-items: center;
+  font-family: var(--font-display); font-weight: 700; font-size: 3rem; letter-spacing: 0.04em;
+}
+.facts { display: grid; gap: 10px; margin: 0; }
+.facts dt { font-family: var(--font-display); font-weight: 600; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.facts dd { margin: 0; font-size: 0.95rem; line-height: 1.45; }
+.subsection { display: grid; gap: 16px; padding-top: 12px; }
+
+/* Dated lists */
+.dated { list-style: none; margin: 0; padding: 0; display: grid; }
+.dated li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 24px; padding-block: 12px; border-top: 1px solid var(--rule); }
+.dated li:last-child { border-bottom: 1px solid var(--rule); }
+.dated .when { color: var(--muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+.dated .what { min-width: 0; }
+.dated .what .detail { display: block; color: var(--muted); font-size: 0.9rem; }
+@media (max-width: 560px) {
+  .dated li { grid-template-columns: minmax(0, 1fr); }
+  .dated .when { text-align: left; }
+}
+.group { display: grid; gap: 12px; }
+.subgroup { display: grid; gap: 8px; padding-top: 6px; }
+
+/* Citations */
+.cites { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; max-width: 70ch; }
+.cites li { padding-left: 1.5em; text-indent: -1.5em; }
+.smallcaps { font-variant: small-caps; letter-spacing: 0.02em; }
+.tag { display: inline-block; text-indent: 0; font-family: var(--font-display); font-weight: 600; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--on-accent); background: var(--accent); padding: 1px 7px; border-radius: 3px; vertical-align: 2px; margin-left: 6px; }
+
+/* Accordions */
+details.acc { border: 1px solid var(--rule); border-radius: 6px; background: var(--bg); max-width: 100%; }
+details.acc > summary {
+  list-style: none; cursor: pointer; padding: 16px 20px;
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; align-items: center;
+}
+details.acc > summary::-webkit-details-marker { display: none; }
+details.acc > summary .acc-title { font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; color: var(--heading); line-height: 1.25; }
+details.acc > summary .acc-sub { grid-column: 1; color: var(--muted); font-size: 0.92rem; }
+details.acc > summary .chev {
+  grid-column: 2; grid-row: 1 / span 2;
+  font-family: var(--font-display); font-weight: 600; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--on-accent); background: var(--accent); border-radius: 4px; padding: 5px 10px; white-space: nowrap;
+}
+details.acc > summary .chev::after { content: "Show all"; }
+details.acc[open] > summary .chev::after { content: "Hide"; }
+details.acc > summary:hover .acc-title { text-decoration: underline; text-underline-offset: 0.15em; }
+details.acc .acc-body { padding: 0 20px 16px; }
+.accs { display: grid; gap: 14px; }
+
+/* Blog list */
+.posts { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; max-width: 72ch; }
+.posts li { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 16px; }
+.posts .date { color: var(--muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; padding-top: 2px; }
+@media (max-width: 560px) { .posts li { grid-template-columns: minmax(0, 1fr); gap: 0; } }
+
+/* Experience */
+.jobs { display: grid; gap: 26px; max-width: 70ch; }
+.job { display: grid; gap: 6px; }
+.job .meta { color: var(--muted); font-size: 0.95rem; }
+
+/* Hero lead and buttons */
+.masthead .lead { color: var(--on-band); font-size: 1.1rem; max-width: 62ch; padding-top: 10px; }
+.btns { display: flex; flex-wrap: wrap; gap: 10px; padding-top: 12px; }
+.btn {
+  display: inline-block; text-decoration: none; border-radius: 4px; padding: 9px 16px;
+  font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; letter-spacing: 0.03em;
+}
+.btn.primary { background: var(--accent); color: var(--on-accent); }
+.btn.ghost { color: var(--on-band); border: 1px solid rgba(255,255,255,0.45); }
+.btn:hover { text-decoration: underline; text-underline-offset: 0.15em; }
+
+/* Teaching materials */
+.mat-groups { display: grid; gap: 28px; }
+.mats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 14px; }
+.mats li { background: var(--surface); border-radius: 6px; padding: 16px 18px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.mats .mat-type { font-family: var(--font-display); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.mats .mat-title { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; line-height: 1.3; }
+.mats p { font-size: 0.95rem; line-height: 1.5; }
+.howto { max-width: 65ch; display: grid; gap: 12px; }
+.tag.soon { margin-left: 0; margin-right: 8px; background: var(--surface); color: var(--muted); border: 1px solid var(--rule); justify-self: start; }
+.mats .tag.soon { background: var(--bg); }
+.status-note { font-size: 0.95rem; }
+.roles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 12px; max-width: 760px; }
+.roles li { border-top: 3px solid var(--accent); background: var(--surface); border-radius: 0 0 6px 6px; padding: 14px 16px; display: grid; gap: 2px; }
+.roles .role-name { font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; color: var(--heading); }
+.roles .role-second { font-size: 0.9rem; color: var(--muted); }
+.eyebrow { font-family: var(--font-display); font-weight: 600; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.license { border-left: 4px solid var(--accent); background: var(--surface); border-radius: 0 6px 6px 0; padding: 18px 20px; display: grid; gap: 12px; max-width: 72ch; }
+.cite-box { display: grid; gap: 8px; }
+.cite-text { font-size: 0.95rem; background: var(--bg); border: 1px solid var(--rule); border-radius: 4px; padding: 10px 12px; user-select: all; }
+.cite-box button.copy { justify-self: start; }
+
+/* Jump links */
+.jump { list-style: none; margin: 0; padding: 20px 0 0; display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: var(--font-display); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase; }
+.jump a { color: var(--muted); text-decoration: none; border-bottom: 2px solid transparent; }
+.jump a:hover { color: var(--heading); border-bottom-color: var(--accent); }
+.masthead.compact { padding-block: 32px 22px; }
+.site-name { margin: 0; }
+.site-name a { color: var(--on-band); text-decoration: none; font-family: var(--font-display); font-weight: 700; font-size: clamp(1.8rem, 4.5vw, 2.6rem); line-height: 1.2; }
+
+/* Boxes (assignments, weeks) */
+.boxes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr)); gap: 14px; }
+.boxes > li { background: var(--surface); border-radius: 6px; padding: 16px 18px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.box-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.box-label { font-family: var(--font-display); font-weight: 600; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-variant-numeric: tabular-nums; }
+.box-title { font-family: var(--font-display); font-weight: 700; font-size: 1.08rem; line-height: 1.3; color: var(--heading); margin: 0; }
+.boxes p { font-size: 0.95rem; line-height: 1.5; }
+.weight { font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; color: var(--on-accent); background: var(--accent); border-radius: 4px; padding: 2px 8px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.acc-body .subgroup:first-child { padding-top: 0; }
+.about.solo { grid-template-columns: minmax(0, 1fr); }
+.portrait { display: block; width: 100%; max-width: 220px; aspect-ratio: 1 / 1; height: auto; border-radius: 50%; object-fit: cover; justify-self: center; border: 4px solid var(--bg); box-shadow: 0 0 0 2px var(--accent); }
+.card .more { font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; }
+.intro-grid { align-items: start; }
+.intro-left { display: grid; gap: 28px; min-width: 0; }
+.mindset { display: flex; align-items: center; gap: 16px; background: var(--surface); color: var(--text); border-left: 4px solid var(--accent); border-radius: 0 6px 6px 0; padding: 16px 20px; max-width: 760px; }
+.mindset-icon { flex: 0 0 auto; width: 40px; height: 40px; color: var(--heading); }
+.mindset-label { font-family: var(--font-display); color: var(--heading); font-weight: 700; }
+.mindset p { font-family: var(--font-body); font-weight: 400; font-size: clamp(1.05rem, 2.2vw, 1.2rem); line-height: 1.45; margin: 0; }
+.wrap.hero-grid { max-width: 1240px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); gap: 36px; align-items: center; }
+.hero-text { display: grid; gap: 10px; min-width: 0; }
+.hero-art { margin: 0; min-width: 0; }
+.hero-art img { display: block; width: 100%; height: auto; border-radius: 6px; box-shadow: 0 6px 24px rgba(0,0,0,0.28); }
+@media (max-width: 900px) { .wrap.hero-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
+p.prose { display: block; }
+.box-title { text-transform: none; letter-spacing: 0; }
+.boxes.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 640px) { .boxes.two { grid-template-columns: minmax(0, 1fr); } }
+.weeklist { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.weeklist > li { background: var(--surface); border-radius: 6px; padding: 14px 18px; display: grid; grid-template-columns: 5em minmax(0, 1fr); gap: 4px 18px; align-items: start; }
+.weeklist .wk { font-family: var(--font-display); font-weight: 700; color: var(--heading); line-height: 1.3; }
+.weeklist .wk span { display: block; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-variant-numeric: tabular-nums; }
+.weeklist .wk-body { display: grid; gap: 4px; min-width: 0; }
+.wk-mats { font-size: 0.92rem; }
+.wk-mats span { font-family: var(--font-display); font-weight: 700; color: var(--heading); }
+.weeklist p { font-size: 0.95rem; line-height: 1.5; }
+@media (max-width: 560px) { .weeklist > li { grid-template-columns: minmax(0, 1fr); } }
+.acc-body .cites { padding-top: 4px; }
+
+/* Footer */
+footer.band { padding-block: 44px; }
+footer .wrap { display: grid; gap: 18px; }
+footer h2 { color: var(--on-band); font-size: 1.5rem; }
+.contact-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.email { font-size: 1.1rem; user-select: all; color: var(--on-band); }
+button.copy {
+  font: inherit; font-family: var(--font-display); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.04em;
+  background: var(--accent); color: var(--on-accent); border: 0; border-radius: 4px; padding: 7px 14px; cursor: pointer;
+}
+.profiles { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 22px; }
+footer a { color: var(--on-band); }
+.disclaimer { color: var(--on-band-muted); font-size: 0.9rem; max-width: 70ch; border-top: 1px solid rgba(255,255,255,0.18); padding-top: 16px; }
+
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; }
+.sec-head > h2 { font-size: 1.75rem; padding-bottom: 10px; position: relative; width: fit-content; }
+.sec-head > h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 3px; background: var(--accent); }
+.to-top { font-size: inherit; white-space: nowrap; }
+</style>
+<style>
+.crumb { margin: 0; padding-top: 24px; font-size: 0.9rem; color: var(--muted); }
+.mat-intro { max-width: 68ch; }
+.canvas-frame :is(h1, h2, h3, h4, h5, h6) { font-family: inherit; font-weight: bold; color: inherit; line-height: 1.3; letter-spacing: normal; text-transform: none; text-wrap: wrap; font-feature-settings: normal; margin: 0.9em 0 0.4em; }
+.canvas-frame h2 { font-size: 1.5em; } .canvas-frame h3 { font-size: 1.25em; } .canvas-frame h4 { font-size: 1.1em; }
+.canvas-frame p { margin: 0 0 12px; }
+.canvas-frame ul, .canvas-frame ol { padding-left: 1.6em; margin: 0 0 12px; }
+.canvas-frame table { border-collapse: collapse; }
+.canvas-frame { background: #ffffff; color: #222222; color-scheme: light; border: 1px solid var(--rule); border-radius: 6px; padding: 22px; max-width: 860px; overflow-x: auto; }
+.reuse { display: grid; gap: 12px; max-width: 860px; }
+.reuse-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.reuse textarea { width: 100%; min-height: 260px; font: 0.85rem/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--text); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 10px; }
+details.code summary { cursor: pointer; font-family: var(--font-display); font-weight: 600; color: var(--heading); }
+details.code[open] summary { margin-bottom: 8px; }
+/* One text size for all running text */
+.small, .facts dd, .dated .what .detail, .dated .when, .posts .date, details.acc > summary .acc-sub, .job .meta, .masthead .lead, .masthead .role,
+.mats p, .status-note, .roles .role-second, .cite-text, .boxes p, .mindset p, .wk-mats, .weeklist p, .obj-list li, .wk-list,
+details.acc.week .acc-body p, .email, .disclaimer, .mat-intro, .prose, .crumb, .card .more { font-size: inherit; }
+</style>
+</head>
+<body>
+<header class="band" id="top">
+  <div class="wrap masthead compact">
+    <p class="site-name"><a href="../index.html">Julie Tedjeske Crane</a></p>
+  </div>
+  <nav class="site" aria-label="Pages">
+    <div class="wrap">
+      <ul>
+        <li><a href="../index.html" class="active">AI and Legal Research Course</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../writing.html">Presentations &amp; Writing</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<main class="wrap">
+  <p class="crumb"><a href="../index.html#materials">AI and Legal Research</a> &rsaquo; Week 2</p>
+  <section aria-labelledby="mat-h">
+    <h2 id="mat-h">Week 2: In-Class Exercise 1, Anonymization Audit</h2>
+    <p class="mat-intro">Students complete this exercise in the course&rsquo;s learning management system during the second class, before the break. The exercise adapts Emily Pavuluri&rsquo;s <a href="https://ailegalresearch.org/exercises/anonymization-audit/">Anonymization Audit</a> from her open teaching project <a href="https://ailegalresearch.org/">Teaching AI-Augmented Legal Research</a> (CC BY-NC 4.0); the fictional client email is hers. Each student works through the email&rsquo;s sixteen facts one at a time, decides whether to leave each fact out, generalize it, or use it as written, and then writes a sanitized prompt for a consumer AI tool without running it. Students may submit the table by pasting it into the learning management system or by filling in the <a href="files/Week2_Anonymization_Audit_Table.docx" download>Word version of the table</a>. The page below shows [time] and [date] wherever a course-specific detail belongs.</p>
+    <div class="canvas-frame">
+<div id="top" style="width: 100%; line-height: 1.55; color: #222222;">
+  <div style="background-color: #001e44; padding: 18px 22px; border-radius: 4px 4px 0 0;">
+    <p style="margin: 0 0 4px 0; letter-spacing: 1px; text-transform: uppercase; color: #9ec9f0;">Week 2 &middot; In-Class Exercise 1</p>
+    <h2 style="margin: 0; color: #ffffff;">Anonymization Audit: Scrub a Client Email Before You Prompt</h2>
+  </div>
+  <div style="height: 4px; background-color: #2b7abc; margin-bottom: 20px;"></div>
+  <div style="background-color: #f0f4f9; border-left: 4px solid #1e407c; padding: 12px 16px; margin: 0 0 20px 0;"><p style="margin: 0;"><strong>Adapted from Emily Pavuluri.</strong> This exercise adapts the <a href="https://ailegalresearch.org/exercises/anonymization-audit/" style="color: #1e407c;">Anonymization Audit</a> from Pavuluri&rsquo;s open teaching project, <em>Teaching AI-Augmented Legal Research</em> (ailegalresearch.org), licensed under CC BY-NC 4.0. The client email is hers.</p></div>
+  <div style="border: 1px solid #d5dfeb; border-radius: 4px; padding: 12px 18px; margin: 0 0 20px 0;"><p style="margin: 0 0 6px 0; font-weight: bold; color: #1e407c;">On this page</p><ul style="margin: 0; padding-left: 0; list-style-type: none;"><li style="margin: 0 0 4px 0;"><a href="#purpose" style="color: #1e407c;">Purpose</a></li><li style="margin: 0 0 4px 0;"><a href="#task" style="color: #1e407c;">Task</a><ul style="margin: 4px 0 4px 0; padding-left: 20px; list-style-type: none;"><li style="margin: 0 0 2px 0;"><a href="#the-rule" style="color: #1e407c;">The Rule</a></li><li style="margin: 0 0 2px 0;"><a href="#the-scenario" style="color: #1e407c;">The Scenario</a></li><li style="margin: 0 0 2px 0;"><a href="#the-client-email" style="color: #1e407c;">The Client Email</a></li><li style="margin: 0 0 2px 0;"><a href="#decide-one-fact-at-a-time" style="color: #1e407c;">1. Decide, one fact at a time</a></li><li style="margin: 0 0 2px 0;"><a href="#write-the-sanitized-prompt" style="color: #1e407c;">2. Write the sanitized prompt</a></li><li style="margin: 0 0 2px 0;"><a href="#submit-your-audit" style="color: #1e407c;">3. Submit your audit</a></li></ul></li><li style="margin: 0 0 4px 0;"><a href="#time" style="color: #1e407c;">Time</a></li><li style="margin: 0 0 4px 0;"><a href="#criteria" style="color: #1e407c;">Criteria</a></li><li style="margin: 0 0 4px 0;"><a href="#source" style="color: #1e407c;">Source</a></li></ul></div>
+  <h2 id="purpose" style="color: #1e407c; margin: 24px 0 8px 0; border-bottom: 1px solid #d5dfeb; padding-bottom: 4px;">Purpose</h2>
+  <p style="margin: 0 0 12px 0;">In this exercise, you practice the judgment that a lawyer exercises before typing anything about a client into an AI tool. You will read a client email, determine which facts the tool needs for initial issue-spotting, decide which facts could identify the client or the employer, and then write the prompt that you would enter. When you decide what the tool needs and rewrite the facts in general terms, you work as a <strong>Strategist</strong> in the <strong>Translator</strong> role. The goal is not a perfect redaction.</p>
+  <p style="margin: 0 0 24px 0; text-align: right;"><a href="#top" style="color: #1e407c;">&uarr; Back to top</a></p>
+  <h2 id="task" style="color: #1e407c; margin: 24px 0 8px 0; border-bottom: 1px solid #d5dfeb; padding-bottom: 4px;">Task</h2>
+  <div style="background-color: #f0f4f9; border-left: 4px solid #1e407c; padding: 14px 16px; margin: 0 0 18px 0;"><h3 id="the-rule" style="margin: 0 0 6px 0; color: #1e407c;">The Rule</h3><p style="margin: 0;">Do not paste the original email, or any part of it, into any AI tool during this exercise. The exercise is the scrubbing, not the answer. The client and her employer are fictional.</p></div>
+  <h3 id="the-scenario" style="color: #2b7abc; margin: 18px 0 6px 0;">The Scenario</h3>
+  <p style="margin: 0 0 12px 0;">You work in a law firm. A potential client has sent the email below. You want to use a generic AI tool to help with initial issue-spotting and to generate a list of possible follow-up questions. The only tool available to you is a public, consumer-style tool. The firm has no data security agreement with the vendor, the vendor may train its model on what you type, and the firm has not approved the tool for client information. Before you use the tool, you must sanitize the email.</p>
+  <div style="border: 1px solid #c9d6e4; border-radius: 4px; margin: 0 0 18px 0;"><h3 id="the-client-email" style="margin: 0; padding: 8px 16px; background-color: #1e407c; color: #ffffff; border-radius: 3px 3px 0 0;">The Client Email</h3><div style="padding: 14px 16px; background-color: #ffffff;"><p style="margin: 0 0 4px 0;"><strong>From:</strong> laylachristinamihuti@veryrealperson.com</p><p style="margin: 0 0 4px 0;"><strong>To:</strong> you@alawfirm.com</p><p style="margin: 0 0 12px 0;"><strong>Subject:</strong> Concerns about workplace harassment and my separation from employment</p><p style="margin: 0 0 10px 0;">Hello,</p><p style="margin: 0 0 10px 0;">I am reaching out because I was advised that I should speak with an attorney as soon as possible. My name is Layla Cristina Mihuti. I live in Indianapolis and worked as a Laboratory Assistant I at Mid America Clinical Laboratories, LLC. I began my employment in early April 2024, and my employment ended in early April 2025 under circumstances that I believe were unfair and harmful. Since leaving the position, I have been dealing with ongoing anxiety, difficulty sleeping, and a sense of embarrassment about how everything unfolded, and I am unsure what options I may have.</p><p style="margin: 0 0 10px 0;">Not long after I started working in the lab, I began to feel isolated from my coworkers. I am a woman working in a department that is largely male, and I was often treated as though I did not fully belong. Coworkers regularly excluded me from informal lunches and breaks, even when plans were openly discussed in front of me. I was not invited to collaborate on larger or more complex projects that were routinely offered to male employees with similar experience, and I was instead assigned repetitive or less visible tasks. During meetings, my input was frequently ignored or spoken over, and when I raised concerns or asked questions, I was sometimes met with dismissive comments or jokes that made me feel embarrassed and undermined. Over time, this behavior escalated into persistent belittling and a work environment where I felt constantly on edge and unwelcome.</p><p style="margin: 0 0 10px 0;">I reported these issues to management multiple times, including specific complaints in February and March 2025. I explained that the exclusion, comments, and unequal treatment were affecting my ability to do my job and my mental health. Despite these reports, no meaningful investigation or corrective action occurred. I was often told that the lab was a &ldquo;high-pressure environment,&rdquo; that I needed to be less sensitive, or that these issues were simply part of workplace dynamics. As the months went on, I began to dread coming into work, avoided shared spaces when possible, and felt increasingly isolated from my team.</p><p style="margin: 0 0 10px 0;">By the beginning of April 2025, the situation had become emotionally overwhelming. I no longer felt comfortable or supported in the lab and did not see a realistic path for improvement. On April 3, 2025, I submitted a resignation because I felt I had no other choice. The following day, April 4, 2025, I was informed that the company was treating my separation as a discharge based on my resignation. This felt confusing and humiliating, especially given that I had tried to raise concerns and resolve the situation internally. I later filed a charge with the EEOC and received a dismissal and notice of rights dated in late 2025. Although the agency stated it could not conclude that a violation occurred, I was issued a right-to-sue notice. I believe I was subjected to a hostile work environment based on my gender and that the emotional impact has been significant. I am seeking guidance on whether I have legal options and what steps I should consider next.</p><p style="margin: 0 0 10px 0;">Thank you for taking the time to read this.</p><p style="margin: 0;">Layla</p></div></div>
+  <p style="margin: 0 0 6px 0;">As you work through the two steps below, keep asking three questions:</p>
+  <ul style="margin: 0 0 12px 0; padding-left: 22px;">
+    <li style="margin: 0 0 4px 0;">What does the AI tool need in order to help with initial issue-spotting?</li>
+    <li style="margin: 0 0 4px 0;">Could this fact, alone or in combination with other facts, be traced back to the client?</li>
+    <li style="margin: 0 0 4px 0;">Am I including this detail because the legal question needs it, or only because it appeared in the email?</li>
+  </ul>
+  <h3 id="decide-one-fact-at-a-time" style="color: #2b7abc; margin: 18px 0 6px 0;">1. Decide, one fact at a time</h3>
+  <p style="margin: 0 0 12px 0;">The email contains sixteen facts. The table below lists them. For each fact, make one of three choices, and then write the wording, if any, that goes into your prompt.</p>
+  <div style="background-color: #f0f4f9; border-left: 4px solid #1e407c; padding: 14px 16px; margin: 0 0 18px 0;"><h3 id="tips" style="margin: 0 0 6px 0; color: #1e407c;">&#128161; Tips</h3><p style="margin: 0 0 10px 0;">This exercise shows you the trade-off at the center of confidentiality work with AI: the more you remove, the safer the prompt becomes, but the less useful the tool&rsquo;s answer may be. Names, addresses, and dates are the easy part. Emotional details, workplace dynamics, timing, job roles, and combinations of ordinary facts can also identify a client, even when no single detail identifies her on its own.</p><p style="margin: 0 0 6px 0;">You have three choices for every fact:</p><ul style="margin: 0 0 10px 0; padding-left: 22px;"><li style="margin: 0 0 4px 0;"><strong>Leave it out</strong> if the fact identifies the client and adds nothing to the legal question.</li><li style="margin: 0 0 4px 0;"><strong>Generalize it</strong> if the fact is sensitive or traceable but the tool needs the point that the fact makes.</li><li style="margin: 0 0 4px 0;"><strong>Use it as written</strong> if the fact is legally useful and does not point to the client.</li></ul><p style="margin: 0;">When you generalize, keep what the legal analysis needs and drop what could identify the client. &ldquo;Laboratory Assistant I at Mid America Clinical Laboratories, LLC in Indianapolis&rdquo; can become &ldquo;an entry-level laboratory employee at a clinical testing company in Indiana.&rdquo; &ldquo;A worker at a company in the Midwest&rdquo; has gone too far, because the tool can no longer place the forum.</p></div>
+  <p style="margin: 0 0 12px 0;">Select the whole table, copy it, and paste it into the Canvas text box below, or use the Word version of the table described in Step 3. Then type your wording in the Prompt column. If you leave a fact out, leave the cell blank. Write your sanitized prompt (Step 2) in the last row.</p>
+  <table style="border-collapse: collapse; width: 100%; margin: 0 0 12px 0;">
+    <tr><th style="width: 30%; border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left; background-color: #f0f4f9; color: #1e407c;" scope="col">Fact</th><th style="width: 35%; border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left; background-color: #f0f4f9; color: #1e407c;" scope="col">Question</th><th style="width: 35%; border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left; background-color: #f0f4f9; color: #1e407c;" scope="col">Prompt</th></tr>
+    <tr><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Her name, Layla Cristina Mihuti</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Should this be included?</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">&nbsp;</td></tr>
+    <tr><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Her email address</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Should this be included?</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">&nbsp;</td></tr>
+    <tr><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Employer: Mid America Clinical Laboratories, LLC</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Should this be included? If so, can it be generalized, and how?</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">&nbsp;</td></tr>
+    <tr><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">City: Indianapolis</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Should this be included? Can it be generalized? If so, how?</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">&nbsp;</td></tr>
+    <tr><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Job title: Laboratory Assistant I</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Should this be included? Can it be generalized? If so, how?</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">&nbsp;</td></tr>
+    <tr><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Started early April 2024</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Should this be included? Can it be generalized?</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">&nbsp;</td></tr>
+    <tr><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">A woman in a largely male department</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Should this be included as written?</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">&nbsp;</td></tr>
+    <tr><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Excluded from coworker lunches and breaks</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Should this be included? Can it be generalized?</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">&nbsp;</td></tr>
+    <tr><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Passed over for larger projects that went to male coworkers with similar experience; given repetitive tasks</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Which part of this fact matters? Can it be generalized?</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">&nbsp;</td></tr>
+    <tr><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Ignored or spoken over in meetings; dismissive comments and jokes</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Should this be included as written, or generalized?</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">&nbsp;</td></tr>
+    <tr><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Complaints to management in February and March 2025</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Can this be generalized? If so, how?</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">&nbsp;</td></tr>
+    <tr><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Told to be &ldquo;less sensitive&rdquo;; no investigation</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Should the quoted phrase be included, or generalized?</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">&nbsp;</td></tr>
+    <tr><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Anxiety, difficulty sleeping, embarrassment</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Should this be included? Can it be generalized?</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">&nbsp;</td></tr>
+    <tr><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Resigned April 3, 2025</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Can this be generalized? If so, how?</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">&nbsp;</td></tr>
+    <tr><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Treated as a discharge April 4, 2025</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Can this be generalized? If so, how?</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">&nbsp;</td></tr>
+    <tr><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">EEOC dismissal and right-to-sue notice, late 2025</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Should this be included? Can it be generalized?</td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">&nbsp;</td></tr>
+    <tr><td style="border: 1px solid #d5dfeb; padding: 8px 10px; background-color: #f0f4f9; color: #1e407c;" colspan="2"><strong>My sanitized prompt (Step 2)</strong></td><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">&nbsp;</td></tr>
+  </table>
+  <p style="margin: 0 0 12px 0;">Err on the side of leaving a fact out. You are doing a preliminary analysis, and traditional research in a legal research platform will narrow the scope later. This exercise assumes that a consumer AI tool is the only tool you have, but in practice you should avoid putting client information into a consumer tool at all; use an enterprise or legal platform that your organization has approved.</p>
+  <h3 id="write-the-sanitized-prompt" style="color: #2b7abc; margin: 18px 0 6px 0;">2. Write the sanitized prompt</h3>
+  <p style="margin: 0 0 12px 0;">Assemble your wording from Step 1 into the prompt that you would enter into the consumer AI tool, and write it in the last row of the table. State the jurisdiction in general terms if the analysis needs it, and tell the tool what you want back: a list of possible legal issues and a list of follow-up questions for the client. You may fix the wording of the sanitized prompt for better flow and clarity; the prompt does not need to be a cut-and-paste of the components from the table. Write the prompt, but do not run it.</p>
+  <h3 id="submit-your-audit" style="color: #2b7abc; margin: 18px 0 6px 0;">3. Submit your audit</h3>
+  <p style="margin: 0 0 12px 0;">Submit the completed table: your wording for each of the sixteen facts from Step 1, and your sanitized prompt from Step 2 in the last row. You may submit it in either of two ways. Paste the table into the Canvas text box below and type in the Prompt column, or download <a href="https://jmtedjeske-crane.github.io/materials/files/Week2_Anonymization_Audit_Table.docx" style="color: #1e407c;">the Word version of the table</a>, fill it in, and upload the file.</p>
+  <p style="margin: 0 0 24px 0; text-align: right;"><a href="#top" style="color: #1e407c;">&uarr; Back to top</a></p>
+  <h2 id="time" style="color: #1e407c; margin: 24px 0 8px 0; border-bottom: 1px solid #d5dfeb; padding-bottom: 4px;">Time</h2>
+  <p style="margin: 0 0 6px 0;"><strong>Read the email:</strong> 2 minutes.</p>
+  <p style="margin: 0 0 6px 0;"><strong>Decide on the sixteen facts (Step 1):</strong> 8 minutes.</p>
+  <p style="margin: 0 0 6px 0;"><strong>Assemble and submit the sanitized prompt (Steps 2 and 3):</strong> 5 minutes.</p>
+  <p style="margin: 0 0 20px 0;"><strong>Total:</strong> 15 minutes, working alone.</p>
+  <p style="margin: 0 0 24px 0; text-align: right;"><a href="#top" style="color: #1e407c;">&uarr; Back to top</a></p>
+  <h2 id="criteria" style="color: #1e407c; margin: 24px 0 8px 0; border-bottom: 1px solid #d5dfeb; padding-bottom: 4px;">Criteria</h2>
+  <p style="margin: 0 0 12px 0;">This exercise counts toward the In-Class Work component of your grade and toward class participation. I grade it pass/fail. A good faith effort is all that I require. Many of the sorting decisions are judgment calls, so I am looking for your reasoning, not for one right answer.</p>
+  <table style="border-collapse: collapse; width: 100%; margin: 12px 0 0 0;">
+    <tr><th style="width: 30%; border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left; background-color: #f0f4f9; color: #1e407c;" scope="row">Turn-in window</th><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">You may turn in this assignment until <strong>[time] on [date]</strong>.</td></tr>
+    <tr><th style="width: 30%; border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left; background-color: #f0f4f9; color: #1e407c;" scope="row">If you miss class</th><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">You still make up this work, even if your absence is excused. We will work out a deadline.</td></tr>
+    <tr><th style="width: 30%; border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left; background-color: #f0f4f9; color: #1e407c;" scope="row">Scoring</th><td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Pass = 95%. I score the In-Class Work component as a whole, not assignment by assignment. Reductions are expected to be rare, and you will usually, though not always, receive a warning first.</td></tr>
+  </table>
+  <p style="margin: 0 0 24px 0; text-align: right;"><a href="#top" style="color: #1e407c;">&uarr; Back to top</a></p>
+  <h2 id="source" style="color: #1e407c; margin: 24px 0 8px 0; border-bottom: 1px solid #d5dfeb; padding-bottom: 4px;">Source</h2>
+  <p style="margin: 0 0 12px 0;">The client email comes from Emily Pavuluri, <em>Anonymization Audit: Student Information Packet</em>, in <em>Teaching AI-Augmented Legal Research</em> (Version 0.1, May 2026), <a href="https://ailegalresearch.org/exercises/anonymization-audit/" style="color: #1e407c;">https://ailegalresearch.org/exercises/anonymization-audit/</a>, licensed under CC BY-NC 4.0. Pavuluri wrote the email for LAW 7015 at Vanderbilt Law School. The fact-by-fact method follows Section IV of <a href="https://jmtedjeske-crane.github.io/materials/constructing-the-prompt.html" style="color: #1e407c;">Week 1: Constructing the Prompt</a>. Julie Tedjeske Crane adapted the instructions and the timing for her course.</p>
+  <p style="margin: 0 0 24px 0; text-align: right;"><a href="#top" style="color: #1e407c;">&uarr; Back to top</a></p>
+</div>
+    </div>
+    <div class="reuse">
+      <div class="sec-head"><h3>Use This Page in Your Learning Management System</h3><a class="to-top" href="#top">Back to top</a></div>
+      <p class="mat-intro">Click the button to copy the page&rsquo;s HTML code. In Canvas, Blackboard, Moodle, D2L Brightspace, or another learning management system, open a page or assignment, switch the editor to HTML view, and paste the code. Then replace the [time] and [date] placeholders, and adjust the grading details to fit your course. The Word version of the table links to this site; download it and attach your own copy if you prefer. Keep the attribution to Emily Pavuluri, because the client email and the exercise design are hers.</p>
+      <div class="reuse-row"><button class="copy" id="copy-canvas" type="button">Copy HTML code</button></div>
+      <details class="code"><summary>Show the HTML code</summary>
+        <textarea id="canvas-code" readonly aria-label="HTML code for this page">&lt;div id=&quot;top&quot; style=&quot;width: 100%; line-height: 1.55; color: #222222;&quot;&gt;
+  &lt;div style=&quot;background-color: #001e44; padding: 18px 22px; border-radius: 4px 4px 0 0;&quot;&gt;
+    &lt;p style=&quot;margin: 0 0 4px 0; letter-spacing: 1px; text-transform: uppercase; color: #9ec9f0;&quot;&gt;Week 2 &amp;middot; In-Class Exercise 1&lt;/p&gt;
+    &lt;h2 style=&quot;margin: 0; color: #ffffff;&quot;&gt;Anonymization Audit: Scrub a Client Email Before You Prompt&lt;/h2&gt;
+  &lt;/div&gt;
+  &lt;div style=&quot;height: 4px; background-color: #2b7abc; margin-bottom: 20px;&quot;&gt;&lt;/div&gt;
+  &lt;div style=&quot;background-color: #f0f4f9; border-left: 4px solid #1e407c; padding: 12px 16px; margin: 0 0 20px 0;&quot;&gt;&lt;p style=&quot;margin: 0;&quot;&gt;&lt;strong&gt;Adapted from Emily Pavuluri.&lt;/strong&gt; This exercise adapts the &lt;a href=&quot;https://ailegalresearch.org/exercises/anonymization-audit/&quot; style=&quot;color: #1e407c;&quot;&gt;Anonymization Audit&lt;/a&gt; from Pavuluri&amp;rsquo;s open teaching project, &lt;em&gt;Teaching AI-Augmented Legal Research&lt;/em&gt; (ailegalresearch.org), licensed under CC BY-NC 4.0. The client email is hers.&lt;/p&gt;&lt;/div&gt;
+  &lt;div style=&quot;border: 1px solid #d5dfeb; border-radius: 4px; padding: 12px 18px; margin: 0 0 20px 0;&quot;&gt;&lt;p style=&quot;margin: 0 0 6px 0; font-weight: bold; color: #1e407c;&quot;&gt;On this page&lt;/p&gt;&lt;ul style=&quot;margin: 0; padding-left: 0; list-style-type: none;&quot;&gt;&lt;li style=&quot;margin: 0 0 4px 0;&quot;&gt;&lt;a href=&quot;#purpose&quot; style=&quot;color: #1e407c;&quot;&gt;Purpose&lt;/a&gt;&lt;/li&gt;&lt;li style=&quot;margin: 0 0 4px 0;&quot;&gt;&lt;a href=&quot;#task&quot; style=&quot;color: #1e407c;&quot;&gt;Task&lt;/a&gt;&lt;ul style=&quot;margin: 4px 0 4px 0; padding-left: 20px; list-style-type: none;&quot;&gt;&lt;li style=&quot;margin: 0 0 2px 0;&quot;&gt;&lt;a href=&quot;#the-rule&quot; style=&quot;color: #1e407c;&quot;&gt;The Rule&lt;/a&gt;&lt;/li&gt;&lt;li style=&quot;margin: 0 0 2px 0;&quot;&gt;&lt;a href=&quot;#the-scenario&quot; style=&quot;color: #1e407c;&quot;&gt;The Scenario&lt;/a&gt;&lt;/li&gt;&lt;li style=&quot;margin: 0 0 2px 0;&quot;&gt;&lt;a href=&quot;#the-client-email&quot; style=&quot;color: #1e407c;&quot;&gt;The Client Email&lt;/a&gt;&lt;/li&gt;&lt;li style=&quot;margin: 0 0 2px 0;&quot;&gt;&lt;a href=&quot;#decide-one-fact-at-a-time&quot; style=&quot;color: #1e407c;&quot;&gt;1. Decide, one fact at a time&lt;/a&gt;&lt;/li&gt;&lt;li style=&quot;margin: 0 0 2px 0;&quot;&gt;&lt;a href=&quot;#write-the-sanitized-prompt&quot; style=&quot;color: #1e407c;&quot;&gt;2. Write the sanitized prompt&lt;/a&gt;&lt;/li&gt;&lt;li style=&quot;margin: 0 0 2px 0;&quot;&gt;&lt;a href=&quot;#submit-your-audit&quot; style=&quot;color: #1e407c;&quot;&gt;3. Submit your audit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li style=&quot;margin: 0 0 4px 0;&quot;&gt;&lt;a href=&quot;#time&quot; style=&quot;color: #1e407c;&quot;&gt;Time&lt;/a&gt;&lt;/li&gt;&lt;li style=&quot;margin: 0 0 4px 0;&quot;&gt;&lt;a href=&quot;#criteria&quot; style=&quot;color: #1e407c;&quot;&gt;Criteria&lt;/a&gt;&lt;/li&gt;&lt;li style=&quot;margin: 0 0 4px 0;&quot;&gt;&lt;a href=&quot;#source&quot; style=&quot;color: #1e407c;&quot;&gt;Source&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+  &lt;h2 id=&quot;purpose&quot; style=&quot;color: #1e407c; margin: 24px 0 8px 0; border-bottom: 1px solid #d5dfeb; padding-bottom: 4px;&quot;&gt;Purpose&lt;/h2&gt;
+  &lt;p style=&quot;margin: 0 0 12px 0;&quot;&gt;In this exercise, you practice the judgment that a lawyer exercises before typing anything about a client into an AI tool. You will read a client email, determine which facts the tool needs for initial issue-spotting, decide which facts could identify the client or the employer, and then write the prompt that you would enter. When you decide what the tool needs and rewrite the facts in general terms, you work as a &lt;strong&gt;Strategist&lt;/strong&gt; in the &lt;strong&gt;Translator&lt;/strong&gt; role. The goal is not a perfect redaction.&lt;/p&gt;
+  &lt;p style=&quot;margin: 0 0 24px 0; text-align: right;&quot;&gt;&lt;a href=&quot;#top&quot; style=&quot;color: #1e407c;&quot;&gt;&amp;uarr; Back to top&lt;/a&gt;&lt;/p&gt;
+  &lt;h2 id=&quot;task&quot; style=&quot;color: #1e407c; margin: 24px 0 8px 0; border-bottom: 1px solid #d5dfeb; padding-bottom: 4px;&quot;&gt;Task&lt;/h2&gt;
+  &lt;div style=&quot;background-color: #f0f4f9; border-left: 4px solid #1e407c; padding: 14px 16px; margin: 0 0 18px 0;&quot;&gt;&lt;h3 id=&quot;the-rule&quot; style=&quot;margin: 0 0 6px 0; color: #1e407c;&quot;&gt;The Rule&lt;/h3&gt;&lt;p style=&quot;margin: 0;&quot;&gt;Do not paste the original email, or any part of it, into any AI tool during this exercise. The exercise is the scrubbing, not the answer. The client and her employer are fictional.&lt;/p&gt;&lt;/div&gt;
+  &lt;h3 id=&quot;the-scenario&quot; style=&quot;color: #2b7abc; margin: 18px 0 6px 0;&quot;&gt;The Scenario&lt;/h3&gt;
+  &lt;p style=&quot;margin: 0 0 12px 0;&quot;&gt;You work in a law firm. A potential client has sent the email below. You want to use a generic AI tool to help with initial issue-spotting and to generate a list of possible follow-up questions. The only tool available to you is a public, consumer-style tool. The firm has no data security agreement with the vendor, the vendor may train its model on what you type, and the firm has not approved the tool for client information. Before you use the tool, you must sanitize the email.&lt;/p&gt;
+  &lt;div style=&quot;border: 1px solid #c9d6e4; border-radius: 4px; margin: 0 0 18px 0;&quot;&gt;&lt;h3 id=&quot;the-client-email&quot; style=&quot;margin: 0; padding: 8px 16px; background-color: #1e407c; color: #ffffff; border-radius: 3px 3px 0 0;&quot;&gt;The Client Email&lt;/h3&gt;&lt;div style=&quot;padding: 14px 16px; background-color: #ffffff;&quot;&gt;&lt;p style=&quot;margin: 0 0 4px 0;&quot;&gt;&lt;strong&gt;From:&lt;/strong&gt; laylachristinamihuti@veryrealperson.com&lt;/p&gt;&lt;p style=&quot;margin: 0 0 4px 0;&quot;&gt;&lt;strong&gt;To:&lt;/strong&gt; you@alawfirm.com&lt;/p&gt;&lt;p style=&quot;margin: 0 0 12px 0;&quot;&gt;&lt;strong&gt;Subject:&lt;/strong&gt; Concerns about workplace harassment and my separation from employment&lt;/p&gt;&lt;p style=&quot;margin: 0 0 10px 0;&quot;&gt;Hello,&lt;/p&gt;&lt;p style=&quot;margin: 0 0 10px 0;&quot;&gt;I am reaching out because I was advised that I should speak with an attorney as soon as possible. My name is Layla Cristina Mihuti. I live in Indianapolis and worked as a Laboratory Assistant I at Mid America Clinical Laboratories, LLC. I began my employment in early April 2024, and my employment ended in early April 2025 under circumstances that I believe were unfair and harmful. Since leaving the position, I have been dealing with ongoing anxiety, difficulty sleeping, and a sense of embarrassment about how everything unfolded, and I am unsure what options I may have.&lt;/p&gt;&lt;p style=&quot;margin: 0 0 10px 0;&quot;&gt;Not long after I started working in the lab, I began to feel isolated from my coworkers. I am a woman working in a department that is largely male, and I was often treated as though I did not fully belong. Coworkers regularly excluded me from informal lunches and breaks, even when plans were openly discussed in front of me. I was not invited to collaborate on larger or more complex projects that were routinely offered to male employees with similar experience, and I was instead assigned repetitive or less visible tasks. During meetings, my input was frequently ignored or spoken over, and when I raised concerns or asked questions, I was sometimes met with dismissive comments or jokes that made me feel embarrassed and undermined. Over time, this behavior escalated into persistent belittling and a work environment where I felt constantly on edge and unwelcome.&lt;/p&gt;&lt;p style=&quot;margin: 0 0 10px 0;&quot;&gt;I reported these issues to management multiple times, including specific complaints in February and March 2025. I explained that the exclusion, comments, and unequal treatment were affecting my ability to do my job and my mental health. Despite these reports, no meaningful investigation or corrective action occurred. I was often told that the lab was a &amp;ldquo;high-pressure environment,&amp;rdquo; that I needed to be less sensitive, or that these issues were simply part of workplace dynamics. As the months went on, I began to dread coming into work, avoided shared spaces when possible, and felt increasingly isolated from my team.&lt;/p&gt;&lt;p style=&quot;margin: 0 0 10px 0;&quot;&gt;By the beginning of April 2025, the situation had become emotionally overwhelming. I no longer felt comfortable or supported in the lab and did not see a realistic path for improvement. On April 3, 2025, I submitted a resignation because I felt I had no other choice. The following day, April 4, 2025, I was informed that the company was treating my separation as a discharge based on my resignation. This felt confusing and humiliating, especially given that I had tried to raise concerns and resolve the situation internally. I later filed a charge with the EEOC and received a dismissal and notice of rights dated in late 2025. Although the agency stated it could not conclude that a violation occurred, I was issued a right-to-sue notice. I believe I was subjected to a hostile work environment based on my gender and that the emotional impact has been significant. I am seeking guidance on whether I have legal options and what steps I should consider next.&lt;/p&gt;&lt;p style=&quot;margin: 0 0 10px 0;&quot;&gt;Thank you for taking the time to read this.&lt;/p&gt;&lt;p style=&quot;margin: 0;&quot;&gt;Layla&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;As you work through the two steps below, keep asking three questions:&lt;/p&gt;
+  &lt;ul style=&quot;margin: 0 0 12px 0; padding-left: 22px;&quot;&gt;
+    &lt;li style=&quot;margin: 0 0 4px 0;&quot;&gt;What does the AI tool need in order to help with initial issue-spotting?&lt;/li&gt;
+    &lt;li style=&quot;margin: 0 0 4px 0;&quot;&gt;Could this fact, alone or in combination with other facts, be traced back to the client?&lt;/li&gt;
+    &lt;li style=&quot;margin: 0 0 4px 0;&quot;&gt;Am I including this detail because the legal question needs it, or only because it appeared in the email?&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h3 id=&quot;decide-one-fact-at-a-time&quot; style=&quot;color: #2b7abc; margin: 18px 0 6px 0;&quot;&gt;1. Decide, one fact at a time&lt;/h3&gt;
+  &lt;p style=&quot;margin: 0 0 12px 0;&quot;&gt;The email contains sixteen facts. The table below lists them. For each fact, make one of three choices, and then write the wording, if any, that goes into your prompt.&lt;/p&gt;
+  &lt;div style=&quot;background-color: #f0f4f9; border-left: 4px solid #1e407c; padding: 14px 16px; margin: 0 0 18px 0;&quot;&gt;&lt;h3 id=&quot;tips&quot; style=&quot;margin: 0 0 6px 0; color: #1e407c;&quot;&gt;&amp;#128161; Tips&lt;/h3&gt;&lt;p style=&quot;margin: 0 0 10px 0;&quot;&gt;This exercise shows you the trade-off at the center of confidentiality work with AI: the more you remove, the safer the prompt becomes, but the less useful the tool&amp;rsquo;s answer may be. Names, addresses, and dates are the easy part. Emotional details, workplace dynamics, timing, job roles, and combinations of ordinary facts can also identify a client, even when no single detail identifies her on its own.&lt;/p&gt;&lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;You have three choices for every fact:&lt;/p&gt;&lt;ul style=&quot;margin: 0 0 10px 0; padding-left: 22px;&quot;&gt;&lt;li style=&quot;margin: 0 0 4px 0;&quot;&gt;&lt;strong&gt;Leave it out&lt;/strong&gt; if the fact identifies the client and adds nothing to the legal question.&lt;/li&gt;&lt;li style=&quot;margin: 0 0 4px 0;&quot;&gt;&lt;strong&gt;Generalize it&lt;/strong&gt; if the fact is sensitive or traceable but the tool needs the point that the fact makes.&lt;/li&gt;&lt;li style=&quot;margin: 0 0 4px 0;&quot;&gt;&lt;strong&gt;Use it as written&lt;/strong&gt; if the fact is legally useful and does not point to the client.&lt;/li&gt;&lt;/ul&gt;&lt;p style=&quot;margin: 0;&quot;&gt;When you generalize, keep what the legal analysis needs and drop what could identify the client. &amp;ldquo;Laboratory Assistant I at Mid America Clinical Laboratories, LLC in Indianapolis&amp;rdquo; can become &amp;ldquo;an entry-level laboratory employee at a clinical testing company in Indiana.&amp;rdquo; &amp;ldquo;A worker at a company in the Midwest&amp;rdquo; has gone too far, because the tool can no longer place the forum.&lt;/p&gt;&lt;/div&gt;
+  &lt;p style=&quot;margin: 0 0 12px 0;&quot;&gt;Select the whole table, copy it, and paste it into the Canvas text box below, or use the Word version of the table described in Step 3. Then type your wording in the Prompt column. If you leave a fact out, leave the cell blank. Write your sanitized prompt (Step 2) in the last row.&lt;/p&gt;
+  &lt;table style=&quot;border-collapse: collapse; width: 100%; margin: 0 0 12px 0;&quot;&gt;
+    &lt;tr&gt;&lt;th style=&quot;width: 30%; border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left; background-color: #f0f4f9; color: #1e407c;&quot; scope=&quot;col&quot;&gt;Fact&lt;/th&gt;&lt;th style=&quot;width: 35%; border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left; background-color: #f0f4f9; color: #1e407c;&quot; scope=&quot;col&quot;&gt;Question&lt;/th&gt;&lt;th style=&quot;width: 35%; border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left; background-color: #f0f4f9; color: #1e407c;&quot; scope=&quot;col&quot;&gt;Prompt&lt;/th&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Her name, Layla Cristina Mihuti&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Should this be included?&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Her email address&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Should this be included?&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Employer: Mid America Clinical Laboratories, LLC&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Should this be included? If so, can it be generalized, and how?&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;City: Indianapolis&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Should this be included? Can it be generalized? If so, how?&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Job title: Laboratory Assistant I&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Should this be included? Can it be generalized? If so, how?&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Started early April 2024&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Should this be included? Can it be generalized?&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;A woman in a largely male department&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Should this be included as written?&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Excluded from coworker lunches and breaks&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Should this be included? Can it be generalized?&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Passed over for larger projects that went to male coworkers with similar experience; given repetitive tasks&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Which part of this fact matters? Can it be generalized?&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Ignored or spoken over in meetings; dismissive comments and jokes&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Should this be included as written, or generalized?&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Complaints to management in February and March 2025&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Can this be generalized? If so, how?&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Told to be &amp;ldquo;less sensitive&amp;rdquo;; no investigation&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Should the quoted phrase be included, or generalized?&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Anxiety, difficulty sleeping, embarrassment&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Should this be included? Can it be generalized?&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Resigned April 3, 2025&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Can this be generalized? If so, how?&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Treated as a discharge April 4, 2025&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Can this be generalized? If so, how?&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;EEOC dismissal and right-to-sue notice, late 2025&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Should this be included? Can it be generalized?&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px; background-color: #f0f4f9; color: #1e407c;&quot; colspan=&quot;2&quot;&gt;&lt;strong&gt;My sanitized prompt (Step 2)&lt;/strong&gt;&lt;/td&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+  &lt;/table&gt;
+  &lt;p style=&quot;margin: 0 0 12px 0;&quot;&gt;Err on the side of leaving a fact out. You are doing a preliminary analysis, and traditional research in a legal research platform will narrow the scope later. This exercise assumes that a consumer AI tool is the only tool you have, but in practice you should avoid putting client information into a consumer tool at all; use an enterprise or legal platform that your organization has approved.&lt;/p&gt;
+  &lt;h3 id=&quot;write-the-sanitized-prompt&quot; style=&quot;color: #2b7abc; margin: 18px 0 6px 0;&quot;&gt;2. Write the sanitized prompt&lt;/h3&gt;
+  &lt;p style=&quot;margin: 0 0 12px 0;&quot;&gt;Assemble your wording from Step 1 into the prompt that you would enter into the consumer AI tool, and write it in the last row of the table. State the jurisdiction in general terms if the analysis needs it, and tell the tool what you want back: a list of possible legal issues and a list of follow-up questions for the client. You may fix the wording of the sanitized prompt for better flow and clarity; the prompt does not need to be a cut-and-paste of the components from the table. Write the prompt, but do not run it.&lt;/p&gt;
+  &lt;h3 id=&quot;submit-your-audit&quot; style=&quot;color: #2b7abc; margin: 18px 0 6px 0;&quot;&gt;3. Submit your audit&lt;/h3&gt;
+  &lt;p style=&quot;margin: 0 0 12px 0;&quot;&gt;Submit the completed table: your wording for each of the sixteen facts from Step 1, and your sanitized prompt from Step 2 in the last row. You may submit it in either of two ways. Paste the table into the Canvas text box below and type in the Prompt column, or download &lt;a href=&quot;https://jmtedjeske-crane.github.io/materials/files/Week2_Anonymization_Audit_Table.docx&quot; style=&quot;color: #1e407c;&quot;&gt;the Word version of the table&lt;/a&gt;, fill it in, and upload the file.&lt;/p&gt;
+  &lt;p style=&quot;margin: 0 0 24px 0; text-align: right;&quot;&gt;&lt;a href=&quot;#top&quot; style=&quot;color: #1e407c;&quot;&gt;&amp;uarr; Back to top&lt;/a&gt;&lt;/p&gt;
+  &lt;h2 id=&quot;time&quot; style=&quot;color: #1e407c; margin: 24px 0 8px 0; border-bottom: 1px solid #d5dfeb; padding-bottom: 4px;&quot;&gt;Time&lt;/h2&gt;
+  &lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;&lt;strong&gt;Read the email:&lt;/strong&gt; 2 minutes.&lt;/p&gt;
+  &lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;&lt;strong&gt;Decide on the sixteen facts (Step 1):&lt;/strong&gt; 8 minutes.&lt;/p&gt;
+  &lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;&lt;strong&gt;Assemble and submit the sanitized prompt (Steps 2 and 3):&lt;/strong&gt; 5 minutes.&lt;/p&gt;
+  &lt;p style=&quot;margin: 0 0 20px 0;&quot;&gt;&lt;strong&gt;Total:&lt;/strong&gt; 15 minutes, working alone.&lt;/p&gt;
+  &lt;p style=&quot;margin: 0 0 24px 0; text-align: right;&quot;&gt;&lt;a href=&quot;#top&quot; style=&quot;color: #1e407c;&quot;&gt;&amp;uarr; Back to top&lt;/a&gt;&lt;/p&gt;
+  &lt;h2 id=&quot;criteria&quot; style=&quot;color: #1e407c; margin: 24px 0 8px 0; border-bottom: 1px solid #d5dfeb; padding-bottom: 4px;&quot;&gt;Criteria&lt;/h2&gt;
+  &lt;p style=&quot;margin: 0 0 12px 0;&quot;&gt;This exercise counts toward the In-Class Work component of your grade and toward class participation. I grade it pass/fail. A good faith effort is all that I require. Many of the sorting decisions are judgment calls, so I am looking for your reasoning, not for one right answer.&lt;/p&gt;
+  &lt;table style=&quot;border-collapse: collapse; width: 100%; margin: 12px 0 0 0;&quot;&gt;
+    &lt;tr&gt;&lt;th style=&quot;width: 30%; border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left; background-color: #f0f4f9; color: #1e407c;&quot; scope=&quot;row&quot;&gt;Turn-in window&lt;/th&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;You may turn in this assignment until &lt;strong&gt;[time] on [date]&lt;/strong&gt;.&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th style=&quot;width: 30%; border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left; background-color: #f0f4f9; color: #1e407c;&quot; scope=&quot;row&quot;&gt;If you miss class&lt;/th&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;You still make up this work, even if your absence is excused. We will work out a deadline.&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th style=&quot;width: 30%; border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left; background-color: #f0f4f9; color: #1e407c;&quot; scope=&quot;row&quot;&gt;Scoring&lt;/th&gt;&lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Pass = 95%. I score the In-Class Work component as a whole, not assignment by assignment. Reductions are expected to be rare, and you will usually, though not always, receive a warning first.&lt;/td&gt;&lt;/tr&gt;
+  &lt;/table&gt;
+  &lt;p style=&quot;margin: 0 0 24px 0; text-align: right;&quot;&gt;&lt;a href=&quot;#top&quot; style=&quot;color: #1e407c;&quot;&gt;&amp;uarr; Back to top&lt;/a&gt;&lt;/p&gt;
+  &lt;h2 id=&quot;source&quot; style=&quot;color: #1e407c; margin: 24px 0 8px 0; border-bottom: 1px solid #d5dfeb; padding-bottom: 4px;&quot;&gt;Source&lt;/h2&gt;
+  &lt;p style=&quot;margin: 0 0 12px 0;&quot;&gt;The client email comes from Emily Pavuluri, &lt;em&gt;Anonymization Audit: Student Information Packet&lt;/em&gt;, in &lt;em&gt;Teaching AI-Augmented Legal Research&lt;/em&gt; (Version 0.1, May 2026), &lt;a href=&quot;https://ailegalresearch.org/exercises/anonymization-audit/&quot; style=&quot;color: #1e407c;&quot;&gt;https://ailegalresearch.org/exercises/anonymization-audit/&lt;/a&gt;, licensed under CC BY-NC 4.0. Pavuluri wrote the email for LAW 7015 at Vanderbilt Law School. The fact-by-fact method follows Section IV of &lt;a href=&quot;https://jmtedjeske-crane.github.io/materials/constructing-the-prompt.html&quot; style=&quot;color: #1e407c;&quot;&gt;Week 1: Constructing the Prompt&lt;/a&gt;. Julie Tedjeske Crane adapted the instructions and the timing for her course.&lt;/p&gt;
+  &lt;p style=&quot;margin: 0 0 24px 0; text-align: right;&quot;&gt;&lt;a href=&quot;#top&quot; style=&quot;color: #1e407c;&quot;&gt;&amp;uarr; Back to top&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;</textarea>
+      </details>
+    </div>
+    <div class="license">
+      <div class="sec-head"><h3>License</h3><a class="to-top" href="#top">Back to top</a></div>
+      <p>Julie Tedjeske Crane releases this course-related material under the <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)</a>. You may adapt and republish the material for noncommercial educational use, as long as you credit Julie and Emily Pavuluri.</p>
+      <p class="small">Suggested citation: Julie Tedjeske Crane, <i>Week 2: In-Class Exercise 1, Anonymization Audit</i>, <i>in</i> <i>AI and Legal Research: Teaching Materials</i> (2026), https://jmtedjeske-crane.github.io/materials/week-2-anonymization-audit.html (licensed under CC BY-NC 4.0), adapting Emily Pavuluri, <i>Anonymization Audit</i>, <i>in</i> <i>Teaching AI-Augmented Legal Research</i> (Version 0.1, May 2026), https://ailegalresearch.org/exercises/anonymization-audit/ (licensed under CC BY-NC 4.0).</p>
+    </div>
+  </section>
+</main>
+
+<footer class="band" id="contact">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <div class="contact-row">
+      <span class="email" id="email" data-u="eksejdetmj" data-d="moc.liamg"></span><noscript><span class="email">jmtedjeske [at] gmail [dot] com</span></noscript>
+      <button class="copy" id="copy-email" type="button">Copy email address</button>
+    </div>
+    <ul class="profiles" aria-label="Profiles">
+      <li><a href="https://dickinsonlaw.psu.edu/directory/julie-tedjeske-crane">Penn State Dickinson Law profile</a></li>
+      <li><a href="https://www.linkedin.com/in/julie-tedjeske-crane-65117813/">LinkedIn</a></li>
+      <li><a href="https://ripslawlibrarian.wordpress.com/author/julietedjeskecrane/">RIPS Law Librarian Blog posts</a></li>
+    </ul>
+    <p class="disclaimer">This site is Julie Tedjeske Crane&rsquo;s personal project. It is not an official publication of Penn State Dickinson Law, and the views expressed on this site are Julie&rsquo;s own. The teaching materials on this site are for educational use. The materials do not provide legal advice, and instructors should adapt the materials to their own institutions&rsquo; policies. Teaching materials &copy; 2026 Julie Tedjeske Crane, licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var em = document.getElementById('email');
+  if (em && em.dataset.u) {
+    em.textContent = em.dataset.u.split('').reverse().join('') + '\u0040' + em.dataset.d.split('').reverse().join('');
+  }
+  function wireCopy(btnId, srcId, label) {
+    var btn = document.getElementById(btnId), src = document.getElementById(srcId);
+    if (!btn || !src) return;
+    btn.addEventListener('click', function () {
+      var text = src.textContent.trim();
+      function selectIt() {
+        var r = document.createRange(); r.selectNodeContents(src);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        btn.textContent = (/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent) ? 'Selected: press Cmd+C' : 'Selected: press Ctrl+C');
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { btn.textContent = 'Copied'; }, selectIt);
+      } else { selectIt(); }
+      setTimeout(function () { if (!/^Selected/.test(btn.textContent)) btn.textContent = label; }, 2500); setTimeout(function () { if (/^Selected/.test(btn.textContent)) btn.textContent = label; }, 6000);
+    });
+  }
+  wireCopy('copy-email', 'email', 'Copy email address');
+  wireCopy('copy-cite', 'cite', 'Copy citation');
+})();
+</script>
+<script>
+(function () {
+  var btn = document.getElementById('copy-canvas'), src = document.getElementById('canvas-code');
+  if (!btn || !src) return;
+  btn.addEventListener('click', function () {
+    function selectIt() { var d = src.closest('details'); if (d) d.open = true; src.focus(); src.select(); btn.textContent = (/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent) ? 'Selected: press Cmd+C' : 'Selected: press Ctrl+C'); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(src.value).then(function () { btn.textContent = 'Copied'; }, selectIt);
+    } else { selectIt(); }
+    setTimeout(function () { if (!/^Selected/.test(btn.textContent)) btn.textContent = 'Copy HTML code'; }, 2500); setTimeout(function () { if (/^Selected/.test(btn.textContent)) btn.textContent = 'Copy HTML code'; }, 6000);
+  });
+})();
+</script>
+</body>
+</html>
