@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Week 3: In-Class Exercise, Ostrander v. Vance Brief | AI and Legal Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700&family=Lato:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+body { margin: 0; }
+img { max-width: 100%; }
+/* Layout: teal header band with name, one-line tagline, and anchor nav; one reading column of sections; long lists sit in accordions; teal footer with contact, profile links, and disclaimer. */
+:root {
+  --bg: #F7F8F9;
+  --surface: #EEF0F2;
+  --band: #1F5F63;
+  --on-band: #F7F8F9;
+  --on-band-muted: #C9DADB;
+  --text: #000000;
+  --heading: #1F5F63;
+  --link: #1B2A41;
+  --muted: #5E6873;
+  --accent: #E8A598;
+  --on-accent: #1B2A41;
+  --rule: #D9DDE1;
+
+  --font-display: 'Raleway', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1B2A41; --surface: #22344F; --band: #13202F; --on-band: #EEF0F2; --on-band-muted: #AEB8C2;
+    --text: #EEF0F2; --heading: #E8A598; --link: #F2C2B8; --muted: #AEB8C2;
+    --accent: #E8A598; --on-accent: #1B2A41; --rule: #34465F;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1B2A41; --surface: #22344F; --band: #13202F; --on-band: #EEF0F2; --on-band-muted: #AEB8C2;
+  --text: #EEF0F2; --heading: #E8A598; --link: #F2C2B8; --muted: #AEB8C2;
+  --accent: #E8A598; --on-accent: #1B2A41; --rule: #34465F;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.65;
+}
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-feature-settings: "lnum";
+  font-variant-numeric: lining-nums;
+  color: var(--heading);
+  text-wrap: balance;
+  margin: 0;
+  line-height: 1.2;
+}
+p { margin: 0; }
+a { color: var(--link); text-decoration: underline; text-underline-offset: 0.15em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 24px; }
+@media (max-width: 480px) { .wrap { padding-inline: 16px; } body { font-size: 17px; } }
+
+/* Header band */
+.band { background: var(--band); color: var(--on-band); }
+.masthead { padding-block: 52px 32px; display: grid; gap: 10px; }
+.masthead h1 { color: var(--on-band); font-size: clamp(2.1rem, 5.5vw, 3.2rem); letter-spacing: 0.005em; }
+.masthead .tagline { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.05rem, 2.4vw, 1.3rem); color: #F4C9C0; }
+.masthead .role { font-size: 1.05rem; color: var(--on-band-muted); }
+nav.site {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+  background: var(--band);
+  border-top: 1px solid rgba(255,255,255,0.14);
+}
+nav.site ul {
+  list-style: none; margin: 0; padding-block: 0;
+  display: flex; gap: 4px 24px; overflow-x: auto; scrollbar-width: none;
+}
+nav.site ul::-webkit-scrollbar { display: none; }
+nav.site a {
+  display: block; padding-block: 12px 10px; white-space: nowrap;
+  color: var(--on-band); text-decoration: none;
+  font-family: var(--font-display); font-weight: 600; font-size: 0.875rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  border-bottom: 3px solid transparent;
+}
+nav.site a:hover, nav.site a.active { border-bottom-color: var(--accent); }
+
+/* Sections */
+main { padding-block: 16px 64px; }
+section { padding-block: 44px 8px; scroll-margin-top: 60px; display: grid; gap: 22px; }
+section > h2 { font-size: 1.75rem; padding-bottom: 10px; position: relative; width: fit-content; }
+section > h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 3px; background: var(--accent); }
+h3 { font-size: 1.2rem; }
+h4 { font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+.prose { max-width: 65ch; display: grid; gap: 16px; }
+.muted { color: var(--muted); }
+.small { font-size: 0.9rem; }
+
+/* About */
+.about { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 40px; align-items: start; }
+@media (max-width: 760px) { .about { grid-template-columns: minmax(0, 1fr); } }
+.card { background: var(--surface); border-radius: 6px; padding: 20px; display: grid; gap: 14px; }
+.monogram {
+  aspect-ratio: 1 / 1; max-width: 100%; border-radius: 4px;
+  background: var(--accent); color: var(--on-accent);
+  display: grid; place-items: center;
+  font-family: var(--font-display); font-weight: 700; font-size: 3rem; letter-spacing: 0.04em;
+}
+.facts { display: grid; gap: 10px; margin: 0; }
+.facts dt { font-family: var(--font-display); font-weight: 600; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.facts dd { margin: 0; font-size: 0.95rem; line-height: 1.45; }
+.subsection { display: grid; gap: 16px; padding-top: 12px; }
+
+/* Dated lists */
+.dated { list-style: none; margin: 0; padding: 0; display: grid; }
+.dated li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 24px; padding-block: 12px; border-top: 1px solid var(--rule); }
+.dated li:last-child { border-bottom: 1px solid var(--rule); }
+.dated .when { color: var(--muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+.dated .what { min-width: 0; }
+.dated .what .detail { display: block; color: var(--muted); font-size: 0.9rem; }
+@media (max-width: 560px) {
+  .dated li { grid-template-columns: minmax(0, 1fr); }
+  .dated .when { text-align: left; }
+}
+.group { display: grid; gap: 12px; }
+.subgroup { display: grid; gap: 8px; padding-top: 6px; }
+
+/* Citations */
+.cites { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; max-width: 70ch; }
+.cites li { padding-left: 1.5em; text-indent: -1.5em; }
+.smallcaps { font-variant: small-caps; letter-spacing: 0.02em; }
+.tag { display: inline-block; text-indent: 0; font-family: var(--font-display); font-weight: 600; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--on-accent); background: var(--accent); padding: 1px 7px; border-radius: 3px; vertical-align: 2px; margin-left: 6px; }
+
+/* Accordions */
+details.acc { border: 1px solid var(--rule); border-radius: 6px; background: var(--bg); max-width: 100%; }
+details.acc > summary {
+  list-style: none; cursor: pointer; padding: 16px 20px;
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; align-items: center;
+}
+details.acc > summary::-webkit-details-marker { display: none; }
+details.acc > summary .acc-title { font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; color: var(--heading); line-height: 1.25; }
+details.acc > summary .acc-sub { grid-column: 1; color: var(--muted); font-size: 0.92rem; }
+details.acc > summary .chev {
+  grid-column: 2; grid-row: 1 / span 2;
+  font-family: var(--font-display); font-weight: 600; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--on-accent); background: var(--accent); border-radius: 4px; padding: 5px 10px; white-space: nowrap;
+}
+details.acc > summary .chev::after { content: "Show all"; }
+details.acc[open] > summary .chev::after { content: "Hide"; }
+details.acc > summary:hover .acc-title { text-decoration: underline; text-underline-offset: 0.15em; }
+details.acc .acc-body { padding: 0 20px 16px; }
+.accs { display: grid; gap: 14px; }
+
+/* Blog list */
+.posts { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; max-width: 72ch; }
+.posts li { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 16px; }
+.posts .date { color: var(--muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; padding-top: 2px; }
+@media (max-width: 560px) { .posts li { grid-template-columns: minmax(0, 1fr); gap: 0; } }
+
+/* Experience */
+.jobs { display: grid; gap: 26px; max-width: 70ch; }
+.job { display: grid; gap: 6px; }
+.job .meta { color: var(--muted); font-size: 0.95rem; }
+
+/* Hero lead and buttons */
+.masthead .lead { color: var(--on-band); font-size: 1.1rem; max-width: 62ch; padding-top: 10px; }
+.btns { display: flex; flex-wrap: wrap; gap: 10px; padding-top: 12px; }
+.btn {
+  display: inline-block; text-decoration: none; border-radius: 4px; padding: 9px 16px;
+  font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; letter-spacing: 0.03em;
+}
+.btn.primary { background: var(--accent); color: var(--on-accent); }
+.btn.ghost { color: var(--on-band); border: 1px solid rgba(255,255,255,0.45); }
+.btn:hover { text-decoration: underline; text-underline-offset: 0.15em; }
+
+/* Teaching materials */
+.mat-groups { display: grid; gap: 28px; }
+.mats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 14px; }
+.mats li { background: var(--surface); border-radius: 6px; padding: 16px 18px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.mats .mat-type { font-family: var(--font-display); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.mats .mat-title { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; line-height: 1.3; }
+.mats p { font-size: 0.95rem; line-height: 1.5; }
+.howto { max-width: 65ch; display: grid; gap: 12px; }
+.tag.soon { margin-left: 0; margin-right: 8px; background: var(--surface); color: var(--muted); border: 1px solid var(--rule); justify-self: start; }
+.mats .tag.soon { background: var(--bg); }
+.status-note { font-size: 0.95rem; }
+.roles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 12px; max-width: 760px; }
+.roles li { border-top: 3px solid var(--accent); background: var(--surface); border-radius: 0 0 6px 6px; padding: 14px 16px; display: grid; gap: 2px; }
+.roles .role-name { font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; color: var(--heading); }
+.roles .role-second { font-size: 0.9rem; color: var(--muted); }
+.eyebrow { font-family: var(--font-display); font-weight: 600; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.license { border-left: 4px solid var(--accent); background: var(--surface); border-radius: 0 6px 6px 0; padding: 18px 20px; display: grid; gap: 12px; max-width: 72ch; }
+.cite-box { display: grid; gap: 8px; }
+.cite-text { font-size: 0.95rem; background: var(--bg); border: 1px solid var(--rule); border-radius: 4px; padding: 10px 12px; user-select: all; }
+.cite-box button.copy { justify-self: start; }
+
+/* Jump links */
+.jump { list-style: none; margin: 0; padding: 20px 0 0; display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: var(--font-display); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase; }
+.jump a { color: var(--muted); text-decoration: none; border-bottom: 2px solid transparent; }
+.jump a:hover { color: var(--heading); border-bottom-color: var(--accent); }
+.masthead.compact { padding-block: 32px 22px; }
+.site-name { margin: 0; }
+.site-name a { color: var(--on-band); text-decoration: none; font-family: var(--font-display); font-weight: 700; font-size: clamp(1.8rem, 4.5vw, 2.6rem); line-height: 1.2; }
+
+/* Boxes (assignments, weeks) */
+.boxes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr)); gap: 14px; }
+.boxes > li { background: var(--surface); border-radius: 6px; padding: 16px 18px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.box-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.box-label { font-family: var(--font-display); font-weight: 600; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-variant-numeric: tabular-nums; }
+.box-title { font-family: var(--font-display); font-weight: 700; font-size: 1.08rem; line-height: 1.3; color: var(--heading); margin: 0; }
+.boxes p { font-size: 0.95rem; line-height: 1.5; }
+.weight { font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; color: var(--on-accent); background: var(--accent); border-radius: 4px; padding: 2px 8px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.acc-body .subgroup:first-child { padding-top: 0; }
+.about.solo { grid-template-columns: minmax(0, 1fr); }
+.portrait { display: block; width: 100%; max-width: 220px; aspect-ratio: 1 / 1; height: auto; border-radius: 50%; object-fit: cover; justify-self: center; border: 4px solid var(--bg); box-shadow: 0 0 0 2px var(--accent); }
+.card .more { font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; }
+.intro-grid { align-items: start; }
+.intro-left { display: grid; gap: 28px; min-width: 0; }
+.mindset { display: flex; align-items: center; gap: 16px; background: var(--surface); color: var(--text); border-left: 4px solid var(--accent); border-radius: 0 6px 6px 0; padding: 16px 20px; max-width: 760px; }
+.mindset-icon { flex: 0 0 auto; width: 40px; height: 40px; color: var(--heading); }
+.mindset-label { font-family: var(--font-display); color: var(--heading); font-weight: 700; }
+.mindset p { font-family: var(--font-body); font-weight: 400; font-size: clamp(1.05rem, 2.2vw, 1.2rem); line-height: 1.45; margin: 0; }
+.wrap.hero-grid { max-width: 1240px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); gap: 36px; align-items: center; }
+.hero-text { display: grid; gap: 10px; min-width: 0; }
+.hero-art { margin: 0; min-width: 0; }
+.hero-art img { display: block; width: 100%; height: auto; border-radius: 6px; box-shadow: 0 6px 24px rgba(0,0,0,0.28); }
+@media (max-width: 900px) { .wrap.hero-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
+p.prose { display: block; }
+.box-title { text-transform: none; letter-spacing: 0; }
+.boxes.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 640px) { .boxes.two { grid-template-columns: minmax(0, 1fr); } }
+.weeklist { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.weeklist > li { background: var(--surface); border-radius: 6px; padding: 14px 18px; display: grid; grid-template-columns: 5em minmax(0, 1fr); gap: 4px 18px; align-items: start; }
+.weeklist .wk { font-family: var(--font-display); font-weight: 700; color: var(--heading); line-height: 1.3; }
+.weeklist .wk span { display: block; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-variant-numeric: tabular-nums; }
+.weeklist .wk-body { display: grid; gap: 4px; min-width: 0; }
+.wk-mats { font-size: 0.92rem; }
+.wk-mats span { font-family: var(--font-display); font-weight: 700; color: var(--heading); }
+.weeklist p { font-size: 0.95rem; line-height: 1.5; }
+@media (max-width: 560px) { .weeklist > li { grid-template-columns: minmax(0, 1fr); } }
+.acc-body .cites { padding-top: 4px; }
+
+/* Footer */
+footer.band { padding-block: 44px; }
+footer .wrap { display: grid; gap: 18px; }
+footer h2 { color: var(--on-band); font-size: 1.5rem; }
+.contact-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.email { font-size: 1.1rem; user-select: all; color: var(--on-band); }
+button.copy {
+  font: inherit; font-family: var(--font-display); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.04em;
+  background: var(--accent); color: var(--on-accent); border: 0; border-radius: 4px; padding: 7px 14px; cursor: pointer;
+}
+.profiles { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 22px; }
+footer a { color: var(--on-band); }
+.disclaimer { color: var(--on-band-muted); font-size: 0.9rem; max-width: 70ch; border-top: 1px solid rgba(255,255,255,0.18); padding-top: 16px; }
+
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; }
+.sec-head > h2 { font-size: 1.75rem; padding-bottom: 10px; position: relative; width: fit-content; }
+.sec-head > h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 3px; background: var(--accent); }
+.to-top { font-size: inherit; white-space: nowrap; }
+</style>
+<style>
+.crumb { margin: 0; padding-top: 24px; font-size: 0.9rem; color: var(--muted); }
+.mat-intro { max-width: 68ch; }
+.canvas-frame :is(h1, h2, h3, h4, h5, h6) { font-family: inherit; font-weight: bold; color: inherit; line-height: 1.3; letter-spacing: normal; text-transform: none; text-wrap: wrap; font-feature-settings: normal; margin: 0.9em 0 0.4em; }
+.canvas-frame h2 { font-size: 1.5em; } .canvas-frame h3 { font-size: 1.25em; } .canvas-frame h4 { font-size: 1.1em; }
+.canvas-frame p { margin: 0 0 12px; }
+.canvas-frame ul, .canvas-frame ol { padding-left: 1.6em; margin: 0 0 12px; }
+.canvas-frame table { border-collapse: collapse; }
+.canvas-frame { background: #ffffff; color: #222222; color-scheme: light; border: 1px solid var(--rule); border-radius: 6px; padding: 22px; max-width: 860px; overflow-x: auto; }
+.reuse { display: grid; gap: 12px; max-width: 860px; }
+.reuse-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.reuse textarea { width: 100%; min-height: 260px; font: 0.85rem/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--text); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 10px; }
+details.code summary { cursor: pointer; font-family: var(--font-display); font-weight: 600; color: var(--heading); }
+details.code[open] summary { margin-bottom: 8px; }
+/* One text size for all running text */
+.small, .facts dd, .dated .what .detail, .dated .when, .posts .date, details.acc > summary .acc-sub, .job .meta, .masthead .lead, .masthead .role,
+.mats p, .status-note, .roles .role-second, .cite-text, .boxes p, .mindset p, .wk-mats, .weeklist p, .obj-list li, .wk-list,
+details.acc.week .acc-body p, .email, .disclaimer, .mat-intro, .prose, .crumb, .card .more { font-size: inherit; }
+</style>
+</head>
+<body>
+<header class="band" id="top">
+  <div class="wrap masthead compact">
+    <p class="site-name"><a href="../index.html">Julie Tedjeske Crane</a></p>
+  </div>
+  <nav class="site" aria-label="Pages">
+    <div class="wrap">
+      <ul>
+        <li><a href="../index.html" class="active">AI and Legal Research Course</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../writing.html">Presentations &amp; Writing</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<main class="wrap">
+  <p class="crumb"><a href="../index.html#materials">AI and Legal Research</a> &rsaquo; Week 3</p>
+  <section aria-labelledby="mat-h">
+    <h2 id="mat-h">Week 3: In-Class Exercise, <i>Ostrander v. Vance</i> Brief</h2>
+    <p class="mat-intro">Students check the citations in this brief during the third class&rsquo;s verification exercise, which the <a href="week-3-individual-report.html">individual report</a> page describes. Each small group checks three of the brief&rsquo;s nine cases by hand, and each student compares what the student found with the report from one of four verification tools that the instructor ran on the brief before class.</p>
+    <div style="background: var(--surface); border-left: 4px solid var(--heading); border-radius: 4px; padding: 14px 18px; max-width: 65ch;"><p><strong>This brief contains defective citations on purpose. Do not cite the brief or rely on it as a statement of the law.</strong></p></div>
+    <div class="sec-head"><h3>Where This Brief Came From</h3></div>
+    <p class="mat-intro">Julie Tedjeske Crane adapted the brief that students check from a real filing: the defendants&rsquo; brief in opposition to the plaintiff&rsquo;s motion in limine in <i>Coomer v. Lindell</i>, a defamation case in the United States District Court for the District of Colorado. She changed the party names to <i>Ostrander v. Vance</i>. Judge Nina Y. Wang found that the original brief contained nearly thirty defective citations, including misquotations, misstated holdings, cases attributed to the wrong court, and citations to cases that do not exist. Order at 2&ndash;3, <i>Coomer v. Lindell</i>, No. 22-cv-01129-NYW-SBP (D. Colo. July 7, 2025), ECF No. 383, <a href="https://www.govinfo.gov/content/pkg/USCOURTS-cod-1_22-cv-01129/pdf/USCOURTS-cod-1_22-cv-01129-10.pdf">https://www.govinfo.gov/content/pkg/USCOURTS-cod-1_22-cv-01129/pdf/USCOURTS-cod-1_22-cv-01129-10.pdf</a>.</p>
+    <p class="mat-intro">At a hearing, the defendants&rsquo; lead counsel told Judge Wang that his team had run the brief through generative AI and that he had not personally checked the citations. <i>Id.</i> at 4. Judge Wang then sanctioned lead counsel and his law firm $3,000 under Rule 11 of the Federal Rules of Civil Procedure, and she sanctioned his co-counsel, who also signed the brief, a separate $3,000. <i>Id.</i> at 19&ndash;20.</p>
+    <div class="sec-head"><h3>The Brief</h3><a class="to-top" href="#top">Back to top</a></div>
+    <p class="mat-intro"><a href="files/Week3_Ostrander_v_Vance_Brief_in_Opposition.docx" download>Download the brief (Word)</a>. To use the brief in your course, upload the Word file to your learning management system, or link students to this page.</p>
+    <div class="canvas-frame">
+<div style="font-family: 'Times New Roman', Times, serif; font-size: 1.05rem; line-height: 1.6; color: #222222;">
+<p style="margin: 0 0 12px 0; text-align: center;"><strong>IN THE UNITED STATES DISTRICT COURT</strong></p>
+<p style="margin: 0 0 12px 0; text-align: center;"><strong>FOR THE DISTRICT OF COLORADO</strong></p>
+<p style="margin: 0 0 12px 0;">Civil Action No. 1:24-cv-00000</p>
+<p style="margin: 0 0 12px 0;">NATHANIEL OSTRANDER,</p>
+<p style="margin: 0 0 12px 0; padding-left: 48px;">Plaintiff,</p>
+<p style="margin: 0 0 12px 0;">v.</p>
+<p style="margin: 0 0 12px 0;">GORDON VANCE, VANCELIVE MEDIA, LLC, and</p>
+<p style="margin: 0 0 12px 0;">SUMMIT COFFEE ROASTERS, INC.,</p>
+<p style="margin: 0 0 12px 0; padding-left: 48px;">Defendants.</p>
+<p style="margin: 0 0 12px 0; text-align: center;"><strong>DEFENDANTS&rsquo; BRIEF IN OPPOSITION TO PLAINTIFF&rsquo;S MOTION IN LIMINE</strong></p>
+<p style="margin: 0 0 12px 0;">Defendants Gordon Vance, VanceLive Media, LLC, and Summit Coffee Roasters, Inc. (&ldquo;Defendants&rdquo;), through counsel, submit this Brief in Opposition to Plaintiff&rsquo;s Motion in Limine.</p>
+<p style="margin: 0 0 12px 0; text-align: center;"><strong>PRELIMINARY STATEMENT</strong></p>
+<p style="margin: 0 0 12px 0;">Plaintiff Nathaniel Ostrander claims that Defendants&rsquo; statements about him destroyed his reputation and caused him severe emotional distress. He alleges that Defendants&rsquo; conduct was &ldquo;extreme and outrageous&rdquo; and seeks damages for &ldquo;intentional infliction of emotional distress.&rdquo; Yet his Motion in Limine asks the Court to keep from the jury the very evidence that bears on his character, his reputation, and the sources of his distress. The Federal Rules of Evidence do not shield a plaintiff from character evidence when the plaintiff&rsquo;s own damages claims depend on it.</p>
+<p style="margin: 0 0 12px 0; text-align: center;"><strong>LEGAL STANDARD</strong></p>
+<p style="margin: 0 0 12px 0;">Evidence is relevant if it &ldquo;has any tendency to make a fact more or less probable than it would be without the evidence&rdquo; and &ldquo;the fact is of consequence in determining the action.&rdquo; Fed. R. Evid. 401.</p>
+<p style="margin: 0 0 12px 0;">The Court may exclude relevant evidence if its probative value is substantially outweighed by a danger of unfair prejudice. Fed. R. Evid. 403. Exclusion of otherwise admissible evidence under Rule 403 &ldquo;is an extraordinary remedy and should be used sparingly.&rdquo; <em>United States v. Smalls</em>, 605 F.3d 765, 787 (10th Cir. 2010) (internal quotation marks omitted).</p>
+<p style="margin: 0 0 12px 0;">Evidence is not unfairly prejudicial merely because it damages a party&rsquo;s case. Unfair prejudice means &ldquo;an undue tendency to suggest decision on an improper basis.&rdquo; Fed. R. Evid. 403 advisory committee notes.</p>
+<p style="margin: 0 0 12px 0;">Rule 404(a) generally bars evidence of a person&rsquo;s character offered to prove action in conformity with that character, but Rule 405(b) permits proof of specific instances of conduct when character is an essential element of a claim or defense. The Tenth Circuit has recognized that in defamation cases, a plaintiff&rsquo;s reputation and character are intertwined with the damages claimed. <em>See World Wide Ass&rsquo;n of Specialty Programs v. Pure, Inc.</em>, 450 F.3d 1132, 1139 (2006) (recognizing that &ldquo;reputation and character are inextricably intertwined&rdquo; in defamation cases).</p>
+<p style="margin: 0 0 12px 0; text-align: center;"><strong>ARGUMENT</strong></p>
+<p style="margin: 0 0 12px 0; padding-left: 32px;"><strong>I.&nbsp;&nbsp;Evidence of Mr. Ostrander&rsquo;s Credibility and Honesty Is Relevant and Admissible</strong></p>
+<p style="margin: 0 0 12px 0;">Defendants intend to offer police body camera footage of Mr. Ostrander&rsquo;s 2021 interactions with municipal police officers during a hit-and-run investigation. The footage shows Mr. Ostrander lying to the officers about his involvement in the collision. Mr. Ostrander&rsquo;s credibility and his character for truthfulness are central issues in this case.</p>
+<p style="margin: 0 0 12px 0;">Character evidence, including specific instances of conduct, is admissible when character is an essential element of a claim or defense. <em>See World Wide Ass&rsquo;n</em>,, at 1139.</p>
+<p style="margin: 0 0 12px 0;">Decisions from this District admit evidence of untruthful conduct and uncharged acts when that evidence bears on credibility, particularly &ldquo;where the focal issue in a case is the plaintiff&rsquo;s character.&rdquo; <em>Ginter v. Northwestern Mut. Life Ins. Co.</em>, 576 F. Supp. 627, 630 (D. Colo. 1984). The footage shows Mr. Ostrander first denying any involvement in the collision and later admitting it.</p>
+<p style="margin: 0 0 12px 0;">Rule 608(b) bars extrinsic evidence of specific instances of conduct, but it permits cross-examination on those instances when they are probative of truthfulness. Fed. R. Evid. 608(b). The circumstances of the collision and Mr. Ostrander&rsquo;s statements to the officers are proper subjects of cross-examination under Rule 608(b).</p>
+<p style="margin: 0 0 12px 0; padding-left: 32px;"><strong>II.&nbsp;&nbsp;Evidence of Mr. Ostrander&rsquo;s Statements About Governor Prescott and Law Enforcement Is Relevant to Core Issues</strong></p>
+<p style="margin: 0 0 12px 0;">Defendants intend to offer Mr. Ostrander&rsquo;s social media posts and public statements about Governor Dale Prescott, about law enforcement, and about related political issues. This evidence is relevant for three purposes:</p>
+<p style="margin: 0 0 12px 0; padding-left: 64px;">•&nbsp;&nbsp;to rebut Mr. Ostrander&rsquo;s evidence of &ldquo;actual malice&rdquo;;</p>
+<p style="margin: 0 0 12px 0; padding-left: 64px;">•&nbsp;&nbsp;to provide context for, and to show the reasonableness of, Defendants&rsquo; statements; and</p>
+<p style="margin: 0 0 12px 0; padding-left: 64px;">•&nbsp;&nbsp;to challenge Mr. Ostrander&rsquo;s claimed damages.</p>
+<p style="margin: 0 0 12px 0;">Under Federal Rule 405(b), specific instances of conduct are admissible when character is an essential element of a claim or defense. Mr. Ostrander has placed his character at issue. Defendants are entitled to show Mr. Ostrander&rsquo;s disdain for Governor Prescott and the Governor&rsquo;s supporters, both to show the reasonableness of Defendants&rsquo; statements and to rebut Mr. Ostrander&rsquo;s evidence of &ldquo;actual malice.&rdquo; A plaintiff shows reckless disregard for the truth only with evidence that &ldquo;the defendant in fact entertained serious doubts as to the truth of his publication.&rdquo; <em>St. Amant v. Thompson</em>, 390 U.S. 727, 731 (1968). Mr. Ostrander&rsquo;s claims assert that Defendants had no basis to comment on his conduct or on his views of the Governor&rsquo;s supporters.</p>
+<p style="margin: 0 0 12px 0;">Mr. Ostrander&rsquo;s public statements are relevant to the truth of the statements at issue, to the damages he claims, and to Defendants&rsquo; state of mind on the question of actual malice. Every statement at issue relates to Mr. Ostrander&rsquo;s role in the disputed March 2023 Centennial Millions jackpot drawing.</p>
+<p style="margin: 0 0 12px 0; padding-left: 32px;"><strong>III.&nbsp;&nbsp;Evidence of Prior Drug and Alcohol Use and Mental Health History Is Relevant to Rebut Damages Claims</strong></p>
+<p style="margin: 0 0 12px 0;">Defendants intend to offer evidence of Mr. Ostrander&rsquo;s past struggles with addiction and of his mental health treatment. This evidence is relevant to rebut his claim for emotional distress damages. Courts consistently admit evidence of pre-existing mental health conditions in cases in which a plaintiff claims emotional distress.</p>
+<p style="margin: 0 0 12px 0;">When a plaintiff claims severe emotional distress, the jury must know about the plaintiff&rsquo;s pre-existing conditions and treatment history to evaluate causation and damages. The Tenth Circuit has allowed defendants to show alternative causes of a plaintiff&rsquo;s emotional injury. <em>Perkins v. Fed. Fruit &amp; Produce Co.</em>, 945 F.3d 1242, 1251 (10th Cir. 2019) (admitting evidence of prior emotional difficulties to challenge damages claims).</p>
+<p style="margin: 0 0 12px 0;">Rule 608(b) bars extrinsic evidence only when a party offers that evidence solely to attack or support a witness&rsquo;s character for truthfulness. Fed. R. Evid. 608 advisory committee&rsquo;s note to 2003 amendment. That is not Defendants&rsquo; purpose.</p>
+<p style="margin: 0 0 12px 0;">Mr. Vance testified at his deposition that he is a recovered addict and that Summit Coffee Roasters hires people who have struggled with addiction. Defendants offer the evidence to give the jury context for Mr. Ostrander&rsquo;s claimed damages.</p>
+<p style="margin: 0 0 12px 0; padding-left: 32px;"><strong>IV.&nbsp;&nbsp;The 118-Page Background Document Is Relevant to Multiple Defense Issues and Is Not Being Offered for Its Truth</strong></p>
+<p style="margin: 0 0 12px 0;">Mr. Ostrander argues that the 118-page background document is inadmissible hearsay. The document serves several non-hearsay purposes that are critical to the defense.</p>
+<p style="margin: 0 0 12px 0;">A statement is hearsay only if it is offered to prove the truth of the matter asserted. Fed. R. Evid. 801(c)(2). Defendants do not offer the document for its truth. Defendants offer it solely to show what Defendants knew about Mr. Ostrander before they made the statements at issue.</p>
+<p style="margin: 0 0 12px 0;">The document is relevant to show (1) the reasonableness of Defendants&rsquo; statements in light of the public information about Mr. Ostrander; (2) the absence of actual malice; and (3) that Defendants&rsquo; conduct was not &ldquo;extreme and outrageous.&rdquo;</p>
+<p style="margin: 0 0 12px 0;">The document&rsquo;s probative value supports its admission. If any portion of the document raises a concern, the Court can redact that portion rather than exclude the entire document.</p>
+<p style="margin: 0 0 12px 0; padding-left: 32px;"><strong>V.&nbsp;&nbsp;Evidence About Religious Views and Social Media Posts Is Relevant to Reputation</strong></p>
+<p style="margin: 0 0 12px 0; padding-left: 64px;"><strong>A.&nbsp;&nbsp;Admissibility of Social Media Evidence</strong></p>
+<p style="margin: 0 0 12px 0;">The Tenth Circuit has addressed the authentication and admissibility of social media evidence. <em>United States v. Hassan</em>. Mr. Ostrander does not dispute that his posts are authentic, and Facebook&rsquo;s business records can verify them. <em>Hassan</em>, 742 F.3d 104, 133 (10th Cir. 2014).</p>
+<p style="margin: 0 0 12px 0; padding-left: 64px;"><strong>B.&nbsp;&nbsp;Religious Beliefs Evidence Under Rule 610</strong></p>
+<p style="margin: 0 0 12px 0;">Rule 610 bars evidence of a witness&rsquo;s religious beliefs offered &ldquo;to attack or support the witness&rsquo;s credibility,&rdquo; but it does not bar religious-belief evidence offered for other relevant purposes. <em>United States v. Hoffman</em>, 806 F.3d 1288, 1295 (10th Cir. 2015) (distinguishing between prohibited credibility attacks and permissible non-credibility purposes).</p>
+<p style="margin: 0 0 12px 0;">The advisory committee notes to Rule 610 confirm that the rule &ldquo;does not bar evidence of religious beliefs when otherwise relevant.&rdquo; Fed. R. Evid. 601, Advisory Notes. Defendants offer Mr. Ostrander&rsquo;s religious statements to show his public persona, to provide context for Defendants&rsquo; statements, and to show alternative causes of any harm to his reputation, not to attack his credibility.</p>
+<p style="margin: 0 0 12px 0;">Courts have admitted evidence related to religion when the evidence bears on issues other than credibility. <em>United States v. Kalaydjian</em>, 784 F.2d 53, 56 (2d Cir. 1986) (permitting evidence regarding religion when offered for purposes other than credibility attack).</p>
+<p style="margin: 0 0 12px 0; padding-left: 32px;"><strong>VI.&nbsp;&nbsp;Alternatively, the Court Should Rule on Each Item Individually and Give Limiting Instructions</strong></p>
+<p style="margin: 0 0 12px 0;">Plaintiff&rsquo;s request for wholesale exclusion ignores the Court&rsquo;s ability to rule on each item of evidence individually and to limit how the jury may use evidence that serves more than one purpose.</p>
+<p style="margin: 0 0 12px 0;">When evidence is admissible for one purpose but not for another, the Court must, on timely request, restrict the evidence to its proper scope and instruct the jury accordingly. Fed. R. Evid. 105. Appropriate instructions here would tell the jury:</p>
+<p style="margin: 0 0 12px 0; padding-left: 64px;">•&nbsp;&nbsp;that Mr. Ostrander&rsquo;s religious statements may be considered only for context and reputation, and not for credibility;</p>
+<p style="margin: 0 0 12px 0; padding-left: 64px;">•&nbsp;&nbsp;that his social media posts may be considered only on reputation, damages, and actual malice; and</p>
+<p style="margin: 0 0 12px 0; padding-left: 64px;">•&nbsp;&nbsp;that the background document may be considered only for Defendants&rsquo; knowledge and state of mind, and not for its truth.</p>
+<p style="margin: 0 0 12px 0;">Limiting instructions address any risk of unfair prejudice because of &ldquo;the almost invariable assumption of the law that jurors follow their instructions.&rdquo; <em>Richardson v. Marsh</em>, 481 U.S. 200, 206 (1987).</p>
+<p style="margin: 0 0 12px 0; text-align: center;"><strong>CONCLUSION</strong></p>
+<p style="margin: 0 0 12px 0;">Defendants respectfully ask the Court to deny Plaintiff&rsquo;s Motion in Limine in its entirety or, in the alternative, to rule on each item of evidence individually.</p>
+<p style="margin: 0 0 12px 0;">Dated: [date]</p>
+<p style="margin: 0 0 12px 0; padding-left: 209px;">Respectfully submitted,</p>
+<p style="margin: 0 0 12px 0; padding-left: 209px;">/s/ Harold J. Brennecke</p>
+<p style="margin: 0 0 12px 0; padding-left: 209px;">Harold J. Brennecke</p>
+<p style="margin: 0 0 12px 0; padding-left: 209px;">/s/ Lydia M. Farrow</p>
+<p style="margin: 0 0 12px 0; padding-left: 209px;">Lydia M. Farrow</p>
+<p style="margin: 0 0 12px 0; padding-left: 209px;">BRENNECKE FARROW PLLC</p>
+<p style="margin: 0 0 12px 0; padding-left: 209px;">Denver, Colorado</p>
+<p style="margin: 0 0 12px 0; padding-left: 209px;">(303) 555-0142</p>
+<p style="margin: 0 0 12px 0; padding-left: 209px;">hbrennecke@example.com</p>
+<p style="margin: 0 0 12px 0; padding-left: 209px;">lfarrow@example.com</p>
+<p style="margin: 0 0 12px 0; padding-left: 209px;">Counsel for Defendants Gordon Vance,</p>
+<p style="margin: 0 0 12px 0; padding-left: 209px;">VanceLive Media, LLC, and</p>
+<p style="margin: 0 0 12px 0; padding-left: 209px;">Summit Coffee Roasters, Inc.</p>
+<p style="margin: 0 0 12px 0; text-align: center;"><strong>CERTIFICATE OF SERVICE</strong></p>
+<p style="margin: 0 0 12px 0;">I certify that on [date], I filed the foregoing with the Clerk of Court using the CM/ECF system, which will send notice of the filing to all counsel of record.</p>
+<p style="margin: 0 0 12px 0; padding-left: 209px;">/s/ Lydia M. Farrow</p>
+<p style="margin: 0 0 12px 0; padding-left: 209px;">Lydia M. Farrow</p>
+</div>
+    </div>
+    <div class="license">
+      <div class="sec-head"><h3>License</h3><a class="to-top" href="#top">Back to top</a></div>
+      <p>Julie Tedjeske Crane releases this course-related material under the <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)</a>. You may adapt and republish the material for noncommercial educational use, as long as you credit Julie.</p>
+      <p class="small">Suggested citation: Julie Tedjeske Crane, <i>Week 3: In-Class Exercise, </i>Ostrander v. Vance<i> Brief</i>, <i>in</i> <i>AI and Legal Research: Teaching Materials</i> (2026), https://jmtedjeske-crane.github.io/materials/week-3-brief.html (licensed under CC BY-NC 4.0).</p>
+    </div>
+  </section>
+</main>
+
+<footer class="band" id="contact">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <div class="contact-row">
+      <span class="email" id="email" data-u="eksejdetmj" data-d="moc.liamg"></span><noscript><span class="email">jmtedjeske [at] gmail [dot] com</span></noscript>
+      <button class="copy" id="copy-email" type="button">Copy email address</button>
+    </div>
+    <ul class="profiles" aria-label="Profiles">
+      <li><a href="https://dickinsonlaw.psu.edu/directory/julie-tedjeske-crane">Penn State Dickinson Law profile</a></li>
+      <li><a href="https://www.linkedin.com/in/julie-tedjeske-crane-65117813/">LinkedIn</a></li>
+      <li><a href="https://ripslawlibrarian.wordpress.com/author/julietedjeskecrane/">RIPS Law Librarian Blog posts</a></li>
+    </ul>
+    <p class="disclaimer">This site is Julie Tedjeske Crane&rsquo;s personal project. It is not an official publication of Penn State Dickinson Law, and the views expressed on this site are Julie&rsquo;s own. The teaching materials on this site are for educational use. The materials do not provide legal advice, and instructors should adapt the materials to their own institutions&rsquo; policies. Teaching materials &copy; 2026 Julie Tedjeske Crane, licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var em = document.getElementById('email');
+  if (em && em.dataset.u) {
+    em.textContent = em.dataset.u.split('').reverse().join('') + '\u0040' + em.dataset.d.split('').reverse().join('');
+  }
+  function wireCopy(btnId, srcId, label) {
+    var btn = document.getElementById(btnId), src = document.getElementById(srcId);
+    if (!btn || !src) return;
+    btn.addEventListener('click', function () {
+      var text = src.textContent.trim();
+      function selectIt() {
+        var r = document.createRange(); r.selectNodeContents(src);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        btn.textContent = (/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent) ? 'Selected: press Cmd+C' : 'Selected: press Ctrl+C');
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { btn.textContent = 'Copied'; }, selectIt);
+      } else { selectIt(); }
+      setTimeout(function () { if (!/^Selected/.test(btn.textContent)) btn.textContent = label; }, 2500); setTimeout(function () { if (/^Selected/.test(btn.textContent)) btn.textContent = label; }, 6000);
+    });
+  }
+  wireCopy('copy-email', 'email', 'Copy email address');
+  wireCopy('copy-cite', 'cite', 'Copy citation');
+})();
+</script>
+<script>
+(function () {
+  var btn = document.getElementById('copy-canvas'), src = document.getElementById('canvas-code');
+  if (!btn || !src) return;
+  btn.addEventListener('click', function () {
+    function selectIt() { var d = src.closest('details'); if (d) d.open = true; src.focus(); src.select(); btn.textContent = (/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent) ? 'Selected: press Cmd+C' : 'Selected: press Ctrl+C'); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(src.value).then(function () { btn.textContent = 'Copied'; }, selectIt);
+    } else { selectIt(); }
+    setTimeout(function () { if (!/^Selected/.test(btn.textContent)) btn.textContent = 'Copy HTML code'; }, 2500); setTimeout(function () { if (/^Selected/.test(btn.textContent)) btn.textContent = 'Copy HTML code'; }, 6000);
+  });
+})();
+</script>
+</body>
+</html>
