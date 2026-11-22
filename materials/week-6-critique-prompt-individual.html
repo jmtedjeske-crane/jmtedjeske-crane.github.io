@@ -309,7 +309,7 @@ details.acc.week .acc-body p, .email, .disclaimer, .mat-intro, .prose, .crumb, .
   <p class="crumb"><a href="../index.html#materials">AI and Legal Research</a> &rsaquo; Week 6</p>
   <section aria-labelledby="mat-h">
     <h2 id="mat-h">Week 6: In-Class Exercise 2, Individual Prompt to Critique a Memo&rsquo;s Use of Authority</h2>
-    <p class="mat-intro">Students complete this exercise during the sixth class, on the same memo as Exercise 1. Each student writes a prompt that asks Harvey, Copilot, or AI Studio to critique the memo&rsquo;s selection and analysis of authority, runs the prompt, and then sorts two of the tool&rsquo;s comments and decides what to do with each one. The exercise adapts Emily Pavuluri&rsquo;s Memo Critique exercise and two of her handouts, which she releases under CC BY-NC 4.0. The page below shows bracketed placeholders for the links to the memo and the handouts, and [time] and [date] where the turn-in deadline belongs.</p>
+    <p class="mat-intro">Students complete this exercise during the sixth class, on the same memo as Exercise 1. Each student writes a prompt that asks one of four assigned tools (AI Studio, Harvey, CoCounsel, or Lexis Prot&eacute;g&eacute;) to critique the memo&rsquo;s selection and analysis of authority. The student runs the prompt, runs a follow-up prompt that breaks the critique into a table of claims, and then sorts two of the claims and decides what to do with each one. Expandable boxes hold the example questions and the follow-up prompt. The exercise adapts Emily Pavuluri&rsquo;s Memo Critique exercise and two of her handouts, which she releases under CC BY-NC 4.0. The page below shows bracketed placeholders for the links to the memo, the Constructing a Critique Prompt page and its Word version, and the handouts, and [time] and [date] where the turn-in deadline belongs.</p>
     <div class="canvas-frame">
 <div id="top" style="width: 100%; line-height: 1.55; color: #222222;">
     <div style="background-color: #001e44; padding: 18px 22px; border-radius: 4px 4px 0 0;">
@@ -325,95 +325,51 @@ details.acc.week .acc-body p, .email, .disclaimer, .mat-intro, .prose, .crumb, .
                 <ul style="margin: 4px 0 4px 0; padding-left: 20px; list-style-type: none;">
                     <li style="margin: 0 0 2px 0;"><a style="color: #1e407c;" href="#write-your-prompt">1. Write your prompt</a></li>
                     <li style="margin: 0 0 2px 0;"><a style="color: #1e407c;" href="#run-your-prompt">2. Run your prompt</a></li>
-                    <li style="margin: 0 0 2px 0;"><a style="color: #1e407c;" href="#review-the-reviewer">3. Review the reviewer</a></li>
+                    <li style="margin: 0 0 2px 0;"><a style="color: #1e407c;" href="#create-a-table">3. Create a table to expedite your review</a></li>
                 </ul>
             </li>
-            <li style="margin: 0 0 4px 0;"><a style="color: #1e407c;" href="#time">Time</a></li>
             <li style="margin: 0 0 4px 0;"><a style="color: #1e407c;" href="#criteria">Criteria</a></li>
             <li style="margin: 0 0 4px 0;"><a style="color: #1e407c;" href="#headings-to-copy-and-paste">Headings to Copy and Paste</a></li>
         </ul>
     </div>
 
     <h2 id="purpose" style="color: #1e407c; margin: 24px 0 8px 0; border-bottom: 1px solid #d5dfeb; padding-bottom: 4px;">Purpose</h2>
-    <p style="margin: 0 0 12px 0;">In Step 10 of the Final Capstone Project, you will write your own prompt that asks an AI tool for feedback on your draft memo. Because this course is a research course, that prompt should focus on how the memo identifies, selects, and describes the authority that it cites. This exercise lets you practice writing that prompt on the memo from Exercise 1.</p>
-    <p style="margin: 0 0 12px 0;">A general request, such as &ldquo;How can I improve this memo?&rdquo;, usually produces broad comments about writing. Your prompt today asks only about authority, and it asks about two things. The first is selection: did the memo choose the right authorities? The second is analysis: does the memo describe and apply each authority accurately?</p>
-    <p style="margin: 0 0 12px 0;">An AI tool&rsquo;s critique is advice, and it is not a supervising attorney&rsquo;s review. After the tool answers, you review the reviewer. You decide which comments are useful, which comments are generic, and which comments you must verify before you rely on them.</p>
-    <div style="background-color: #f0f4f9; border-left: 4px solid #1E407C; padding: 12px 16px; margin: 0 0 12px 0;">
-        <p style="margin: 0 0 8px 0;"><strong>Source.</strong> This exercise adapts Emily Pavuluri&rsquo;s <a style="color: #1e407c;" href="https://ailegalresearch.org/exercises/memo-critique-bot/">Memo Critique exercise</a> and two of her handouts, the Five Editing Lenses Checklist ([link to the handout]) and the AI Critique Review Checklist ([link to the handout]). Emily Pavuluri, <em>Teaching AI-Augmented Legal Research</em> (Version 2, Nov. 2026), <a style="color: #1e407c;" href="https://ailegalresearch.org/">ailegalresearch.org</a>, licensed under <a style="color: #1e407c;" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.</p>
-        <p style="margin: 0;">I changed the exercise in three ways. I narrowed the critique to authority, I added the questions about selecting authority, and I added a group report.</p>
-    </div>
+    <p style="margin: 0 0 12px 0;">In <strong>Step 10</strong> of the Final Capstone Project, you will write your own prompt that asks an AI tool for feedback on your draft memo. Because this course is a research course, your prompt should focus on the selection and description of authority. We are using the same memo for both exercises this week, namely the Lexis Prot&eacute;g&eacute; memo from last week that had access to the cases in the Vault, as well as the Authority Table.</p>
+    <p style="margin: 0 0 12px 0;">Your prompt will only address the treatment of authority in the memo, and more specifically two aspects of that treatment. The first is selection: did the memo choose the best available authorities? The second is analysis: does the memo describe and apply each authority accurately?</p>
 
     <p style="margin: 0 0 16px 0; text-align: right;"><a style="color: #1e407c;" href="#top">(Back to Top)</a></p>
     <h2 id="task" style="color: #1e407c; margin: 24px 0 8px 0; border-bottom: 1px solid #d5dfeb; padding-bottom: 4px;">Task</h2>
-    <p style="margin: 0 0 12px 0;">Copy the headings from the box at the bottom of this page, and paste them into the Canvas text box. Fill in the headings as you work through the three steps. Work alone, and submit your own answers. Your group meets after this exercise, and your group&rsquo;s leader submits a separate group report.</p>
+    <p style="margin: 0 0 12px 0;">Work alone on this segment, and submit your answers. Your group meets after this exercise, and the group leader will submit a separate report.</p>
 
     <h3 id="write-your-prompt" style="color: #2b7abc; margin: 18px 0 6px 0;">1. Write your prompt</h3>
-    <p style="margin: 0 0 6px 0;">Write a prompt that asks an AI tool to critique the memo from Exercise 1 ([link to the memo]). Your prompt must tell the tool five things.</p>
-    <table style="border-collapse: collapse; width: 100%; margin: 0 0 12px 0;">
-        <thead>
-            <tr>
-                <th style="border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left; background-color: #f0f4f9; color: #1e407c;" scope="col">Tell the tool</th>
-                <th style="border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left; background-color: #f0f4f9; color: #1e407c;" scope="col">For this memo</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th style="width: 28%; border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left;" scope="row">The audience</th>
-                <td style="border: 1px solid #d5dfeb; padding: 8px 10px;">A supervising partner will read the memo.</td>
-            </tr>
-            <tr>
-                <th style="width: 28%; border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left;" scope="row">The purpose</th>
-                <td style="border: 1px solid #d5dfeb; padding: 8px 10px;">The memo is an objective memo, so it predicts how the court is likely to rule. Name the court.</td>
-            </tr>
-            <tr>
-                <th style="width: 28%; border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left;" scope="row">The level of feedback</th>
-                <td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Say how many comments you want and how the tool should rank them. For example, ask for the three most important problems.</td>
-            </tr>
-            <tr>
-                <th style="width: 28%; border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left;" scope="row">The focus</th>
-                <td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Ask about authority only, and ask about both selection and analysis. Tell the tool not to comment on grammar, style, tone, or organization.</td>
-            </tr>
-            <tr>
-                <th style="width: 28%; border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left;" scope="row">The limits</th>
-                <td style="border: 1px solid #d5dfeb; padding: 8px 10px;">Tell the tool not to invent facts and not to rewrite the memo. Ask for the comments as a table of suggested changes. Tell the tool to give a full citation for any authority that it suggests. Tell the tool to say, for each comment, whether you must verify the comment before you rely on it.</td>
-            </tr>
-        </tbody>
-    </table>
-    <p style="margin: 0 0 6px 0;">The questions below are examples of what a prompt about authority can ask. You do not need to use all of them. Choose the questions that matter most for this memo, and write them in your own words.</p>
-    <p style="margin: 14px 0 4px 0; font-weight: bold; color: #1e407c;">Selection: did the memo choose the right authorities?</p>
-    <ul style="margin: 0 0 12px 0; padding-left: 22px;">
-        <li style="margin: 0 0 6px 0;">Which cited authorities bind the court that will decide the issue, and which authorities are only persuasive?</li>
-        <li style="margin: 0 0 6px 0;">Does the memo say so when it relies on persuasive authority?</li>
-        <li style="margin: 0 0 6px 0;">Is there binding authority, more recent authority, or adverse authority that the memo does not cite?</li>
-        <li style="margin: 0 0 6px 0;">Does any proposition in the memo rest on too little authority?</li>
-    </ul>
-    <p style="margin: 14px 0 4px 0; font-weight: bold; color: #1e407c;">Analysis: does the memo describe and apply each authority accurately?</p>
-    <ul style="margin: 0 0 12px 0; padding-left: 22px;">
+    <p style="margin: 0 0 6px 0;">Write a prompt that asks an AI tool to critique the memo from Exercise 1 ([link to the memo]). Your prompt must tell the tool five things: the audience, the purpose, the level of feedback, the focus, and the limits. To build your prompt, you can use the Constructing a Critique Prompt page ([link to the page]), which walks you through each element, with examples, and builds your prompt as you type. You can also use the Word version of the page ([link to the Word version]).</p>
+    <p style="margin: 0 0 6px 0;">The questions below are examples of what a prompt about authority can ask. You do not need to use all of them. Choose the questions that you determine matter most for this memo, and write them in your own words.</p>
+    <details style="margin: 6px 0 12px 0; border: 1px solid #d5dfeb; border-radius: 4px; padding: 6px 10px; background-color: #f0f4f9;"><summary style="cursor: pointer; color: #1e407c; font-weight: bold;">Selection: did the memo choose the best available authorities? (select to expand)</summary>
+    <ul style="margin: 6px 0 2px 0; padding-left: 22px;">
+        <li style="margin: 0 0 6px 0;">Does the memo rely on persuasive authority only when that is a strategically justified decision?</li>
+        <li style="margin: 0 0 6px 0;">Is there binding authority that the memo does not cite?</li>
+        <li style="margin: 0 0 6px 0;">Is there more recent authority or useful persuasive authority that the memo does not cite?</li>
+        <li style="margin: 0 0 6px 0;">Is any proposition in the memo supported by too little authority?</li>
+        <li style="margin: 0 0 6px 0;">Does the memo treat adverse authority appropriately?</li>
+    </ul></details>
+    <details style="margin: 6px 0 12px 0; border: 1px solid #d5dfeb; border-radius: 4px; padding: 6px 10px; background-color: #f0f4f9;"><summary style="cursor: pointer; color: #1e407c; font-weight: bold;">Analysis: does the memo describe and apply each authority accurately? (select to expand)</summary>
+    <ul style="margin: 6px 0 2px 0; padding-left: 22px;">
         <li style="margin: 0 0 6px 0;">Does each citation support the specific sentence that it follows?</li>
         <li style="margin: 0 0 6px 0;">Does the memo state any holding more broadly than the court stated it?</li>
-        <li style="margin: 0 0 6px 0;">Does the memo compare the facts of the cited cases with the client&rsquo;s facts?</li>
+        <li style="margin: 0 0 6px 0;">Is the memo otherwise wrong in how it characterizes any of the authority?</li>
         <li style="margin: 0 0 6px 0;">Does any conclusion claim more confidence than the cited authority supports?</li>
-    </ul>
+    </ul></details>
 
     <h3 id="run-your-prompt" style="color: #2b7abc; margin: 18px 0 6px 0;">2. Run your prompt</h3>
-    <p style="margin: 0 0 12px 0;">Run your prompt in the tool assigned to you: Harvey, Copilot, or AI Studio. Each member of your group uses a different tool, so your group can compare the advice that each tool gives. Do not use Lexis or Westlaw for this exercise, and do not upload cases from Westlaw or Lexis into these tools. Upload the memo if the tool accepts uploads. Otherwise, paste the text of the memo below your prompt. The memo is fictional, so it contains no confidential information.</p>
+    <p style="margin: 0 0 6px 0;">Each member of your group will run the prompt through a different assigned tool. The four tools are AI Studio, Harvey, CoCounsel, and Lexis Prot&eacute;g&eacute;.</p>
+    <p style="margin: 0 0 6px 0;">Within your tool, you may use the tool&rsquo;s default model. If your tool lets you choose a model, you may instead select a specific model, such as one of Anthropic&rsquo;s Claude models or one of OpenAI&rsquo;s GPT models. Record the tool and the model that you used.</p>
 
-    <h3 id="review-the-reviewer" style="color: #2b7abc; margin: 18px 0 6px 0;">3. Review the reviewer</h3>
-    <p style="margin: 0 0 6px 0;">First, paste the follow-up prompt below into the same conversation with the tool. The follow-up prompt asks the tool to break its critique into a table, with one claim in each row, and to leave two columns blank so that you make the decisions.</p>
-    <div style="background-color: #f0f4f9; border-left: 4px solid #1E407C; padding: 12px 16px; margin: 0 0 12px 0;">
-        <p style="margin: 0 0 8px 0;">Break your critique into a table of separate claims. Give each claim its own row, even when one of your comments made more than one claim. Use these six columns:</p>
-        <ol style="margin: 0 0 8px 0;">
-            <li>Number</li>
-            <li>Where in the memo (the section heading, or a short quoted phrase)</li>
-            <li>Your claim, in one sentence, using your earlier wording where you can</li>
-            <li>The authority you relied on, with a full citation, or &ldquo;None&rdquo;</li>
-            <li>Category (leave this column blank)</li>
-            <li>Decision (leave this column blank)</li>
-        </ol>
-        <p style="margin: 0;">Do not add new claims, and do not change or soften the claims you already made. Do not fill in columns 5 and 6, because I will decide them.</p>
-    </div>
-    <p style="margin: 0 0 6px 0;">The tool leaves the Category and Decision columns blank because an AI tool that rates its own claims tends to rate most of them as useful. Column 4 shows you which claims rest on an authority and which claims rest on nothing.</p>
-    <p style="margin: 0 0 6px 0;">Then choose two rows from the table. For each row, choose the category that fits the claim best.</p>
+    <h3 id="create-a-table" style="color: #2b7abc; margin: 18px 0 6px 0;">3. Create a table to expedite your review</h3>
+    <p style="margin: 0 0 6px 0;">First, paste the follow-up prompt into the same conversation with the tool. The follow-up prompt asks the tool to break its critique into a table, with one claim in each row, and to leave two columns blank so that you make the decisions. You can copy the follow-up prompt from Section III of the Constructing a Critique Prompt page ([link to the page]) or from the Word version of the page ([link to the Word version]). The prompt also appears in the box below.</p>
+    <details style="margin: 6px 0 12px 0; border: 1px solid #d5dfeb; border-radius: 4px; padding: 6px 10px; background-color: #f0f4f9;"><summary style="cursor: pointer; color: #1e407c; font-weight: bold;">The follow-up prompt (select to expand)</summary><p style="margin: 8px 0 6px 0;">Break your critique into a table of separate claims. Give each claim its own row, even when one of your comments made more than one claim. Use these six columns:</p><ol style="margin: 0 0 6px 0; padding-left: 22px;"><li>Number</li><li>Where in the memo (the section heading and paragraph number)</li><li>Your claim, in one sentence, using your earlier wording where you can</li><li>The authority you relied on, with a full citation, or &ldquo;None&rdquo;</li><li>Category: Useful, Generic, Legally inaccurate, Unsupported, Strategically unhelpful, or Needs verification (put these six options in the column heading, and leave the column blank)</li><li>Decision: Accept, Modify, Verify first, or Reject (put these four options in the column heading, and leave the column blank)</li></ol><p style="margin: 0 0 2px 0;">Do not add new claims, and do not change or soften the claims you already made. Do not fill in columns 5 and 6, because I will decide them.</p></details>
+    <p style="margin: 0 0 6px 0;">The Category and Decision columns are blank because filling them in is your job.</p>
+    <p style="margin: 0 0 6px 0;">You will choose two rows from the table to complete. In other words, you do not have to fill out the entire table in the time allotted for this in-class exercise. For both of the rows you select, you will make two decisions.</p>
+    <p style="margin: 0 0 6px 0;"><strong>1.</strong> You will determine which category fits the claim best. The categories are in the table below.</p>
     <table style="border-collapse: collapse; width: 100%; margin: 0 0 12px 0;">
         <thead>
             <tr>
@@ -448,25 +404,11 @@ details.acc.week .acc-body p, .email, .disclaimer, .mat-intro, .prose, .crumb, .
             </tr>
         </tbody>
     </table>
-    <p style="margin: 0 0 12px 0;">Next, decide what you would do with each claim: accept it, modify it, verify it first, or reject it. Give your reason in one sentence. You do not need to do the verifying today.</p>
-    <div style="background-color: #f0f4f9; border-left: 4px solid #1E407C; padding: 12px 16px; margin: 0 0 12px 0;">
-        <p style="margin: 0 0 8px 0;"><strong>Be careful about letting an AI tool change your document directly.</strong> Ask the tool for a table of suggested changes or for tracked changes, so that you can see each change and decide whether to accept it.</p>
-        <p style="margin: 0;">To be extra safe, run a redline or review the tracked changes after extensive revisions. A redline compares the revised document with your earlier version, so it shows you any change that entered the document without your approval.</p>
-    </div>
-
-
-    <p style="margin: 0 0 16px 0; text-align: right;"><a style="color: #1e407c;" href="#top">(Back to Top)</a></p>
-    <h2 id="time" style="color: #1e407c; margin: 24px 0 8px 0; border-bottom: 1px solid #d5dfeb; padding-bottom: 4px;">Time</h2>
-    <p style="margin: 0 0 6px 0;"><strong>Writing your prompt (Step 1):</strong> 6 minutes.</p>
-    <p style="margin: 0 0 6px 0;"><strong>Running your prompt (Step 2):</strong> 3 minutes.</p>
-    <p style="margin: 0 0 20px 0;"><strong>Running the follow-up prompt and reviewing two claims (Step 3):</strong> 6 minutes.</p>
+    <p style="margin: 0 0 12px 0;"><strong>2.</strong> You will decide what to do with the claim. Your choices are to accept it, modify it, verify it first, or reject it. Give your reason in one or two sentences. You do not actually need to verify anything for this assignment.</p>
 
     <p style="margin: 0 0 16px 0; text-align: right;"><a style="color: #1e407c;" href="#top">(Back to Top)</a></p>
     <h2 id="criteria" style="color: #1e407c; margin: 24px 0 8px 0; border-bottom: 1px solid #d5dfeb; padding-bottom: 4px;">Criteria</h2>
-    <p style="margin: 0 0 12px 0;">This exercise counts toward the In-Class Work component of your grade and toward class participation. I grade it pass/fail. A good faith effort is all that I require. A complete submission meets the two conditions below.</p>
-    <p style="margin: 0 0 8px 0;"><strong>Your prompt.</strong> Your submission includes the prompt that you ran. The prompt tells the tool the five things in Step 1, and it asks about both the selection of authority and the analysis of authority.</p>
-    <p style="margin: 0 0 12px 0;"><strong>Your review.</strong> Your submission names the tool that you used. For each of two claims from the follow-up table, your submission gives a category, a decision, and a reason.</p>
-    <table style="border-collapse: collapse; width: 100%; margin: 12px 0 0 0;">
+    <table style="border-collapse: collapse; width: 100%; margin: 0;">
         <tbody>
             <tr>
                 <th style="width: 30%; border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left; background-color: #f0f4f9; color: #1e407c;" scope="row">Turn-in window</th>
@@ -486,7 +428,11 @@ details.acc.week .acc-body p, .email, .disclaimer, .mat-intro, .prose, .crumb, .
     <p style="margin: 0 0 16px 0; text-align: right;"><a style="color: #1e407c;" href="#top">(Back to Top)</a></p>
     <h2 id="headings-to-copy-and-paste" style="color: #1e407c; margin: 24px 0 8px 0; border-bottom: 1px solid #d5dfeb; padding-bottom: 4px;">Headings to Copy and Paste</h2>
     <p style="margin: 0 0 12px 0;">Select everything in the box, copy it, and paste it into the Canvas text box. Write your answer under each heading. The notes in gray are reminders, and you can delete them.</p>
-    <div style="border: 1px dashed #8aa4c4; background: #ffffff; padding: 12px 16px; margin: 0 0 8px 0; line-height: 1.7;"><strong>Individual Prompt: Critiquing a Memo&rsquo;s Use of Authority</strong><br /><br /><strong>1. My prompt</strong><br /><em style="color: #5b6770;">Paste the prompt that you ran. It should state the audience, the purpose, the level of feedback, the focus on authority (selection and analysis), and the limits.</em><br /><br /><strong>2. My tool:</strong><br /><br /><strong>3a. First claim</strong><br /><strong>The claim</strong> <em style="color: #5b6770;">(the row number and a short summary)</em><strong>:</strong><br /><strong>Category</strong> <em style="color: #5b6770;">(useful, generic, legally inaccurate, unsupported, strategically unhelpful, or needs verification)</em><strong>:</strong><br /><strong>My decision</strong> <em style="color: #5b6770;">(accept, modify, verify first, or reject)</em><strong>, and my reason:</strong><br /><br /><strong>3b. Second claim</strong><br /><strong>The claim</strong> <em style="color: #5b6770;">(the row number and a short summary)</em><strong>:</strong><br /><strong>Category:</strong><br /><strong>My decision, and my reason:</strong><br /></div>
+    <div style="border: 1px dashed #8aa4c4; background: #ffffff; padding: 12px 16px; margin: 0 0 8px 0; line-height: 1.7;"><strong>Individual Prompt: Critiquing a Memo&rsquo;s Use of Authority</strong><br /><br /><strong>1. My prompt</strong><br /><em style="color: #5b6770;">Paste the prompt that you ran. It should state the audience, the purpose, the level of feedback, the focus on authority (selection and analysis), and the limits.</em><br /><br /><strong>2. My tool and model:</strong><br /><br /><strong>3a. First claim</strong><br /><strong>The claim</strong> <em style="color: #5b6770;">(the row number and a short summary)</em><strong>:</strong><br /><strong>Category</strong> <em style="color: #5b6770;">(useful, generic, legally inaccurate, unsupported, strategically unhelpful, or needs verification)</em><strong>:</strong><br /><strong>My decision</strong> <em style="color: #5b6770;">(accept, modify, verify first, or reject)</em><strong>, and my reason:</strong><br /><br /><strong>3b. Second claim</strong><br /><strong>The claim</strong> <em style="color: #5b6770;">(the row number and a short summary)</em><strong>:</strong><br /><strong>Category:</strong><br /><strong>My decision, and my reason:</strong><br /></div>
+    <div style="background-color: #f0f4f9; border-left: 4px solid #1E407C; padding: 12px 16px; margin: 24px 0 12px 0;">
+        <p style="margin: 0 0 8px 0;"><strong>Source.</strong> This exercise adapts Emily Pavuluri&rsquo;s <a style="color: #1e407c;" href="https://ailegalresearch.org/exercises/memo-critique-bot/">Memo Critique exercise</a> and two of her handouts, the Five Editing Lenses Checklist ([link to the handout]) and the AI Critique Review Checklist ([link to the handout]). Emily Pavuluri, <em>Teaching AI-Augmented Legal Research</em> (Version 2, Nov. 2026), <a style="color: #1e407c;" href="https://ailegalresearch.org/">ailegalresearch.org</a>, licensed under <a style="color: #1e407c;" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.</p>
+        <p style="margin: 0;">I changed the exercise in six ways. I narrowed the critique to the authority lens and its two aspects, selection and analysis. I added example questions for each aspect. I also created the Constructing a Critique Prompt page, which builds the prompt step by step. In addition, I drafted a follow-up prompt that breaks the tool&rsquo;s critique into a table of claims for you to categorize and decide on. I also assigned each member of a group a different tool. Finally, I added a group report that compares the tools&rsquo; advice.</p>
+    </div>
     <p style="margin: 0 0 16px 0; text-align: right;"><a style="color: #1e407c;" href="#top">(Back to Top)</a></p>
 </div>
     </div>
@@ -509,95 +455,51 @@ details.acc.week .acc-body p, .email, .disclaimer, .mat-intro, .prose, .crumb, .
                 &lt;ul style=&quot;margin: 4px 0 4px 0; padding-left: 20px; list-style-type: none;&quot;&gt;
                     &lt;li style=&quot;margin: 0 0 2px 0;&quot;&gt;&lt;a style=&quot;color: #1e407c;&quot; href=&quot;#write-your-prompt&quot;&gt;1. Write your prompt&lt;/a&gt;&lt;/li&gt;
                     &lt;li style=&quot;margin: 0 0 2px 0;&quot;&gt;&lt;a style=&quot;color: #1e407c;&quot; href=&quot;#run-your-prompt&quot;&gt;2. Run your prompt&lt;/a&gt;&lt;/li&gt;
-                    &lt;li style=&quot;margin: 0 0 2px 0;&quot;&gt;&lt;a style=&quot;color: #1e407c;&quot; href=&quot;#review-the-reviewer&quot;&gt;3. Review the reviewer&lt;/a&gt;&lt;/li&gt;
+                    &lt;li style=&quot;margin: 0 0 2px 0;&quot;&gt;&lt;a style=&quot;color: #1e407c;&quot; href=&quot;#create-a-table&quot;&gt;3. Create a table to expedite your review&lt;/a&gt;&lt;/li&gt;
                 &lt;/ul&gt;
             &lt;/li&gt;
-            &lt;li style=&quot;margin: 0 0 4px 0;&quot;&gt;&lt;a style=&quot;color: #1e407c;&quot; href=&quot;#time&quot;&gt;Time&lt;/a&gt;&lt;/li&gt;
             &lt;li style=&quot;margin: 0 0 4px 0;&quot;&gt;&lt;a style=&quot;color: #1e407c;&quot; href=&quot;#criteria&quot;&gt;Criteria&lt;/a&gt;&lt;/li&gt;
             &lt;li style=&quot;margin: 0 0 4px 0;&quot;&gt;&lt;a style=&quot;color: #1e407c;&quot; href=&quot;#headings-to-copy-and-paste&quot;&gt;Headings to Copy and Paste&lt;/a&gt;&lt;/li&gt;
         &lt;/ul&gt;
     &lt;/div&gt;
 
     &lt;h2 id=&quot;purpose&quot; style=&quot;color: #1e407c; margin: 24px 0 8px 0; border-bottom: 1px solid #d5dfeb; padding-bottom: 4px;&quot;&gt;Purpose&lt;/h2&gt;
-    &lt;p style=&quot;margin: 0 0 12px 0;&quot;&gt;In Step 10 of the Final Capstone Project, you will write your own prompt that asks an AI tool for feedback on your draft memo. Because this course is a research course, that prompt should focus on how the memo identifies, selects, and describes the authority that it cites. This exercise lets you practice writing that prompt on the memo from Exercise 1.&lt;/p&gt;
-    &lt;p style=&quot;margin: 0 0 12px 0;&quot;&gt;A general request, such as &amp;ldquo;How can I improve this memo?&amp;rdquo;, usually produces broad comments about writing. Your prompt today asks only about authority, and it asks about two things. The first is selection: did the memo choose the right authorities? The second is analysis: does the memo describe and apply each authority accurately?&lt;/p&gt;
-    &lt;p style=&quot;margin: 0 0 12px 0;&quot;&gt;An AI tool&amp;rsquo;s critique is advice, and it is not a supervising attorney&amp;rsquo;s review. After the tool answers, you review the reviewer. You decide which comments are useful, which comments are generic, and which comments you must verify before you rely on them.&lt;/p&gt;
-    &lt;div style=&quot;background-color: #f0f4f9; border-left: 4px solid #1E407C; padding: 12px 16px; margin: 0 0 12px 0;&quot;&gt;
-        &lt;p style=&quot;margin: 0 0 8px 0;&quot;&gt;&lt;strong&gt;Source.&lt;/strong&gt; This exercise adapts Emily Pavuluri&amp;rsquo;s &lt;a style=&quot;color: #1e407c;&quot; href=&quot;https://ailegalresearch.org/exercises/memo-critique-bot/&quot;&gt;Memo Critique exercise&lt;/a&gt; and two of her handouts, the Five Editing Lenses Checklist ([link to the handout]) and the AI Critique Review Checklist ([link to the handout]). Emily Pavuluri, &lt;em&gt;Teaching AI-Augmented Legal Research&lt;/em&gt; (Version 2, Nov. 2026), &lt;a style=&quot;color: #1e407c;&quot; href=&quot;https://ailegalresearch.org/&quot;&gt;ailegalresearch.org&lt;/a&gt;, licensed under &lt;a style=&quot;color: #1e407c;&quot; href=&quot;https://creativecommons.org/licenses/by-nc/4.0/&quot;&gt;CC BY-NC 4.0&lt;/a&gt;.&lt;/p&gt;
-        &lt;p style=&quot;margin: 0;&quot;&gt;I changed the exercise in three ways. I narrowed the critique to authority, I added the questions about selecting authority, and I added a group report.&lt;/p&gt;
-    &lt;/div&gt;
+    &lt;p style=&quot;margin: 0 0 12px 0;&quot;&gt;In &lt;strong&gt;Step 10&lt;/strong&gt; of the Final Capstone Project, you will write your own prompt that asks an AI tool for feedback on your draft memo. Because this course is a research course, your prompt should focus on the selection and description of authority. We are using the same memo for both exercises this week, namely the Lexis Prot&amp;eacute;g&amp;eacute; memo from last week that had access to the cases in the Vault, as well as the Authority Table.&lt;/p&gt;
+    &lt;p style=&quot;margin: 0 0 12px 0;&quot;&gt;Your prompt will only address the treatment of authority in the memo, and more specifically two aspects of that treatment. The first is selection: did the memo choose the best available authorities? The second is analysis: does the memo describe and apply each authority accurately?&lt;/p&gt;
 
     &lt;p style=&quot;margin: 0 0 16px 0; text-align: right;&quot;&gt;&lt;a style=&quot;color: #1e407c;&quot; href=&quot;#top&quot;&gt;(Back to Top)&lt;/a&gt;&lt;/p&gt;
     &lt;h2 id=&quot;task&quot; style=&quot;color: #1e407c; margin: 24px 0 8px 0; border-bottom: 1px solid #d5dfeb; padding-bottom: 4px;&quot;&gt;Task&lt;/h2&gt;
-    &lt;p style=&quot;margin: 0 0 12px 0;&quot;&gt;Copy the headings from the box at the bottom of this page, and paste them into the Canvas text box. Fill in the headings as you work through the three steps. Work alone, and submit your own answers. Your group meets after this exercise, and your group&amp;rsquo;s leader submits a separate group report.&lt;/p&gt;
+    &lt;p style=&quot;margin: 0 0 12px 0;&quot;&gt;Work alone on this segment, and submit your answers. Your group meets after this exercise, and the group leader will submit a separate report.&lt;/p&gt;
 
     &lt;h3 id=&quot;write-your-prompt&quot; style=&quot;color: #2b7abc; margin: 18px 0 6px 0;&quot;&gt;1. Write your prompt&lt;/h3&gt;
-    &lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;Write a prompt that asks an AI tool to critique the memo from Exercise 1 ([link to the memo]). Your prompt must tell the tool five things.&lt;/p&gt;
-    &lt;table style=&quot;border-collapse: collapse; width: 100%; margin: 0 0 12px 0;&quot;&gt;
-        &lt;thead&gt;
-            &lt;tr&gt;
-                &lt;th style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left; background-color: #f0f4f9; color: #1e407c;&quot; scope=&quot;col&quot;&gt;Tell the tool&lt;/th&gt;
-                &lt;th style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left; background-color: #f0f4f9; color: #1e407c;&quot; scope=&quot;col&quot;&gt;For this memo&lt;/th&gt;
-            &lt;/tr&gt;
-        &lt;/thead&gt;
-        &lt;tbody&gt;
-            &lt;tr&gt;
-                &lt;th style=&quot;width: 28%; border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left;&quot; scope=&quot;row&quot;&gt;The audience&lt;/th&gt;
-                &lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;A supervising partner will read the memo.&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-                &lt;th style=&quot;width: 28%; border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left;&quot; scope=&quot;row&quot;&gt;The purpose&lt;/th&gt;
-                &lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;The memo is an objective memo, so it predicts how the court is likely to rule. Name the court.&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-                &lt;th style=&quot;width: 28%; border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left;&quot; scope=&quot;row&quot;&gt;The level of feedback&lt;/th&gt;
-                &lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Say how many comments you want and how the tool should rank them. For example, ask for the three most important problems.&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-                &lt;th style=&quot;width: 28%; border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left;&quot; scope=&quot;row&quot;&gt;The focus&lt;/th&gt;
-                &lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Ask about authority only, and ask about both selection and analysis. Tell the tool not to comment on grammar, style, tone, or organization.&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-                &lt;th style=&quot;width: 28%; border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left;&quot; scope=&quot;row&quot;&gt;The limits&lt;/th&gt;
-                &lt;td style=&quot;border: 1px solid #d5dfeb; padding: 8px 10px;&quot;&gt;Tell the tool not to invent facts and not to rewrite the memo. Ask for the comments as a table of suggested changes. Tell the tool to give a full citation for any authority that it suggests. Tell the tool to say, for each comment, whether you must verify the comment before you rely on it.&lt;/td&gt;
-            &lt;/tr&gt;
-        &lt;/tbody&gt;
-    &lt;/table&gt;
-    &lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;The questions below are examples of what a prompt about authority can ask. You do not need to use all of them. Choose the questions that matter most for this memo, and write them in your own words.&lt;/p&gt;
-    &lt;p style=&quot;margin: 14px 0 4px 0; font-weight: bold; color: #1e407c;&quot;&gt;Selection: did the memo choose the right authorities?&lt;/p&gt;
-    &lt;ul style=&quot;margin: 0 0 12px 0; padding-left: 22px;&quot;&gt;
-        &lt;li style=&quot;margin: 0 0 6px 0;&quot;&gt;Which cited authorities bind the court that will decide the issue, and which authorities are only persuasive?&lt;/li&gt;
-        &lt;li style=&quot;margin: 0 0 6px 0;&quot;&gt;Does the memo say so when it relies on persuasive authority?&lt;/li&gt;
-        &lt;li style=&quot;margin: 0 0 6px 0;&quot;&gt;Is there binding authority, more recent authority, or adverse authority that the memo does not cite?&lt;/li&gt;
-        &lt;li style=&quot;margin: 0 0 6px 0;&quot;&gt;Does any proposition in the memo rest on too little authority?&lt;/li&gt;
-    &lt;/ul&gt;
-    &lt;p style=&quot;margin: 14px 0 4px 0; font-weight: bold; color: #1e407c;&quot;&gt;Analysis: does the memo describe and apply each authority accurately?&lt;/p&gt;
-    &lt;ul style=&quot;margin: 0 0 12px 0; padding-left: 22px;&quot;&gt;
+    &lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;Write a prompt that asks an AI tool to critique the memo from Exercise 1 ([link to the memo]). Your prompt must tell the tool five things: the audience, the purpose, the level of feedback, the focus, and the limits. To build your prompt, you can use the Constructing a Critique Prompt page ([link to the page]), which walks you through each element, with examples, and builds your prompt as you type. You can also use the Word version of the page ([link to the Word version]).&lt;/p&gt;
+    &lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;The questions below are examples of what a prompt about authority can ask. You do not need to use all of them. Choose the questions that you determine matter most for this memo, and write them in your own words.&lt;/p&gt;
+    &lt;details style=&quot;margin: 6px 0 12px 0; border: 1px solid #d5dfeb; border-radius: 4px; padding: 6px 10px; background-color: #f0f4f9;&quot;&gt;&lt;summary style=&quot;cursor: pointer; color: #1e407c; font-weight: bold;&quot;&gt;Selection: did the memo choose the best available authorities? (select to expand)&lt;/summary&gt;
+    &lt;ul style=&quot;margin: 6px 0 2px 0; padding-left: 22px;&quot;&gt;
+        &lt;li style=&quot;margin: 0 0 6px 0;&quot;&gt;Does the memo rely on persuasive authority only when that is a strategically justified decision?&lt;/li&gt;
+        &lt;li style=&quot;margin: 0 0 6px 0;&quot;&gt;Is there binding authority that the memo does not cite?&lt;/li&gt;
+        &lt;li style=&quot;margin: 0 0 6px 0;&quot;&gt;Is there more recent authority or useful persuasive authority that the memo does not cite?&lt;/li&gt;
+        &lt;li style=&quot;margin: 0 0 6px 0;&quot;&gt;Is any proposition in the memo supported by too little authority?&lt;/li&gt;
+        &lt;li style=&quot;margin: 0 0 6px 0;&quot;&gt;Does the memo treat adverse authority appropriately?&lt;/li&gt;
+    &lt;/ul&gt;&lt;/details&gt;
+    &lt;details style=&quot;margin: 6px 0 12px 0; border: 1px solid #d5dfeb; border-radius: 4px; padding: 6px 10px; background-color: #f0f4f9;&quot;&gt;&lt;summary style=&quot;cursor: pointer; color: #1e407c; font-weight: bold;&quot;&gt;Analysis: does the memo describe and apply each authority accurately? (select to expand)&lt;/summary&gt;
+    &lt;ul style=&quot;margin: 6px 0 2px 0; padding-left: 22px;&quot;&gt;
         &lt;li style=&quot;margin: 0 0 6px 0;&quot;&gt;Does each citation support the specific sentence that it follows?&lt;/li&gt;
         &lt;li style=&quot;margin: 0 0 6px 0;&quot;&gt;Does the memo state any holding more broadly than the court stated it?&lt;/li&gt;
-        &lt;li style=&quot;margin: 0 0 6px 0;&quot;&gt;Does the memo compare the facts of the cited cases with the client&amp;rsquo;s facts?&lt;/li&gt;
+        &lt;li style=&quot;margin: 0 0 6px 0;&quot;&gt;Is the memo otherwise wrong in how it characterizes any of the authority?&lt;/li&gt;
         &lt;li style=&quot;margin: 0 0 6px 0;&quot;&gt;Does any conclusion claim more confidence than the cited authority supports?&lt;/li&gt;
-    &lt;/ul&gt;
+    &lt;/ul&gt;&lt;/details&gt;
 
     &lt;h3 id=&quot;run-your-prompt&quot; style=&quot;color: #2b7abc; margin: 18px 0 6px 0;&quot;&gt;2. Run your prompt&lt;/h3&gt;
-    &lt;p style=&quot;margin: 0 0 12px 0;&quot;&gt;Run your prompt in the tool assigned to you: Harvey, Copilot, or AI Studio. Each member of your group uses a different tool, so your group can compare the advice that each tool gives. Do not use Lexis or Westlaw for this exercise, and do not upload cases from Westlaw or Lexis into these tools. Upload the memo if the tool accepts uploads. Otherwise, paste the text of the memo below your prompt. The memo is fictional, so it contains no confidential information.&lt;/p&gt;
+    &lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;Each member of your group will run the prompt through a different assigned tool. The four tools are AI Studio, Harvey, CoCounsel, and Lexis Prot&amp;eacute;g&amp;eacute;.&lt;/p&gt;
+    &lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;Within your tool, you may use the tool&amp;rsquo;s default model. If your tool lets you choose a model, you may instead select a specific model, such as one of Anthropic&amp;rsquo;s Claude models or one of OpenAI&amp;rsquo;s GPT models. Record the tool and the model that you used.&lt;/p&gt;
 
-    &lt;h3 id=&quot;review-the-reviewer&quot; style=&quot;color: #2b7abc; margin: 18px 0 6px 0;&quot;&gt;3. Review the reviewer&lt;/h3&gt;
-    &lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;First, paste the follow-up prompt below into the same conversation with the tool. The follow-up prompt asks the tool to break its critique into a table, with one claim in each row, and to leave two columns blank so that you make the decisions.&lt;/p&gt;
-    &lt;div style=&quot;background-color: #f0f4f9; border-left: 4px solid #1E407C; padding: 12px 16px; margin: 0 0 12px 0;&quot;&gt;
-        &lt;p style=&quot;margin: 0 0 8px 0;&quot;&gt;Break your critique into a table of separate claims. Give each claim its own row, even when one of your comments made more than one claim. Use these six columns:&lt;/p&gt;
-        &lt;ol style=&quot;margin: 0 0 8px 0;&quot;&gt;
-            &lt;li&gt;Number&lt;/li&gt;
-            &lt;li&gt;Where in the memo (the section heading, or a short quoted phrase)&lt;/li&gt;
-            &lt;li&gt;Your claim, in one sentence, using your earlier wording where you can&lt;/li&gt;
-            &lt;li&gt;The authority you relied on, with a full citation, or &amp;ldquo;None&amp;rdquo;&lt;/li&gt;
-            &lt;li&gt;Category (leave this column blank)&lt;/li&gt;
-            &lt;li&gt;Decision (leave this column blank)&lt;/li&gt;
-        &lt;/ol&gt;
-        &lt;p style=&quot;margin: 0;&quot;&gt;Do not add new claims, and do not change or soften the claims you already made. Do not fill in columns 5 and 6, because I will decide them.&lt;/p&gt;
-    &lt;/div&gt;
-    &lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;The tool leaves the Category and Decision columns blank because an AI tool that rates its own claims tends to rate most of them as useful. Column 4 shows you which claims rest on an authority and which claims rest on nothing.&lt;/p&gt;
-    &lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;Then choose two rows from the table. For each row, choose the category that fits the claim best.&lt;/p&gt;
+    &lt;h3 id=&quot;create-a-table&quot; style=&quot;color: #2b7abc; margin: 18px 0 6px 0;&quot;&gt;3. Create a table to expedite your review&lt;/h3&gt;
+    &lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;First, paste the follow-up prompt into the same conversation with the tool. The follow-up prompt asks the tool to break its critique into a table, with one claim in each row, and to leave two columns blank so that you make the decisions. You can copy the follow-up prompt from Section III of the Constructing a Critique Prompt page ([link to the page]) or from the Word version of the page ([link to the Word version]). The prompt also appears in the box below.&lt;/p&gt;
+    &lt;details style=&quot;margin: 6px 0 12px 0; border: 1px solid #d5dfeb; border-radius: 4px; padding: 6px 10px; background-color: #f0f4f9;&quot;&gt;&lt;summary style=&quot;cursor: pointer; color: #1e407c; font-weight: bold;&quot;&gt;The follow-up prompt (select to expand)&lt;/summary&gt;&lt;p style=&quot;margin: 8px 0 6px 0;&quot;&gt;Break your critique into a table of separate claims. Give each claim its own row, even when one of your comments made more than one claim. Use these six columns:&lt;/p&gt;&lt;ol style=&quot;margin: 0 0 6px 0; padding-left: 22px;&quot;&gt;&lt;li&gt;Number&lt;/li&gt;&lt;li&gt;Where in the memo (the section heading and paragraph number)&lt;/li&gt;&lt;li&gt;Your claim, in one sentence, using your earlier wording where you can&lt;/li&gt;&lt;li&gt;The authority you relied on, with a full citation, or &amp;ldquo;None&amp;rdquo;&lt;/li&gt;&lt;li&gt;Category: Useful, Generic, Legally inaccurate, Unsupported, Strategically unhelpful, or Needs verification (put these six options in the column heading, and leave the column blank)&lt;/li&gt;&lt;li&gt;Decision: Accept, Modify, Verify first, or Reject (put these four options in the column heading, and leave the column blank)&lt;/li&gt;&lt;/ol&gt;&lt;p style=&quot;margin: 0 0 2px 0;&quot;&gt;Do not add new claims, and do not change or soften the claims you already made. Do not fill in columns 5 and 6, because I will decide them.&lt;/p&gt;&lt;/details&gt;
+    &lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;The Category and Decision columns are blank because filling them in is your job.&lt;/p&gt;
+    &lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;You will choose two rows from the table to complete. In other words, you do not have to fill out the entire table in the time allotted for this in-class exercise. For both of the rows you select, you will make two decisions.&lt;/p&gt;
+    &lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;&lt;strong&gt;1.&lt;/strong&gt; You will determine which category fits the claim best. The categories are in the table below.&lt;/p&gt;
     &lt;table style=&quot;border-collapse: collapse; width: 100%; margin: 0 0 12px 0;&quot;&gt;
         &lt;thead&gt;
             &lt;tr&gt;
@@ -632,25 +534,11 @@ details.acc.week .acc-body p, .email, .disclaimer, .mat-intro, .prose, .crumb, .
             &lt;/tr&gt;
         &lt;/tbody&gt;
     &lt;/table&gt;
-    &lt;p style=&quot;margin: 0 0 12px 0;&quot;&gt;Next, decide what you would do with each claim: accept it, modify it, verify it first, or reject it. Give your reason in one sentence. You do not need to do the verifying today.&lt;/p&gt;
-    &lt;div style=&quot;background-color: #f0f4f9; border-left: 4px solid #1E407C; padding: 12px 16px; margin: 0 0 12px 0;&quot;&gt;
-        &lt;p style=&quot;margin: 0 0 8px 0;&quot;&gt;&lt;strong&gt;Be careful about letting an AI tool change your document directly.&lt;/strong&gt; Ask the tool for a table of suggested changes or for tracked changes, so that you can see each change and decide whether to accept it.&lt;/p&gt;
-        &lt;p style=&quot;margin: 0;&quot;&gt;To be extra safe, run a redline or review the tracked changes after extensive revisions. A redline compares the revised document with your earlier version, so it shows you any change that entered the document without your approval.&lt;/p&gt;
-    &lt;/div&gt;
-
-
-    &lt;p style=&quot;margin: 0 0 16px 0; text-align: right;&quot;&gt;&lt;a style=&quot;color: #1e407c;&quot; href=&quot;#top&quot;&gt;(Back to Top)&lt;/a&gt;&lt;/p&gt;
-    &lt;h2 id=&quot;time&quot; style=&quot;color: #1e407c; margin: 24px 0 8px 0; border-bottom: 1px solid #d5dfeb; padding-bottom: 4px;&quot;&gt;Time&lt;/h2&gt;
-    &lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;&lt;strong&gt;Writing your prompt (Step 1):&lt;/strong&gt; 6 minutes.&lt;/p&gt;
-    &lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;&lt;strong&gt;Running your prompt (Step 2):&lt;/strong&gt; 3 minutes.&lt;/p&gt;
-    &lt;p style=&quot;margin: 0 0 20px 0;&quot;&gt;&lt;strong&gt;Running the follow-up prompt and reviewing two claims (Step 3):&lt;/strong&gt; 6 minutes.&lt;/p&gt;
+    &lt;p style=&quot;margin: 0 0 12px 0;&quot;&gt;&lt;strong&gt;2.&lt;/strong&gt; You will decide what to do with the claim. Your choices are to accept it, modify it, verify it first, or reject it. Give your reason in one or two sentences. You do not actually need to verify anything for this assignment.&lt;/p&gt;
 
     &lt;p style=&quot;margin: 0 0 16px 0; text-align: right;&quot;&gt;&lt;a style=&quot;color: #1e407c;&quot; href=&quot;#top&quot;&gt;(Back to Top)&lt;/a&gt;&lt;/p&gt;
     &lt;h2 id=&quot;criteria&quot; style=&quot;color: #1e407c; margin: 24px 0 8px 0; border-bottom: 1px solid #d5dfeb; padding-bottom: 4px;&quot;&gt;Criteria&lt;/h2&gt;
-    &lt;p style=&quot;margin: 0 0 12px 0;&quot;&gt;This exercise counts toward the In-Class Work component of your grade and toward class participation. I grade it pass/fail. A good faith effort is all that I require. A complete submission meets the two conditions below.&lt;/p&gt;
-    &lt;p style=&quot;margin: 0 0 8px 0;&quot;&gt;&lt;strong&gt;Your prompt.&lt;/strong&gt; Your submission includes the prompt that you ran. The prompt tells the tool the five things in Step 1, and it asks about both the selection of authority and the analysis of authority.&lt;/p&gt;
-    &lt;p style=&quot;margin: 0 0 12px 0;&quot;&gt;&lt;strong&gt;Your review.&lt;/strong&gt; Your submission names the tool that you used. For each of two claims from the follow-up table, your submission gives a category, a decision, and a reason.&lt;/p&gt;
-    &lt;table style=&quot;border-collapse: collapse; width: 100%; margin: 12px 0 0 0;&quot;&gt;
+    &lt;table style=&quot;border-collapse: collapse; width: 100%; margin: 0;&quot;&gt;
         &lt;tbody&gt;
             &lt;tr&gt;
                 &lt;th style=&quot;width: 30%; border: 1px solid #d5dfeb; padding: 8px 10px; text-align: left; background-color: #f0f4f9; color: #1e407c;&quot; scope=&quot;row&quot;&gt;Turn-in window&lt;/th&gt;
@@ -670,10 +558,13 @@ details.acc.week .acc-body p, .email, .disclaimer, .mat-intro, .prose, .crumb, .
     &lt;p style=&quot;margin: 0 0 16px 0; text-align: right;&quot;&gt;&lt;a style=&quot;color: #1e407c;&quot; href=&quot;#top&quot;&gt;(Back to Top)&lt;/a&gt;&lt;/p&gt;
     &lt;h2 id=&quot;headings-to-copy-and-paste&quot; style=&quot;color: #1e407c; margin: 24px 0 8px 0; border-bottom: 1px solid #d5dfeb; padding-bottom: 4px;&quot;&gt;Headings to Copy and Paste&lt;/h2&gt;
     &lt;p style=&quot;margin: 0 0 12px 0;&quot;&gt;Select everything in the box, copy it, and paste it into the Canvas text box. Write your answer under each heading. The notes in gray are reminders, and you can delete them.&lt;/p&gt;
-    &lt;div style=&quot;border: 1px dashed #8aa4c4; background: #ffffff; padding: 12px 16px; margin: 0 0 8px 0; line-height: 1.7;&quot;&gt;&lt;strong&gt;Individual Prompt: Critiquing a Memo&amp;rsquo;s Use of Authority&lt;/strong&gt;&lt;br /&gt;&lt;br /&gt;&lt;strong&gt;1. My prompt&lt;/strong&gt;&lt;br /&gt;&lt;em style=&quot;color: #5b6770;&quot;&gt;Paste the prompt that you ran. It should state the audience, the purpose, the level of feedback, the focus on authority (selection and analysis), and the limits.&lt;/em&gt;&lt;br /&gt;&lt;br /&gt;&lt;strong&gt;2. My tool:&lt;/strong&gt;&lt;br /&gt;&lt;br /&gt;&lt;strong&gt;3a. First claim&lt;/strong&gt;&lt;br /&gt;&lt;strong&gt;The claim&lt;/strong&gt; &lt;em style=&quot;color: #5b6770;&quot;&gt;(the row number and a short summary)&lt;/em&gt;&lt;strong&gt;:&lt;/strong&gt;&lt;br /&gt;&lt;strong&gt;Category&lt;/strong&gt; &lt;em style=&quot;color: #5b6770;&quot;&gt;(useful, generic, legally inaccurate, unsupported, strategically unhelpful, or needs verification)&lt;/em&gt;&lt;strong&gt;:&lt;/strong&gt;&lt;br /&gt;&lt;strong&gt;My decision&lt;/strong&gt; &lt;em style=&quot;color: #5b6770;&quot;&gt;(accept, modify, verify first, or reject)&lt;/em&gt;&lt;strong&gt;, and my reason:&lt;/strong&gt;&lt;br /&gt;&lt;br /&gt;&lt;strong&gt;3b. Second claim&lt;/strong&gt;&lt;br /&gt;&lt;strong&gt;The claim&lt;/strong&gt; &lt;em style=&quot;color: #5b6770;&quot;&gt;(the row number and a short summary)&lt;/em&gt;&lt;strong&gt;:&lt;/strong&gt;&lt;br /&gt;&lt;strong&gt;Category:&lt;/strong&gt;&lt;br /&gt;&lt;strong&gt;My decision, and my reason:&lt;/strong&gt;&lt;br /&gt;&lt;/div&gt;
+    &lt;div style=&quot;border: 1px dashed #8aa4c4; background: #ffffff; padding: 12px 16px; margin: 0 0 8px 0; line-height: 1.7;&quot;&gt;&lt;strong&gt;Individual Prompt: Critiquing a Memo&amp;rsquo;s Use of Authority&lt;/strong&gt;&lt;br /&gt;&lt;br /&gt;&lt;strong&gt;1. My prompt&lt;/strong&gt;&lt;br /&gt;&lt;em style=&quot;color: #5b6770;&quot;&gt;Paste the prompt that you ran. It should state the audience, the purpose, the level of feedback, the focus on authority (selection and analysis), and the limits.&lt;/em&gt;&lt;br /&gt;&lt;br /&gt;&lt;strong&gt;2. My tool and model:&lt;/strong&gt;&lt;br /&gt;&lt;br /&gt;&lt;strong&gt;3a. First claim&lt;/strong&gt;&lt;br /&gt;&lt;strong&gt;The claim&lt;/strong&gt; &lt;em style=&quot;color: #5b6770;&quot;&gt;(the row number and a short summary)&lt;/em&gt;&lt;strong&gt;:&lt;/strong&gt;&lt;br /&gt;&lt;strong&gt;Category&lt;/strong&gt; &lt;em style=&quot;color: #5b6770;&quot;&gt;(useful, generic, legally inaccurate, unsupported, strategically unhelpful, or needs verification)&lt;/em&gt;&lt;strong&gt;:&lt;/strong&gt;&lt;br /&gt;&lt;strong&gt;My decision&lt;/strong&gt; &lt;em style=&quot;color: #5b6770;&quot;&gt;(accept, modify, verify first, or reject)&lt;/em&gt;&lt;strong&gt;, and my reason:&lt;/strong&gt;&lt;br /&gt;&lt;br /&gt;&lt;strong&gt;3b. Second claim&lt;/strong&gt;&lt;br /&gt;&lt;strong&gt;The claim&lt;/strong&gt; &lt;em style=&quot;color: #5b6770;&quot;&gt;(the row number and a short summary)&lt;/em&gt;&lt;strong&gt;:&lt;/strong&gt;&lt;br /&gt;&lt;strong&gt;Category:&lt;/strong&gt;&lt;br /&gt;&lt;strong&gt;My decision, and my reason:&lt;/strong&gt;&lt;br /&gt;&lt;/div&gt;
+    &lt;div style=&quot;background-color: #f0f4f9; border-left: 4px solid #1E407C; padding: 12px 16px; margin: 24px 0 12px 0;&quot;&gt;
+        &lt;p style=&quot;margin: 0 0 8px 0;&quot;&gt;&lt;strong&gt;Source.&lt;/strong&gt; This exercise adapts Emily Pavuluri&amp;rsquo;s &lt;a style=&quot;color: #1e407c;&quot; href=&quot;https://ailegalresearch.org/exercises/memo-critique-bot/&quot;&gt;Memo Critique exercise&lt;/a&gt; and two of her handouts, the Five Editing Lenses Checklist ([link to the handout]) and the AI Critique Review Checklist ([link to the handout]). Emily Pavuluri, &lt;em&gt;Teaching AI-Augmented Legal Research&lt;/em&gt; (Version 2, Nov. 2026), &lt;a style=&quot;color: #1e407c;&quot; href=&quot;https://ailegalresearch.org/&quot;&gt;ailegalresearch.org&lt;/a&gt;, licensed under &lt;a style=&quot;color: #1e407c;&quot; href=&quot;https://creativecommons.org/licenses/by-nc/4.0/&quot;&gt;CC BY-NC 4.0&lt;/a&gt;.&lt;/p&gt;
+        &lt;p style=&quot;margin: 0;&quot;&gt;I changed the exercise in six ways. I narrowed the critique to the authority lens and its two aspects, selection and analysis. I added example questions for each aspect. I also created the Constructing a Critique Prompt page, which builds the prompt step by step. In addition, I drafted a follow-up prompt that breaks the tool&amp;rsquo;s critique into a table of claims for you to categorize and decide on. I also assigned each member of a group a different tool. Finally, I added a group report that compares the tools&amp;rsquo; advice.&lt;/p&gt;
+    &lt;/div&gt;
     &lt;p style=&quot;margin: 0 0 16px 0; text-align: right;&quot;&gt;&lt;a style=&quot;color: #1e407c;&quot; href=&quot;#top&quot;&gt;(Back to Top)&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-</textarea>
+&lt;/div&gt;</textarea>
       </details>
     </div>
     <div class="license">
