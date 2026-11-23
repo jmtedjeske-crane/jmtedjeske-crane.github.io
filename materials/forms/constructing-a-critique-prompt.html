@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Constructing a Critique Prompt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+/* VOICE: a calm classroom worksheet, matching the Week 1 "Constructing the Prompt" exercise.
+   IDEA: the prompt assembles on a sheet as each element is switched on, like the Week 1 tool.
+   PICTURE: the live prompt sheet beside the element switches, then beside the student's own steps.
+   COLOUR and TYPE: the course's Broadsheet system: paper #f3f2f2, ink #201e1d, accent #0088b0, magenta #d6006c; Source Serif 4.
+   LAYOUT: one reading column for Sections I and II; two columns (controls, sheet) for Sections III and IV, stacked on narrow screens. */
+:root{color-scheme:light dark;
+  --bg:light-dark(#f3f2f2,#1b1a19);--ink:light-dark(#201e1d,#ece9e8);--sheet:light-dark(#ffffff,#262423);
+  --muted:light-dark(#605d5d,#bab6b6);--faint:light-dark(#7d7979,#9b9797);--rule:light-dark(#d7d3d3,#444141);
+  --accent:light-dark(#0088b0,#62c5ee);--accent-d:light-dark(#006786,#99e0ff);--accent-bg:light-dark(#e9f8ff,#0a303e);
+  --pink:light-dark(#d6006c,#ff90b1);--pink-bg:light-dark(#fff1f4,#4b1528)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Source Serif 4",Georgia,serif;overflow-x:clip}
+h1,h2,h3{font-weight:600;line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(34px,5vw,50px)}h2{font-size:clamp(26px,3.2vw,34px);margin-bottom:14px}h3{font-size:20px}
+p{margin:0 0 14px;max-width:68ch}
+.band{padding:clamp(28px,4vw,56px) max(5vw,16px);max-width:1240px;margin:0 auto}
+.top{border-bottom:3px solid var(--ink)}
+.kicker{font-size:15px;color:var(--muted);margin-bottom:8px}
+.meta{margin-top:10px;font-size:16px;color:var(--accent-d)}
+.notice{margin-top:22px;padding:14px 18px;background:var(--pink-bg);border-left:4px solid var(--pink);max-width:76ch}
+.notice strong{display:block;margin-bottom:4px}
+.sec-n{color:var(--pink);margin-right:.35em}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+sup a{color:var(--accent-d);text-decoration:none;font-weight:600}
+.parts{margin:0 0 16px;padding-left:1.2em;max-width:68ch}.parts li{margin:4px 0}
+.parts ul{margin:6px 0 10px;padding-left:1.2em;font-size:16px}.parts .qs{display:block;margin-top:4px;font-size:15px;color:var(--muted)}
+.asks{margin:18px 0 0;padding:16px 20px;background:var(--sheet);border:1px solid var(--rule);max-width:68ch}
+.asks h3{font-size:17px;margin-bottom:8px;color:var(--accent-d)}
+.asks ul{margin:0;padding-left:1.2em}.asks li{margin:4px 0}
+/* The five lenses are drawn as magnifying glasses: a round glass rim with a short handle. They are labels, not buttons. */
+.lenses{display:flex;flex-wrap:wrap;gap:18px 30px;margin:10px 0 26px;padding:0 0 6px;list-style:none}
+.lenses li{position:relative;width:92px;height:92px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;font-size:14px;color:var(--muted);cursor:default;user-select:none;
+  border:4px solid var(--faint);background:radial-gradient(circle at 34% 30%,light-dark(#ffffff,#3a3837) 0 18%,light-dark(#f4f7f9,#2c2a29) 45%,light-dark(#e3e9ee,#232120) 100%)}
+.lenses li::after{content:"";position:absolute;width:30px;height:7px;border-radius:3px;background:var(--faint);right:-24px;bottom:2px;transform:rotate(45deg);transform-origin:left center}
+.lenses li.on{border-color:var(--accent);color:var(--ink);font-weight:600;background:radial-gradient(circle at 34% 30%,light-dark(#ffffff,#1d4b5c) 0 18%,var(--accent-bg) 55%,light-dark(#cbeeff,#0a303e) 100%)}
+.lenses li.on::after{background:var(--accent)}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:28px;align-items:start;margin-top:18px}
+.el{display:flex;gap:14px;width:100%;text-align:left;padding:12px 14px;margin:0 0 8px;background:var(--sheet);border:1px solid var(--rule);color:inherit;font:inherit;cursor:pointer;min-height:44px}
+.el:hover{border-color:var(--accent)}
+.el:focus-visible,button:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.sw{flex:none;width:22px;height:22px;margin-top:3px;border:1.5px solid var(--faint);transition:background .15s}
+.el[aria-pressed=true] .sw{background:var(--accent);border-color:var(--accent-d)}
+.el .t{font-weight:600;font-size:18px;color:var(--muted)}.el[aria-pressed=true] .t{color:var(--ink)}
+.tag{display:inline-block;font-size:13px;font-weight:400;color:var(--accent-d);margin-left:6px}
+.why{font-size:15px;color:var(--muted);margin-top:2px}
+.sheet{background:var(--sheet);border:1px solid var(--rule);border-top:4px solid var(--accent);padding:18px 20px;position:sticky;top:16px}
+.sheet h3{margin-bottom:6px}
+.five{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 12px;padding:0;list-style:none}
+.five li{font-size:13px;padding:3px 9px;border:1px solid var(--rule);color:var(--faint)}
+.five li.on{border-color:var(--accent);color:var(--accent-d);background:var(--accent-bg)}
+.meter{height:6px;background:var(--rule)}.meter i{display:block;height:6px;background:var(--accent);transition:width .25s}
+.verdict{font-size:15px;font-style:italic;color:var(--muted);margin:10px 0 12px}
+.out{font-size:16px;line-height:1.55}.out p{margin:0 0 10px}
+.out .lb{display:block;font-size:13px;color:var(--accent-d)}
+.empty{color:var(--faint);font-style:italic}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+button.b{min-height:44px;padding:9px 16px;font:inherit;font-size:15px;cursor:pointer;border:1px solid var(--accent-d);background:transparent;color:var(--accent-d)}
+button.b.fill{background:var(--accent-d);color:#fff}
+button.b:disabled{opacity:.45;cursor:default}
+.follow{margin-top:30px;padding:18px 20px;background:var(--sheet);border:1px solid var(--rule);border-left:4px solid var(--pink)}
+.follow pre{white-space:pre-wrap;font:inherit;font-size:16px;margin:0;padding:12px 14px;background:var(--bg);border:1px solid var(--rule)}
+.follow .lab{font-size:17px;color:var(--accent-d);margin:4px 0 6px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:14px;font-size:15px}
+.two ul{margin:4px 0 0;padding-left:1.2em}
+.file{background:var(--sheet);border:1px solid var(--rule);padding:16px 20px;max-width:76ch;margin-bottom:18px}
+.step{background:var(--sheet);border:1px solid var(--rule);padding:14px 16px;margin-bottom:10px}
+.step .hd{display:flex;gap:10px;align-items:baseline}
+.step .n{font-size:15px;color:var(--faint)}.step.done .n{color:var(--accent-d);font-weight:600}
+.step p.g{font-size:15px;color:var(--muted);margin:4px 0 8px}
+.step details{font-size:14px;color:var(--muted);margin-bottom:8px}.step summary{cursor:pointer;color:var(--accent-d)}
+.step label{display:block;font-size:14px;color:var(--muted);margin-bottom:4px}
+textarea{width:100%;min-height:86px;padding:10px;font:16px/1.5 "Source Serif 4",Georgia,serif;color:var(--ink);background:var(--bg);border:1px solid var(--rule);resize:vertical}
+.wc{font-size:14px;color:var(--faint)}
+footer{border-top:1px solid var(--rule);font-size:14px;color:var(--muted)}
+footer p{max-width:90ch}
+@media(max-width:900px){.grid{grid-template-columns:minmax(0,1fr)}.sheet{position:static}}
+@media(max-width:600px){.two{grid-template-columns:minmax(0,1fr)}body{font-size:16px}}
+@media(prefers-reduced-motion:reduce){.meter i,.sw{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="band top" id="top">
+  <div class="kicker">AI and Legal Research · Week 6</div>
+  <h1>Constructing a critique prompt</h1>
+  <div class="meta">Use with In-Class Exercise 2 (optionally, you can also use it for Step 10 of the Final Capstone Project)</div>
+  <div class="notice" role="note"><strong>Nothing is saved</strong>This tool keeps no record of who uses it or what anyone types. If you close the browser tab, your work is gone, so copy your prompt before you leave the page.</div>
+</header>
+
+<main>
+<section class="band" aria-labelledby="s1">
+  <h2 id="s1"><span class="sec-n">I.</span>As the Decision-Maker, you review the AI reviewer</h2>
+  <p>One of the ways you exercise judgment in the research process is in the role of Decision-Maker. As the Decision-Maker, you need to determine how to incorporate AI-generated feedback on a draft into your final product.</p>
+  <p>This exercise deals with prompting an AI tool for feedback on the primary law used in the document. A good critique prompt narrows the scope of what the AI looks at to make it easier to evaluate each comment that the tool makes.</p>
+  <p>Emily Pavuluri, a law librarian and the Associate Director of the Vanderbilt AI Law Lab, provides a structure for sorting critiques into five “lenses”:<sup><a href="#note-1" id="ref-1" aria-label="Note 1">1</a></sup></p>
+  <ul class="lenses" aria-label="The five editing lenses"><li>Accuracy</li><li>Structure</li><li class="on">Authority<span class="sr"> (the focus of this exercise)</span></li><li>Tone</li><li>Strategy</li></ul>
+  <p>Given that this is a research course, this exercise focuses on the “authority” lens, with some consideration of “accuracy” and “strategy.” We are considering two aspects of “authority”:</p>
+  <ul class="parts">
+    <li><strong>Selection:</strong> Does the memo include the best available authority?<span class="qs">More specific questions that your prompt can ask about selection:</span>
+      <ul>
+        <li>Does the memo rely on persuasive authority only when that is a strategically justified decision?</li>
+        <li>Is there binding authority that the memo does not cite?</li>
+        <li>Is there more recent authority or useful persuasive authority that the memo does not cite?</li>
+        <li>Is any proposition in the memo supported by too little authority?</li>
+        <li>Does the memo treat adverse authority appropriately?</li>
+      </ul></li>
+    <li><strong>Analysis:</strong> Does the memo describe and apply each item accurately?<span class="qs">More specific questions that your prompt can ask about analysis:</span>
+      <ul>
+        <li>Does each citation support the specific sentence that it follows?</li>
+        <li>Does the memo state any holding more broadly than the court stated it?</li>
+        <li>Is the memo otherwise wrong in how it characterizes any of the authority?</li>
+        <li>Does any conclusion claim more confidence than the cited authority supports?</li>
+      </ul></li>
+  </ul>
+  <p>You do not need to use all of these questions. Choose the questions that you determine matter most for the memo, and write them in your own words.</p>
+</section>
+
+<section class="band" aria-labelledby="s4">
+  <h2 id="s4"><span class="sec-n">II.</span>Write the prompt for the Exercise 2 memo</h2>
+  <div class="file"><h3 style="margin-bottom:8px">The memo</h3>
+    <p>The memo for this exercise comes from last week’s assignment. It is the Lexis Protégé memo that had access to the cases in the Vault, as well as the Authority Table. The memo predicts whether the U.S. District Court for the Middle District of Pennsylvania will require a defendant’s Rule 30(b)(6) designee to appear for deposition in Harrisburg, rather than near the defendant’s San Francisco headquarters, and it recommends what the defendant should file.</p>
+    <p style="margin:0">Use the structured format below to craft the language for the prompt. The language that you draft will likely be, in many cases, similar to the examples from the Dating Disasters memo (the fact pattern from Week 1). That sample language appears under each step. However, you should feel free to either adapt the suggested language or create your own. When you finish, copy your prompt and run it, with the memo, in your assigned tool.</p>
+    <p style="margin:12px 0 0">There is also a <a href="../files/Week6_Constructing_a_Critique_Prompt.docx" download>Word version of this page</a> that you can use.</p>
+  </div>
+  <div class="grid">
+    <div id="steps"></div>
+    <div class="sheet" aria-labelledby="yt-h">
+      <h3 id="yt-h">Your prompt</h3>
+      <div class="wc" id="wc">0 words</div>
+      <div class="out" id="ytOut" aria-live="polite"></div>
+      <div class="btns"><button class="b fill" type="button" id="copyYt" disabled>Copy your prompt</button><button class="b" type="button" id="clearYt">Clear all</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="notes-h">
+  <h2 id="notes-h" style="font-size:20px">Notes</h2>
+  <p id="note-1" style="font-size:15px">1. Emily Pavuluri, <em>Five Editing Lenses Checklist</em>, <em>in</em> <em>Teaching AI-Augmented Legal Research</em> (Version 2, Nov. 2026), <a href="https://ailegalresearch.org/" style="color:var(--accent-d)">https://ailegalresearch.org</a> (licensed under CC BY-NC 4.0). <a href="#ref-1" style="color:var(--accent-d)">Back to the text</a></p>
+</section>
+</main>
+
+<footer class="band">
+  <p>AI and Legal Research · Week 6 · Constructing a critique prompt.</p>
+  <p>The five editing lenses come from Emily Pavuluri’s Five Editing Lenses Checklist, and the elements of a critique prompt are adapted from her Memo Critique exercise, both in Emily Pavuluri, <em>Teaching AI-Augmented Legal Research</em> (Version 2, Nov. 2026), <a href="https://ailegalresearch.org/" style="color:var(--accent-d)">ailegalresearch.org</a>, licensed under CC BY-NC 4.0.</p>
+</footer>
+
+<script>
+{
+const FIVE = ["Audience", "Purpose", "Level of feedback", "Focus", "Limits"];
+const EL = [
+  { key: "audience", five: "Audience", title: "Audience",
+    why: "Tells the tool who will read the memo, so the tool judges the memo by that reader’s needs.",
+    text: "A supervising partner will read the attached memo before the firm advises the client.",
+    step: "Identify the reader of the memo, and explain what the reader will do with it." },
+  { key: "purpose", five: "Purpose", title: "Purpose",
+    why: "Tells the tool what kind of document the memo is, so the tool does not push an objective memo toward advocacy.",
+    text: "The memo is an objective memo. It predicts how federal courts within the Third Circuit would rule on whether our client can bring a claim against the Website, and it sets aside whether the post is defamatory. The memo should predict the outcome, not argue for one side.",
+    step: "Say what kind of memo it is, identify the court, and state the question that the memo answers." },
+  { key: "lens", five: "Focus", title: "Focus: one editing lens",
+    why: "Limits the critique to authority, so comments about writing do not crowd out problems with authority.",
+    text: "Critique only the memo’s use of primary law authority. Do not comment on grammar, style, tone, or organization.",
+    step: "Limit the critique to the “authority” lens, and explain what the tool should not comment on." },
+  { key: "selection", five: "Focus", title: "Focus: selection of authority",
+    why: "Asks whether the memo includes the best available authority and treats adverse authority appropriately.",
+    text: "Selection: Tell me whether the memo relies on persuasive authority only when that is a strategically justified decision. Tell me whether binding or more recent authority is missing, whether any proposition rests on too little authority, and whether the memo treats adverse authority appropriately. List up to five useful cases that the memo does not cite, ranked by usefulness, with one sentence on how each would aid the analysis.",
+    step: "Ask whether the memo relies on persuasive authority only when that is justified, what binding, more recent, or useful persuasive authority is missing, whether any proposition rests on too little authority, and whether the memo treats adverse authority appropriately." },
+  { key: "analysis", five: "Focus", title: "Focus: analysis of authority",
+    why: "Asks whether the memo describes and applies each authority accurately.",
+    text: "Analysis: Tell me whether each citation supports the sentence that it follows, whether the memo states any holding more broadly than the court did, whether the memo is otherwise wrong in how it characterizes any of the authority, and whether any conclusion claims more confidence than the authority supports.",
+    step: "Ask whether each citation supports its sentence, whether any holding is stated too broadly, whether the memo otherwise mischaracterizes any authority, and whether any conclusion is too confident." },
+  { key: "level", five: "Level of feedback", title: "Level of feedback",
+    why: "Caps the number of comments and ranks them, so you get the problems that matter most and can check each one.",
+    text: "Give me the three most important problems, ranked from most to least important.",
+    step: "Specify how many comments you want, and how the tool should rank them." },
+  { key: "cites", five: "Limits", title: "Limits: citations and verification",
+    why: "Makes the tool cite what it suggests and flag what it is unsure of, so you know what to check before you rely on it.",
+    text: "Give a full Bluebook citation for any authority that you suggest, and do not suggest any authority that you cannot cite in full. Mark anything you are not certain of with [VERIFY].",
+    step: "Require full Bluebook citations, and tell the tool to flag what it is unsure of." }
+];
+const $ = (id) => document.getElementById(id);
+const esc = (t) => t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const on = {};
+const fields = {};
+EL.forEach((e) => { fields[e.key] = ""; });
+
+function copy(text, btn, label) {
+  const done = () => { btn.textContent = "Copied"; setTimeout(() => { btn.textContent = label; }, 1800); };
+  const fallback = () => {
+    try {
+      const ta = document.createElement("textarea");
+      ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.left = "-9999px";
+      document.body.appendChild(ta); ta.select(); const ok = document.execCommand("copy"); document.body.removeChild(ta);
+      if (ok) done(); else btn.textContent = "Select the text and copy it";
+    } catch (e) { btn.textContent = "Select the text and copy it"; }
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback);
+  else fallback();
+}
+
+
+// Section II: the student's own prompt
+$("steps").innerHTML = EL.map((e, i) => `<div class="step" id="st-${e.key}">
+  <div class="hd"><span class="n">0${i + 1}</span><h3>${e.title}</h3></div>
+  <p class="g">${e.step}</p>
+  <details><summary>Example from the Dating Disasters memo</summary><p style="margin:6px 0 0">${esc(e.text)}</p></details>
+  <label for="f-${e.key}">Your text for the deposition memo</label>
+  <textarea id="f-${e.key}" data-k="${e.key}"></textarea></div>`).join("");
+function renderYours() {
+  const filled = EL.filter((e) => fields[e.key].trim());
+  EL.forEach((e) => $("st-" + e.key).classList.toggle("done", !!fields[e.key].trim()));
+  const text = filled.map((e) => fields[e.key].trim()).join("\n\n");
+  $("wc").textContent = (text ? text.split(/\s+/).length : 0) + " words";
+  $("ytOut").innerHTML = filled.length
+    ? filled.map((e) => `<p><span class="lb">${e.title}</span>${esc(fields[e.key].trim())}</p>`).join("")
+    : `<p class="empty">Nothing typed yet. Fill in the steps, and your prompt appears here.</p>`;
+  $("copyYt").disabled = !filled.length;
+}
+$("steps").addEventListener("input", (ev) => { const t = ev.target; if (t.dataset.k) { fields[t.dataset.k] = t.value; renderYours(); } });
+$("copyYt").addEventListener("click", (ev) => copy(EL.filter((e) => fields[e.key].trim()).map((e) => fields[e.key].trim()).join("\n\n"), ev.currentTarget, "Copy your prompt"));
+$("clearYt").addEventListener("click", () => {
+  EL.forEach((e) => { fields[e.key] = ""; $("f-" + e.key).value = ""; }); renderYours();
+});
+
+renderYours();
+}
+</script>
+</body>
+</html>
